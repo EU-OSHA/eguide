@@ -1,0 +1,876 @@
+/**
+ * @file
+ * Positioning for a responsive layout.
+ *
+ * Define CSS classes to create a fluid grid layout with optional sidebars
+ * depending on whether blocks are placed in the left or right sidebars.
+ *
+ * This layout uses the Zen Grids plugin for Compass: http://zengrids.com
+ */
+
+/**
+ * Center the page.
+ *
+ */
+#page,
+.region-bottom {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Apply the shared properties of grid items in a single, efficient ruleset. */
+#header,
+#content,
+#navigation,
+.region-sidebar-first,
+.region-sidebar-second,
+#footer {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  *behavior: url("/path/to/boxsizing.htc");
+  _display: inline;
+  _overflow: hidden;
+  _overflow-y: visible;
+}
+
+/* Containers for grid items and flow items. */
+#header,
+#main,
+#footer {
+  *position: relative;
+  *zoom: 1;
+}
+#header:before,
+#header:after,
+#main:before,
+#main:after,
+#footer:before,
+#footer:after {
+
+}
+#header:after,
+#main:after,
+#footer:after {
+  clear: both;
+}
+
+/* Navigation bar */
+@media all and (min-width: 480px) {
+  #main {
+    /* Move all the children of #main down to make room. */
+   /* padding-top: 3em;*/
+    position: relative;
+  }
+  #navigation {
+    /* Move the navbar up inside #main's padding. */
+    position: absolute;
+    top: 0;
+    height: 3em;
+    width: 100%;
+  }
+}
+
+/**
+ * Use 3 grid columns for smaller screens.
+ */
+@media all and (min-width: 480px) and (max-width: 959px) {
+
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+
+  /* Span 2 columns, starting in 2nd column from left. */
+  .sidebar-first #content {
+    float: left;
+    width: 66.66667%;
+    margin-left: 33.33333%;
+    margin-right: -100%;
+  }
+
+  /* Span 1 column, starting in 1st column from left. */
+  .sidebar-first .region-sidebar-first {
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+  }
+
+  /**
+   * The layout when there is only one sidebar, the right one.
+   */
+
+  /* Span 2 columns, starting in 1st column from left. */
+  .sidebar-second #content {
+    float: left;
+    width: 66.66667%;
+    margin-left: 0%;
+    margin-right: -66.66667%;
+  }
+
+  /* Span 1 column, starting in 3rd column from left. */
+  .sidebar-second .region-sidebar-second {
+    float: left;
+    width: 33.33333%;
+    margin-left: 66.66667%;
+    margin-right: -100%;
+  }
+
+  /**
+   * The layout when there are two sidebars.
+   */
+
+  /* Span 2 columns, starting in 2nd column from left. */
+  .two-sidebars #content {
+    float: left;
+    width: 66.66667%;
+    margin-left: 33.33333%;
+    margin-right: -100%;
+  }
+
+  /* Span 1 column, starting in 1st column from left. */
+  .two-sidebars .region-sidebar-first {
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+  }
+
+  /* Start a new row and span all 3 columns. */
+  .two-sidebars .region-sidebar-second {
+    float: left;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: -100%;
+    padding-left: 0;
+    padding-right: 0;
+    clear: left;
+  }
+
+  /* Apply the shared properties of grid items in a single, efficient ruleset. */
+  .two-sidebars .region-sidebar-second .block {
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    *behavior: url("/path/to/boxsizing.htc");
+    _display: inline;
+    _overflow: hidden;
+    _overflow-y: visible;
+  }
+
+  /* Span 1 column, starting in the 1st column from left. */
+  .two-sidebars .region-sidebar-second .block:nth-child(3n+1) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+    clear: left;
+  }
+
+  /* Span 1 column, starting in the 2nd column from left. */
+  .two-sidebars .region-sidebar-second .block:nth-child(3n+2) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 33.33333%;
+    margin-right: -66.66667%;
+  }
+
+  /* Span 1 column, starting in the 3rd column from left. */
+  .two-sidebars .region-sidebar-second .block:nth-child(3n) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 66.66667%;
+    margin-right: -100%;
+  }
+}
+
+/**
+ * Use 5 grid columns for larger screens.
+ */
+@media all and (min-width: 960px) {
+
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+
+  /* Span 4 columns, starting in 2nd column from left. */
+  .sidebar-first #content {
+    float: left;
+    width: 80%;
+    margin-left: 20%;
+    margin-right: -100%;
+  }
+
+  /* Span 1 column, starting in 1st column from left. */
+  .sidebar-first .region-sidebar-first {
+    float: left;
+    width: 20%;
+    margin-left: 0%;
+    margin-right: -20%;
+  }
+
+  /**
+   * The layout when there is only one sidebar, the right one.
+   */
+
+  /* Span 4 columns, starting in 1st column from left. */
+  .sidebar-second #content {
+    float: left;
+    width: 80%;
+    margin-left: 0%;
+    margin-right: -80%;
+  }
+
+  /* Span 1 column, starting in 5th column from left. */
+  .sidebar-second .region-sidebar-second {
+    float: left;
+    width: 20%;
+    margin-left: 80%;
+    margin-right: -100%;
+  }
+
+  /**
+   * The layout when there are two sidebars.
+   */
+
+  /* Span 3 columns, starting in 2nd column from left. */
+  .two-sidebars #content {
+    float: left;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: -80%;
+  }
+
+  /* Span 1 column, starting in 1st column from left. */
+  .two-sidebars .region-sidebar-first {
+    float: left;
+    width: 20%;
+    margin-left: 0%;
+    margin-right: -20%;
+  }
+
+  /* Span 1 column, starting in 5th column from left. */
+  .two-sidebars .region-sidebar-second {
+    float: left;
+    width: 20%;
+    margin-left: 80%;
+    margin-right: -100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+@media all and (min-width: 1px) and (max-width: 1215px) {
+  .view-did-you-know .views-row {
+    width:30% !important;
+  }
+
+  .view-good-practices .view-content, .view-did-you-know .view-content,.view-useful-links .view-content,.contentText{
+    max-width: 95% !important;
+  }
+
+}
+
+@media all and (min-width: 1px) and (max-width: 800px) {
+.view-did-you-know .views-row {
+    width:100% !important;
+    max-width: auto !important;
+    float:none !important;
+    min-height:auto !important;
+  }
+
+  .informationAboutUs img{
+    float:none !important;
+    margin:1.5em auto !important;
+     display: block;
+  }
+  .informationAboutUs p{
+    margin-left:0 !important;
+  }
+}
+
+
+
+
+@media all and (min-width: 1px) and (max-width: 1006px) {
+
+  body {
+    background: #FFF !important;
+  }
+  #page {
+   border: 0px !important;
+   padding: 0 !important;
+   margin-top:16px !important;
+  }
+
+
+  .highLight h1 {
+    font-size: 1.7em !important;
+  }
+
+  .highLight h2 {
+    font-size: 1.5em !important;
+  }
+  .MapSC,.ListSC,#mapImg {
+    display:none;
+  }
+  .containerSmall,.containerC {
+    width:100% !important;
+  }
+  .textSC {
+    background: #ececec url("/sites/all/themes/bilbomatica/img/backgroundSelectCountryMobile.png") no-repeat scroll center bottom;
+    float: none !important;
+    font-size: 1.2em !important;
+    font-style: normal !important;
+    padding: 0.75em 0 1.4em !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  #listText,#listText ul li ul,#countries,#countries ul li ul {
+    display:block !important;
+  }
+  #listText ul, #countries ul {
+    -webkit-column-count: 1 !important; /* Chrome, Safari, Opera */
+    -moz-column-count: 1!important; /* Firefox */
+    column-count: 1!important;
+  }
+  #listText ul li ul, #countries ul li ul {
+    background: #fff none repeat scroll 0 0;
+    float: right !important;
+    position: relative !important;
+    margin: 0.5em 0 0 !important;
+  }
+
+  #listText ul li ul li a,#countries ul li ul li a{
+    background: #fff none repeat scroll 0 0 !important;
+    color: #000 !important;
+    font-size: 1em !important;
+    padding: 0 0.3em !important;
+  }
+  #countries ul li ul li a{
+     background: #ececec none repeat scroll 0 0 !important;
+  }
+
+  #listText ul li,#countries ul li { 
+    border-bottom:1px solid #e2e2e2;
+    font-size: 1.5em !important;
+    overflow: hidden !important;
+    padding: 0.2em 0 0.2em 0.5em !important;
+  }
+  #listText ul li ul li,#countries ul li ul li{
+    border-bottom: 0 none !important;
+    font-size: 1em !important;
+    margin-right: 1px !important;
+    padding: 0.1em !important;
+
+  }
+
+ #listText ul li ul li.lineR,#countries ul li ul li.lineR{
+    border-right: 1px solid #000 !important;
+  }
+
+  .selectCountry {
+    border:0 !important;
+  }
+ #listText .containerC {
+  padding-top: 0 !important;
+ }
+
+ #fundedBy,.front #copyright {
+  clear: both !important;
+  float: none !important;
+  text-align: center !important;
+  width: 100% !important;
+ }
+ #size {
+  display: none;
+ }
+ .subHighLight {
+  font-style: normal !important;
+  font-weight:normal !important;
+  padding:1em !important;
+  text-align: left !important;
+  font-size:1.3em !important;
+ }
+ .half {
+    float: none !important;
+    width: 100% !important;
+ }
+ .half.br{
+  background:url("/sites/all/themes/bilbomatica/img/c6c6c8.png") repeat-x 0 bottom #ececec !important;
+}
+
+ .half .img {
+  display:none !important;;
+ }
+
+  .half .text {
+   
+  }
+
+  .half .button {
+    
+  }
+
+  .blueBg,.whiteBg {
+    overflow:auto !important;;
+    padding: 1.3em 0 !important;
+  }
+  .theme-selected {
+    float:none !important;
+    width:100% !important;
+    height: 645px !important;
+  }
+  .theme-selected .backT {
+    margin:0 !important;
+  }
+  a.backThemes {
+    display: block;
+    float: left;
+    font-size: 1.4em;
+    width: auto;
+  }
+
+  .theme-selected h1 {
+    clear: both;
+    display: block !important;
+    font-size: 2.5em !important;
+    line-height: 1em;
+    margin: 0 0.5em !important;
+    padding-top: 1em;
+    text-align: center;
+  }
+  .sections {
+    height: auto !important;
+    margin: 0 1.2em !important;
+    padding:0 !important;
+  }
+  .sections h2 {
+    font-size: 1.4em !important;
+    margin: 0.5em 0 0.2em !important;
+    padding: 0 !important;
+  }
+  .section a {
+    font-size: 1.3em !important;
+    padding: 0.5em 1.5em 0.5em 0;
+  }
+  .goodPractices {
+    border-bottom: 1px solid #767676;
+  }
+  .goodPractices,.usefulLinks {
+    float:none !important;
+    width:100% !important;
+    clear:both;
+    padding: 2.1em 0 !important;
+    background-position: 1.1em center, 95% center !important;
+  }
+  .goodPractices .goodP, .usefulLinks .usefulL {
+    font-size: 1.4em;
+    margin: 0 !important;
+    padding-left: 4.5em;
+  }
+  .goodPractices .keepInMind, .usefulLinks .discover {
+    font-size: 1.3em;
+    margin: 0 !important;
+    padding-left: 4.85em;
+  }
+  .sections.steps {
+    overflow: hidden !important;
+  }
+  .tabsBilbomatica {
+    clear: both;
+  }
+  #fundedBy {
+    padding: 0.9em 0;
+  }
+  footer {
+    padding:0 !important;
+  }
+  #copyright {
+    float: none !important;
+    padding: 1em 0 0.3em;
+    text-align: center !important;
+    width: auto !important;
+  }
+  .menuPMo {
+    text-align: center !important;
+  }
+  .menuPMo a{
+    color: #fff !important;
+    margin: 0 1em !important;
+  }
+  .button {
+    margin: 2.1em 0 2em !important;
+  }
+  
+  .half .text {
+    padding: 1.5em 0 0 !important;
+  }
+
+  #menuLinkRespon {
+    display: block !important;
+  }
+  #block-system-main-menu {
+    background: #4066a2 none repeat scroll 0 0;
+    display: none;
+    padding-bottom: 4em !important;
+    position: absolute;
+    top: 8.1em;
+    width: 100%;
+    z-index: 9999;
+  }
+  #block-system-main-menu ul li{
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    display: block !important;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0.6em 0;
+  }
+  #block-system-main-menu ul li a{
+    color:#FFF !important;
+  }
+  ul.menu {
+    padding: 0 !important;
+  }
+  .mainMenu {
+    margin: 11.5em 0 !important;
+    padding: 0 !important;
+  }
+
+  .mainMenu ul li a.is-active-trail.active {
+    border: 0 !important;
+    color: #000 !important;
+    font-weight: normal !important;
+  }
+  .mainMenu ul li a:hover{
+    border-bottom:0 !important;
+    background: transparent !important;
+  }
+
+  #moreInfoDiv {
+    width:100% !important;
+    top:0 !important;
+    transform: translate(-50%, 0%) !important;
+    overflow:auto !important;
+  }
+  #moreInfoDiv h1 {
+    margin: 5.5em 0 1em !important;
+  }
+
+  .containerWidth h1,.containerWidth h2 {
+    text-align: center;
+  }
+  .containerWidth h2 {
+    margin:0 0 .7em 0 !important;
+  }
+  .whiteItalic {
+    text-align: center;
+    margin: 0 1em !important;
+    font-size: 1em !important;
+    margin: -6px 0 0.8em !important;
+  }
+  .startTour {
+    float:none !important;
+    width:100% !important;
+    margin-bottom: 1em !important;
+    background: #8fa2c5 url("/sites/all/themes/bilbomatica/img/startTourMobile.png") no-repeat scroll 95% bottom !important;
+    height: 237px !important;
+  }
+  .startTour p {
+    font-weight: lighter !important;
+    line-height: 1.2em;
+    max-width: 8em !important;
+    padding: 0.5em 0 0 !important;
+  }
+  .startTour a {
+    height: auto !important;
+    margin-top: 136px !important;
+    padding: 8px 0 !important;
+    position: relative !important;
+    width: 100% !important;
+  }
+  .containerThemes li {
+    float: none !important;
+    height: auto !important;
+    margin: 2em 0 !important;
+    padding: 3.3em 0;
+    width: 100% !important;
+  }
+  .views-field-field-order {
+    margin:0 !important;
+    text-align: center;
+  }
+  .view-themes {
+    margin-top: -2px !important;
+  }
+  .read {
+    position:relative !important;
+    top:auto !important;
+  }
+  .read a {
+    margin: 0 auto !important;
+    
+  }
+  .containerThemes li .views-field-title  {
+   
+  }
+  .preFooter {
+ 
+  }
+  .didYouKnow, .glossary, .aboutUs {
+    float:none !important;
+    width:auto !important;
+    margin:0 1.2em !important;
+    border-bottom:1px solid #b0bfd8;
+  }
+
+  .containerThemes .containerWidth  {
+    margin:0 !important;
+  }
+  .didYouKnow {
+    background-image: url("/sites/all/themes/bilbomatica/img/i-_did-you-know-blueMobile.png"), url("/sites/all/themes/bilbomatica/img/i-_arrow-right-dark-blueMobile.png") !important;
+    background-position: 1.3em center, 90% 50% !important;
+    background-repeat: no-repeat;
+    padding: 3em 0 !important;
+  }
+
+ .glossary {
+    background-image: url("/sites/all/themes/bilbomatica/img/i-_glossary-blueMobile.png"), url("/sites/all/themes/bilbomatica/img/i-_arrow-right-dark-blueMobile.png") !important;
+    background-position: 0 center, 90% 50% !important;
+    background-repeat: no-repeat;
+    padding: 2em 0 2.87em !important;
+  }
+  .aboutUs {
+    background-image: url("/sites/all/themes/bilbomatica/img/i-_about-us-blueMobile.png"), url("/sites/all/themes/bilbomatica/img/i-_arrow-right-dark-blueMobile.png") !important;
+    background-position: .6em center, 90% 50% !important;
+    background-repeat: no-repeat;
+    padding: 2.5em 0 2.8em !important;
+  }
+
+
+  .clearPieMovil {
+    height:1px;
+    background: white;
+    clear: both;
+  }
+  
+  .menuPMo.linea {
+      border-right: 1px solid white;
+  }
+  .textGlossary {
+    width:100% !important;
+    text-align: center !important;
+    float: none !important;
+    border-bottom: 1px solid #336699;
+    padding: 0.6em 0 !important;
+    font-style: normal !important;
+  }
+
+  .lexicon-links,#search-api-page-search-form {
+    border-top:1px solid #336699;
+    border-bottom:1px solid #336699;
+  }
+  .searchGlossary, .filterGlossary {
+    width:50% !important;
+    padding:.6em 0 !important;
+    border:0 !important;
+  }
+  span.selectaletter {
+    display: block !important;
+    text-align: left !important;
+  }
+  .lexicon-links {
+    padding:.2em .8em !important;
+    margin-bottom: 1.5em !important;
+
+  }
+  .lexicon-list {
+      margin: 0 1em !important;
+  }
+  #letrasResponsive {
+    margin: 0.3em 0;
+    padding: 0.3em;
+    text-transform: capitalize;
+    width: 100%;
+  }
+   .containerC {
+    margin:0 !important;
+  }
+  .contentSearch {
+    width:100% !important;
+  }
+  .go {
+    float: none !important;
+    display: block !important;
+    margin: 1em 0 0 !important;
+  }
+  .go a {
+     text-align: center !important;
+     display: block !important;
+     padding: 0.36em 0em !important;
+  }
+  .highLight.search .containerSmall {
+    padding:0 !important;
+  }
+  .section-search-results .result {
+    margin:0 1em !important;
+  }
+
+  .textForm {
+    float:none !important;
+    margin: 0 1em;
+  }
+  .webform-client-form.webform-client-form-19{
+    float:none !important;
+    width: auto !important;
+    margin:1em;
+  }
+  .webform-component-textfield.webform-component--name {
+    float:none !important;
+    margin: 0 0 1em;
+  }
+  #edit-submitted-name,#edit-submitted-email {
+    width: auto !important;
+  }
+  .form-item-captcha-response {
+    float: none !important;
+  }
+  .view-good-practices .views-row, .good-practicesBox {
+    float:none !important;
+    width:auto !important;
+    min-height: auto !important;
+  }
+  #containerMaxLengthTools {
+    margin:0 !important;
+    overflow: hidden !important;
+  }
+  #containerTools {
+    float:none !important;
+    text-align: left !important;
+  }
+  #containerTools .tabs {
+    padding: 0 !important;
+    margin:0 !important;
+  }
+  #containerTools .tabs li {
+    margin:0;
+    float:left;
+    padding:0;
+    height: 2.8em;
+    font-size:1.4em !important;
+  }
+  #containerTools .tabs li div {
+    margin: 0.8em 0 0 0.6em;
+    vertical-align: middle;
+  }
+
+  .search {
+    padding:0 35px !important;
+    background: url("/sites/all/themes/bilbomatica/img/lupaMobile.png") center center no-repeat !important;
+    
+  }
+  ul.tabs li.profileTab,ul.tabs li.country {
+   background:  url("/sites/all/themes/bilbomatica/img/downMobile.png") no-repeat scroll 94% center !important;
+   margin: 0 10px 0 0 !important;
+  }
+  ul.tabs li.country.selected,ul.tabs li.profileTab.selected {
+    background: url("/sites/all/themes/bilbomatica/img/upMobile.png") no-repeat scroll 94% center #ececec  !important;
+    border-bottom:1px solid #ececec;
+
+  }
+  #countries ul {
+    margin-top: -27px !important;
+  }
+  #search-api-page-search-form label {
+    display: block !important;
+    font-style: normal !important;
+    margin: 0 0 0.5em;
+    text-align: left;
+  }
+  #search-api-page-search-form input {
+    display:block !important;
+    width: 100% !important;
+    margin:.5em 0 !important;
+  }
+  .preFooter.did {
+    top:0 !important;
+    width: 100% !important;
+    left: 0 !important;
+    transform: translate(0%, 0%) !important;
+  }
+  .containerWidth h1 {
+    font-size: 2.3em !important;
+    line-height: 1em !important;
+  }
+  .containerWidth h2 {
+    border-bottom: 1px solid #fff;
+    font-size: 1.3em !important;
+    margin: 0.5em 0 !important;
+    padding: 0 0 0.2em;
+  }
+  .containerThemes {
+    padding: 1em 2em 0 !important;
+    background-image: none !important;
+    background-color: #4066a2 !important;
+  }
+  .didYouKnow p, .glossary p, .aboutUs p {
+    padding: 0 0 0 8em !important;
+    font-size: 1.1em !important;
+    line-height: 1.2em !important;
+  }
+  .containerThemes a {
+    font-size: 1.6em !important;
+    font-weight: lighter !important;
+  }
+  .migas {
+    display:none !important;
+  }  
+
+  #logosHeader {
+    margin-left: 0 !important;
+    margin-top: 0.5em !important;
+  }
+  .categoriesUsefulLinks a {
+    display:block;
+    padding:.3em !important;
+  }
+  .view-useful-links .views-row a {
+    float:none !important;
+    width:auto !important;
+    display:block;
+  }
+  .view-themes.view-id-themes.view-display-id-default .views-field-title{
+    text-align: center !important;
+  }
+  .highLight.goodPracticesBanner a.backThemes {
+    margin-left: 10px !important;
+    margin-top: -3em !important;
+  }
+   .usefulLinksBanner a.backThemes {
+    margin-left: 10px !important;
+    margin-top: -2.4em !important;
+  }
+
+  .highLight.goodPracticesBanner {
+    background-size: 30% auto !important;
+    background-position: 100% 100% !important;
+  }
+  .usefulLinksBanner {
+   background-image: none !important;
+  }
+
+}
+
