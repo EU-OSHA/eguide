@@ -68,7 +68,7 @@ function icoHome() {
 	
 	if(jQuery(window).width()>1006) {
 		var domain=jQuery("#domain").text();
-		jQuery("#block-system-main-menu li.first a").html("<img src='"+domain+"sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
+		jQuery("#block-system-main-menu li.first a").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
 	} else {
 		jQuery("#block-system-main-menu li.first a").html(htmlHome);
 	}
@@ -934,7 +934,7 @@ function hacerDia() {
 
 function submenu() {
 	if(jQuery(window).width()>1006) {
-		jQuery(".mnThemes").mouseover(function() {
+		jQuery("#block-system-main-menu .mnThemes").mouseover(function() {
 			if(jQuery("#submenu").length>0) {
 				jQuery("#submenu").remove();
 			}
@@ -1030,7 +1030,7 @@ function submenu() {
 
 function quitarSubmenu() {
 	if(jQuery("#submenu").length>0) {
-		if (jQuery('#submenu:hover').length==0 && jQuery(".mnThemes:hover").length==0 && jQuery(".mnGoodPractices:hover").length==0 && jQuery(".mnOtherResources:hover").length==0) {
+		if (jQuery('#submenu:hover').length==0 && jQuery("#block-system-main-menu .mnThemes:hover").length==0 && jQuery(".mnGoodPractices:hover").length==0 && jQuery(".mnOtherResources:hover").length==0) {
 			jQuery("#submenu").slideUp("fast",function() {
 				jQuery("#submenu").remove();
 			});
