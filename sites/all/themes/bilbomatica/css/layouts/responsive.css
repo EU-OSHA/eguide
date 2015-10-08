@@ -71,6 +71,7 @@
     height: 3em;
     width: 100%;
   }
+
 }
 
 /**
@@ -874,3 +875,18 @@
 
 }
 
+
+@media all and (max-width: 460px) {
+    #containerTools .tabs li {
+        font-size: 95% !important;
+    }
+
+  #containerTools .tabs {
+      min-width: auto !important;
+  }
+}
+@media all and (max-width: 400px) {
+    #containerTools .tabs li {
+        font-size: 80% !important;
+    }
+}

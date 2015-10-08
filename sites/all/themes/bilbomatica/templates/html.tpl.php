@@ -44,6 +44,8 @@ $domain=$base_root;
 
   <?php 
   ?>
+   <link rel="stylesheet" type="text/css" href="sites/all/themes/bilbomatica/js/tooltipster-master/css/tooltipster.css" />
+   <script type="text/javascript" src="sites/all/themes/bilbomatica/js/tooltipster-master/js/jquery.tooltipster.min.js"></script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>

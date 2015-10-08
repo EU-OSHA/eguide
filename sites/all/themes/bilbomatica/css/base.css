@@ -857,6 +857,7 @@ a.backThemes {
 	width:13px;
 	height: 7px;
 	position:absolute;
+	opacity: 0.8;
 }
 #countries {
 	display:none;
@@ -1830,3 +1831,102 @@ h1.temazo {
 #domain {
 	display:none;
 }
+
+.section-privacy-policy article{
+	border: 1px solid #ccc;
+    margin: 1em auto;
+    padding: 0 1em 1em 1em;
+    background: #f9f8f8;
+    max-width:800px;
+}
+.section-privacy-policy h2{
+	color:#2d559a;
+	font-size:1.5em;
+	font-weight: normal;
+	margin: 1em 0 0;
+	padding:0;
+}
+.section-privacy-policy p{
+	margin:0;
+	padding:0;
+}
+
+/*TOUR MOBILE*/
+.mobileTourLayer {
+	display:none; //
+}
+
+.mobileTourLayer {
+	background: #FFF;
+}
+.mobileTourLayer .page {
+	width: 0 auto;
+	background: #4d6179;
+	padding:1em;
+}
+.mobileTourLayer .skipMobile {
+	background: #98b400 none repeat scroll 0 0;
+    color: #fff;
+    float: left;
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 0.6em 0;
+    text-align: center;
+    width: 50%;
+}
+
+.mobileTourLayer .nextMobile {
+	background: #003384;
+	color:#FFF;
+	float:left;
+	width: 50%;
+	text-align: center;
+	font-size: 1.8em;
+    font-weight: bold;
+    padding: 0.6em 0;
+}
+
+.mobileTourLayer .titleMobile {
+	border-bottom: 2px solid #4d6179;
+    clear: both;
+    color: #013183;
+    font-size: 1.5em;
+    height: 7.4em;
+    padding: 0.5em 0.6em 3.4em;
+}
+.mobileTourLayer .page1 .titleMobile {
+	background: #fff url("/sites/all/themes/bilbomatica/img/manTour.png") no-repeat scroll 100% 100%;
+}
+.mobileTourLayer .page2 .titleMobile {
+	background: #fff url("/sites/all/themes/bilbomatica/img/tourPage2.png") no-repeat scroll 50% 50%;
+}
+.mobileTourLayer .page3 .titleMobile {
+	background: #fff url("/sites/all/themes/bilbomatica/img/tourPage3.png") no-repeat scroll 50% 50%;
+}
+.mobileTourLayer .page4 .titleMobile {
+	background: #fff url("/sites/all/themes/bilbomatica/img/tourPage8.png") no-repeat scroll 50% 0%;
+}
+.mobileTourLayer .page5 .titleMobile {
+	background: #fff url("/sites/all/themes/bilbomatica/img/tourPage10.png") no-repeat scroll 50% 50%;
+}
+.mobileTourLayer .page1 .titleMobile span {
+	display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.1em;
+    max-width: 10em;
+    padding-top: 0.2em;
+}
+.mobileTourLayer .textMobile {
+	background: #98b400 none repeat scroll 0 0;
+    color: #fff;
+    font-size: 1.4em;
+    line-height: 1.2em;
+    padding: 0.7em 0.9em;
+}
+.mobileTourLayer .textMobile div{
+	margin:.3em 0;
+}
+
+
+/**/

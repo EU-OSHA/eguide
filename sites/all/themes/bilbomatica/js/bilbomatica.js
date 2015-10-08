@@ -61,6 +61,10 @@ jQuery(".mnOtherResources").removeAttr("href");
 		heightGoodPractices();
 	});
 
+	jQuery(document).ajaxComplete(function() {
+		usefulLinks();
+	});
+
 });
 
 function icoHome() {
@@ -105,39 +109,117 @@ function glossary() {
 	var title="";
 	jQuery(".lexicon-term").each(function() {
 		jQuery(this).removeAttr("href");
+
+
+		
+		//no quieren que tenga title. Así que reemplazo el title por un data-title
+		var title=jQuery(this).attr("title");
+		jQuery(this).attr("data-titleBM",title);
+		jQuery(this).removeAttr("title");
+
+
 		jQuery(this).click(function () {
 			removePopUps();
-			title=jQuery(this).attr("title");
-			jQuery(this).removeAttr("title").addClass("poparizado");
+			title=jQuery(this).attr("data-titleBM");
+			jQuery(this).addClass("poparizado");
 			var html="<div class='popup'><div class='closePop'><img src='sites/all/themes/bilbomatica/img/closeGlossary.png'></div><div class='contentPop'>"+title+"</div></div><div class='arrowPopUp'></div>";
 			jQuery(this).before(html);
 			//positioning
-			var widthWord=jQuery(this).width()/2;
-			var widthBox=jQuery(".popup").width()/2;
-			var leftWord=jQuery(this).position().left;
-			var leftPut=(leftWord+widthWord)-(widthBox)+"px";
-			jQuery(".popup").css("left",leftPut); //center
 
-			var topWord=jQuery(this).position().top;
-			var heightWord=jQuery(this).height();
-			var heightBox=jQuery(".popup").height();
-			var topPut=topWord-heightBox-heightWord+"px";
-			jQuery(".popup").css("top",topPut); //center
+			//tengo el problema que si el texto sale en 2 lineas la cosa sale mal. Me hago un algoritmo para que detecte si ocupa más de una línea
 
-			var topPutArrow=topWord-3+"px";
-			var widthArrow=jQuery(".arrowPopUp").width()/2;
+			var textoSel=jQuery(this).text();
+			var topPalabra=0;
+			var variasLineas=0;
 
-			var leftPutArrow=(leftWord+widthWord)-(widthArrow)+"px";
-			jQuery(".arrowPopUp").css("top",topPutArrow);
-			jQuery(".arrowPopUp").css("left",leftPutArrow); //center
+			var cachos=jQuery.trim(textoSel).split(" ");
+			if(cachos.length>0) {
+				var txtTemporal="";
+				for(i=0;i<cachos.length;i++) {
+					txtTemporal=txtTemporal+"<span>"+cachos[i]+"</span> ";
+				}
+				jQuery(this).html(txtTemporal);
+
+				var contador=0;
+				jQuery("span",this).each(function() {
+					if(contador==0) {
+						topPalabra=jQuery(this).position().top;
+					} else {
+						if(topPalabra!=jQuery(this).position().top) {
+							variasLineas=1;
+						}
+					}
+					contador++;
+				});
+			}
+
+			if(variasLineas==0) {
+				jQuery(this).html(textoSel);
+				var widthWord=jQuery(this).width()/2;
+				var widthBox=jQuery(".popup").width()/2;
+				var leftWord=jQuery(this).position().left;
+				var leftPut=(leftWord+widthWord)-(widthBox)+"px";
+				jQuery(".popup").css("left",leftPut); //center
+
+				var topWord=jQuery(this).position().top;
+				var heightWord=jQuery(this).height();
+				var heightBox=jQuery(".popup").height();
+				var topPut=topWord-heightBox-heightWord+"px";
+				jQuery(".popup").css("top",topPut); //center
+
+				var topPutArrow=topWord+"px";
+				var widthArrow=jQuery(".arrowPopUp").width()/2;
+
+				var leftPutArrow=(leftWord+widthWord)-(widthArrow)+"px";
+				jQuery(".arrowPopUp").css("top",topPutArrow);
+				jQuery(".arrowPopUp").css("left",leftPutArrow); //center
+			} else {
+				var widthWord=jQuery("span:eq(0)",this).width()/2;
+				var widthBox=jQuery(".popup").width()/2;
+				var leftWord=jQuery("span:eq(0)",this).position().left;
+				var leftPut=(leftWord+widthWord)-(widthBox)+"px";
+				jQuery(".popup").css("left",leftPut); //center
+
+				var topWord=jQuery("span:eq(0)",this).position().top;
+				var heightWord=jQuery("span:eq(0)",this).height();
+				var heightBox=jQuery(".popup").height();
+				var topPut=topWord-heightBox-heightWord+"px";
+				jQuery(".popup").css("top",topPut); //center
+
+				var topPutArrow=topWord+"px";
+				var widthArrow=jQuery(".arrowPopUp").width()/2;
+
+				var leftPutArrow=(leftWord+widthWord)-(widthArrow)+"px";
+				jQuery(".arrowPopUp").css("top",topPutArrow);
+				jQuery(".arrowPopUp").css("left",leftPutArrow); //center
+
+				jQuery(this).html(textoSel);
+			}
+
+
+			
 
 
 			jQuery(".closePop").click(function () {
 				removePopUps();
-				jQuery(".poparizado").attr("title",title).removeClass("poparizado");
+				jQuery(".poparizado").removeClass("poparizado");
 			});
-		});		
+		});	
+		
+		//jQuery(this).addClass("tooltip"); //descartado por errores cuando las palabras salen en varias líneas
+
+
 	});
+
+		/*
+		jQuery('.tooltip').tooltipster({
+		   animation: 'fade',
+		   delay: 100,
+		   theme: 'tooltipster-default',
+		   touchDevices: true,
+		   trigger: 'click'
+		});
+		*/
 
 }
 
@@ -281,6 +363,9 @@ function usefulLinks() {
 }
 
 function moreInfo() {
+	var body = jQuery("html, body");
+		body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
+	});
 	var alturaCapa=0;
 	if(jQuery("#moreInfoDiv").length>0) {
 		if(jQuery(window).width()>1006) {
@@ -308,7 +393,7 @@ function moreInfo() {
 			jQuery("#shadow").remove();
 			jQuery("body").css("overflow","auto").removeAttr("style");
 
-			jQuery("#listText").removeAttr("style");
+			//jQuery("#listText").removeAttr("style");
 		});
 	});
 }
@@ -322,6 +407,10 @@ function showSources() {
 			jQuery(".view-did-you-know").hide();
 	}
 	jQuery(".preFooter.did").slideDown();
+
+	var top=(jQuery(window).height()/2)-(jQuery(".preFooter.did").height()/2)-350;
+	var left=(jQuery(window).width()/2)-(jQuery(".preFooter.did").width()/2);
+	jQuery(".preFooter.did").css("top",top+"px").css("left",left+"px");
 
 	jQuery(".closeMoreInfo").click(function() {
 		jQuery(".preFooter.did").slideUp("fast",function() {
@@ -538,13 +627,19 @@ function arrowGlossary() {
 
 function wizard() {
 	jQuery("#tour").click(function() {
-		Cookies.set('tour', '1');
-		location.href=location.protocol + "//" + location.host;
+		//direfencio si está en la versión Mobile o desktop
+		if(jQuery(window).width()>1006) {
+			Cookies.set('tour', '1');
+			location.href=location.protocol + "//" + location.host;
+		} else {
+			tourMobile();
+		}
 	});
 }
 function startTour() {
 
 	if(Cookies.get('tour')=="1") {
+
 		/*dependiendo de la página en la que esté el usuario hay que mostrarle una capa distinta. 
 		Esta capa estará contenida en cada página; en la home en el bloque del mapa*/
 		//por el momento muestro la capa oscura
@@ -1036,5 +1131,8 @@ function quitarSubmenu() {
 			});
 		}
 	} 
+
+}
+function tourMobile() {
 
 }
