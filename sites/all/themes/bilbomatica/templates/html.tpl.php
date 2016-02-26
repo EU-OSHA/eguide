@@ -13,39 +13,54 @@ $domain=$base_root;
 <!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7" <?php print $html_attributes; ?>><![endif]-->
 <!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8" <?php print $html_attributes; ?>><![endif]-->
 <!--[if IE 8]><html class="lt-ie9" <?php print $html_attributes; ?>><![endif]-->
-<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html <?php print $html_attributes . $rdf_namespaces; ?>><!--<![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html <?php print $html_attributes . $rdf_namespaces; ?> ><!--<![endif]-->
 
 <head>
+<link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,400italic,700&subset=latin,greek,greek-ext,cyrillic,latin-ext,cyrillic-ext' rel='stylesheet' type='text/css'>
+ <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
-
+  <meta name="description" content="Healthy Workplaces for all Ages e-Guide" />
   <?php if ($default_mobile_metatags): ?>
     <meta name="MobileOptimized" content="width">
     <meta name="HandheldFriendly" content="true">
     <meta name="viewport" content="width=device-width">
   <?php endif; ?>
-  <meta http-equiv="cleartype" content="on">
+  <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
 
   <?php print $styles; ?>
   <?php print $scripts; ?>
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
-    <script src="<?php print $base_path . $path_to_zen; ?>/js/html5.js"></script>
+    <script type="text/javascript" src="<?php print $base_path . $path_to_zen; ?>/js/html5.js"></script>
     <![endif]-->
   <?php elseif ($add_html5_shim and $add_respond_js): ?>
     <!--[if lt IE 9]>
-    <script src="<?php print $base_path . $path_to_zen; ?>/js/html5-respond.js"></script>
+    <script type="text/javascript" src="<?php print $base_path . $path_to_zen; ?>/js/html5-respond.js"></script>
     <![endif]-->
   <?php elseif ($add_respond_js): ?>
     <!--[if lt IE 9]>
-    <script src="<?php print $base_path . $path_to_zen; ?>/js/respond.js"></script>
+    <script type="text/javascript" src="<?php print $base_path . $path_to_zen; ?>/js/respond.js"></script>
     <![endif]-->
   <?php endif; ?>
 
   <?php 
   ?>
-   <link rel="stylesheet" type="text/css" href="sites/all/themes/bilbomatica/js/tooltipster-master/css/tooltipster.css" />
-   <script type="text/javascript" src="sites/all/themes/bilbomatica/js/tooltipster-master/js/jquery.tooltipster.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="/sites/all/themes/bilbomatica/js/tooltipster-master/css/tooltipster.css" />
+   <script type="text/javascript" src="/sites/all/themes/bilbomatica/js/tooltipster-master/js/jquery.tooltipster.min.js"></script>
+   <noscript>
+    <style>
+      #vmap {
+        display:none !important;
+      }
+      #listText ul li ul {
+        position:relative !important;
+      }
+      .arrow, .MapSC,.ListSC {
+        display:none !important;
+      }
+    </style>
+   </noscript>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>

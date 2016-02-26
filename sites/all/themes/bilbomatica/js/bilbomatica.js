@@ -2,10 +2,14 @@ var menuR=0;
 jQuery(document).ready(function() {
 
 //deshabilito el link mnOtherResources
-jQuery(".mnOtherResources").removeAttr("href");
+if(jQuery(window).width()>1006) {
+	jQuery(".mnOtherResources").removeAttr("href");
+	
+}
 
+    //jQuery(".categoriesUsefulLinks a:eq(0)").css("display","hidden");
 
-	jQuery.getScript('sites/all/themes/bilbomatica/js/js.cookie.js', function() { 
+	jQuery.getScript(location.protocol + "//" + location.host + '/sites/all/themes/bilbomatica/js/js.cookie.js', function() { 
 		if(Cookies.get('tour')!=undefined && Cookies.get('tour')!="undefined") {
 			if(Cookies.get('tour').length==0) {
 				Cookies.set('tour', '0');
@@ -43,8 +47,12 @@ jQuery(".mnOtherResources").removeAttr("href");
 	breadcrumbsSearch();
 	menuloginup();
 	arrowGlossary();
-	submenu();
-
+	//submenu();
+	abrirMoreinfo();
+	abrirReadMore();
+	
+	scrollpopup();
+	
 	jQuery(window).resize(function() {
 		arrowGlossary();
 		sectionsSteps();
@@ -68,13 +76,20 @@ jQuery(".mnOtherResources").removeAttr("href");
 });
 
 function icoHome() {
-	var htmlHome=jQuery("#block-system-main-menu li.first a.mnHome").text();
 	
+	var htmlHome=jQuery("#block-superfish-1 a.mnHome").text();
+		
 	if(jQuery(window).width()>1006) {
 		var domain=jQuery("#domain").text();
-		jQuery("#block-system-main-menu li.first a").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
+		jQuery("#block-superfish-1 a.mnHome").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
+		jQuery("#block-superfish-2 a.mnHome").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
 	} else {
-		jQuery("#block-system-main-menu li.first a").html(htmlHome);
+		//jQuery("#block-superfish-1 li.first a").html(htmlHome);
+		//jQuery("#block-superfish-2 li.first a").html(htmlHome);
+		//jQuery("#block-superfish-1 li.first a").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
+		
+		jQuery("#block-superfish-2 a:eq(1)").html("<img src='/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
+		//jQuery("#block-superfish-2 first a").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
 	}
 }
 
@@ -122,7 +137,7 @@ function glossary() {
 			removePopUps();
 			title=jQuery(this).attr("data-titleBM");
 			jQuery(this).addClass("poparizado");
-			var html="<div class='popup'><div class='closePop'><img src='sites/all/themes/bilbomatica/img/closeGlossary.png'></div><div class='contentPop'>"+title+"</div></div><div class='arrowPopUp'></div>";
+			var html="<div class='popup'><div class='closePop'><img src='/sites/all/themes/bilbomatica/img/closeGlossary.png'></div><div class='contentPop'>"+title+"</div></div><div class='arrowPopUp'></div>";
 			jQuery(this).before(html);
 			//positioning
 
@@ -363,6 +378,8 @@ function usefulLinks() {
 }
 
 function moreInfo() {
+	
+	
 	var body = jQuery("html, body");
 		body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
 	});
@@ -370,9 +387,14 @@ function moreInfo() {
 	if(jQuery("#moreInfoDiv").length>0) {
 		if(jQuery(window).width()>1006) {
 			jQuery("#page").after("<div id='shadow'></div>")
+			barrablanca = (jQuery(window).width() - jQuery("#vmap").width())/2;//ñapa by rramos para pantallas grandes
+		}
+		else
+		{
+			barrablanca=0;
 		}
 		var top=(jQuery(window).height()/2)-(jQuery("#moreInfoDiv").height()/2)-50;
-		var left=(jQuery(window).width()/2)-(jQuery("#moreInfoDiv").width()/2);
+		var left=(jQuery(window).width()/2)-(jQuery("#moreInfoDiv").width()/2); //- barrablanca;
 		jQuery("#moreInfoDiv").css("top",top+"px").css("left",left+"px");
 
 		jQuery("#moreInfoDiv").slideDown("fast",function() {
@@ -398,7 +420,14 @@ function moreInfo() {
 	});
 }
 
-function showSources() {
+
+
+function showSources(texto) {
+	var textopintar  = jQuery("#source"+texto).text();
+	jQuery("div").remove(".sourcetext");
+	jQuery (".preFooter.did ul").before("<div class='sourcetext'>"+textopintar+"</div>");
+	jQuery (".preFooter.did ul").hide();
+
 	if(jQuery(window).width()>1006) {
 		jQuery("#page").after("<div id='shadow'></div>")
 		jQuery("body").css("overflow","hidden");
@@ -421,31 +450,60 @@ function showSources() {
 	});
 }
 
-function viewSources() {
-	if(jQuery(".view-did-you-know").length>0) {
+function viewSources(source) {
+	
+	/*if(jQuery(".view-did-you-know").length>0) {
 		var textButton=jQuery(".contentDid strong:eq(0)").text();
 		jQuery(".view-did-you-know .views-row:eq(0)").before("<div class='buttonViewSource'><a href='#' onclick='showSources()' class='viewSource'>"+textButton+"</a></div>");
 	}
-	jQuery(".preFooter.did").hide();
+	jQuery(".preFooter.did").hide();*/
 }
 
 function fontSize() {
 	jQuery(".bigSize a").click(function() {
+	
+		jQuery(".readmoretheme").addClass("readmorethemeLG");
+		jQuery(".readmoretheme").removeClass("readmoretheme");
+		
+		jQuery(".morethemeinfono").addClass("morethemeinfonoLG");
+		jQuery(".morethemeinfono").removeClass("morethemeinfono");
+		
+		jQuery(".moreinfotheme").addClass("moreinfothemeLG");
+		jQuery(".moreinfotheme").removeClass("moreinfotheme");
+	
 		jQuery("body").css("font-size","120%");
 		jQuery(".normalSize").removeClass("selected");
 		jQuery(".bigSize").addClass("selected");
 
 		if(jQuery(".view-did-you-know").length>0) {
-			didYouKnowHeight();
+			//didYouKnowHeight();
+			jQuery(".sourceLink").addClass("sourceLinkLG");
 		}
+		
+		
 
 		
 	});
 
 	jQuery(".normalSize a").click(function() {
+	
+		jQuery(".readmorethemeLG").addClass("readmoretheme");
+		jQuery(".readmorethemeLG").removeClass("readmorethemeLG");
+		
+		jQuery(".morethemeinfonoLG").addClass("morethemeinfono");
+		jQuery(".morethemeinfonoLG").removeClass("morethemeinfonoLG");
+		
+		jQuery(".moreinfothemeLG").addClass("moreinfotheme");
+		jQuery(".moreinfothemeLG").removeClass("moreinfothemeLG");
+	
 		jQuery("body").css("font-size","100%");
 		jQuery(".bigSize").removeClass("selected");
 		jQuery(".normalSize").addClass("selected");
+		
+		if(jQuery(".view-did-you-know").length>0) {
+			//didYouKnowHeight();
+			jQuery(".sourceLink").removeClass("sourceLinkLG");
+		}
 	});
 	 
 }
@@ -489,16 +547,16 @@ function heightGoodPractices() {
 			var top=jQuery(this).position().top+height-35;
 
 			jQuery(".shareReadMore",this).width(ancho).css("margin-left","-24px").css("top",top+"px");
-			var anchoMenosUno=(ancho/2)-1;
+			var anchoMenosUno=(ancho/2)-3;
 			jQuery(".share",this).width(anchoMenosUno).css("border-right","1px solid #FFF");
 			jQuery(".readMore",this).width(ancho/2);
-
+			
 			var link=jQuery("a",this).attr("href");
 			jQuery(".readMore",this).click(function() {
 				location.href=link;
 			});
 
-			//se muestran el shar y read more solo al pasar por encima
+			//se muestran el share y read more solo al pasar por encima
 			jQuery(this).mouseenter(function() {
 				jQuery(".shareReadMore",this).fadeIn("fast");
 			});
@@ -626,18 +684,20 @@ function arrowGlossary() {
 
 
 function wizard() {
+	
 	jQuery("#tour").click(function() {
+	
 		//direfencio si está en la versión Mobile o desktop
 		if(jQuery(window).width()>1006) {
 			Cookies.set('tour', '1');
-			location.href=location.protocol + "//" + location.host;
+			location.href=location.protocol + "//" + location.host + "/select-your-profile";
 		} else {
 			tourMobile();
 		}
 	});
 }
 function startTour() {
-
+	
 	if(Cookies.get('tour')=="1") {
 
 		/*dependiendo de la página en la que esté el usuario hay que mostrarle una capa distinta. 
@@ -646,10 +706,10 @@ function startTour() {
 		hacerNoche();
 
 		//HOME
-		if(jQuery(".front").length>0) {
+		if(jQuery(".front").length>1) {
 			jQuery(".halfTour").css("height","293px");
-			var left=jQuery(".ListSC").position().left;
-			var top=jQuery(".ListSC").position().top;
+			var left=jQuery("#tour").position().left;
+			var top=jQuery("#tour").position().top;
 
 			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
 			var topMaspalitroque=top+116;
@@ -663,7 +723,7 @@ function startTour() {
 				    //pone el pointer
 				    var topPalitroque=top+35;
 				    var leftPalitroque=left+47;
-				   	jQuery(".tourLayer").after("<div class='pointerUp'></div>");
+				   	jQuery(".tourLayer").after("<div class='pointerLeft'></div>");
 				   	jQuery(".pointerUp").css("left",leftPalitroque+"px").css("top",topPalitroque+"px").fadeIn();
 				   	jQuery(".skip").fadeIn();
 				    var topNext=jQuery(window).height()-180;
@@ -676,11 +736,13 @@ function startTour() {
 		} 
 
 		//SELECT YOUR PROFILE
-		if(jQuery(".section-select-your-profile").length>0) {
+		
+		if(jQuery(".butonTour").length>0) {
+		
 			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
-			jQuery(".halfTour").css("height","250px");
+			jQuery(".halfTour").css("height","300px");
 
-			var top=jQuery(".subHighLight").position().top+85;
+			var top=jQuery(".subStartTour").position().top+85;
 			var left=jQuery("#page").width()/2-(jQuery(".tourLayer").width()/2);
 			jQuery(".tourLayer").animate({
 			    top: "+="+top
@@ -714,16 +776,18 @@ function startTour() {
 		}
 
 		//SELECT THEME
+		
 		if(jQuery(".section-list-themes").length>0) {
+		
 			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
 			jQuery(".halfTour").css("height","250px");
-
+			
 			if (Cookies.get('tourVuelta')==0) {
+				
 				var top=jQuery(".containerThemes").position().top-15;
-				var left=jQuery(".views-field-field-order:eq(0)").position().left+96;
-
+				var left=jQuery(".numero:eq(0)").position().left+96;
+				
 				jQuery(".nameOfTheme").text(jQuery(".views-field-title:eq(0)").text());
-
 				jQuery(".tourLayer").animate({
 				    top: "+="+top
 				  }, 300, function() {
@@ -732,18 +796,15 @@ function startTour() {
 					  }, 300, function() {		
 					  	var leftPalitroque=left+50;		  
 					  	var topPalitroque=top+258;
-
 					  	jQuery(".tourLayer").after("<div class='pointerDown'></div>");
 					  	jQuery(".pointerDown").css("left",leftPalitroque+"px").css("top",topPalitroque+"px").fadeIn();
-					 
 					    jQuery(".skip").fadeIn();
-
 					   	var topNext=jQuery(window).height()-180;
 					   	jQuery(".next").fadeIn().css("top",topNext+"px");
-
 					   	jQuery(".next a").attr("href",jQuery(".read:eq(0) a").attr("href"));
 					   	jQuery(".next").click(function() {
-					   		location.href=jQuery(".read:eq(0) a").attr("href");
+					   		location.href=jQuery(".views-field-title-1:eq(0) a").attr("href");;
+							
 					   	});
 					   	
 					});
@@ -756,10 +817,9 @@ function startTour() {
 
 				//cambiar info3 por info7
 				jQuery(".info3").removeClass("info3").addClass("info7");
-
-				var left=jQuery("ul.tabs").position().left-jQuery(".tourLayer").width()+jQuery("ul.tabs li:eq(0)").width()+70;
-				var top=jQuery(".profileTab").position().top+17;
-
+				var left = jQuery("#searchField").position().left-jQuery(".tourLayer").width()+jQuery("ul.tabs li:eq(0)").width()+70;
+				var top=jQuery(".profileTab").position().top+30;
+				
 				jQuery(".tourLayer").animate({
 				    top: "+="+top
 				  }, 300, function() {
@@ -790,8 +850,8 @@ function startTour() {
 
 				jQuery(".info3").removeClass("info3").addClass("info8");
 
-				var left=jQuery("#block-system-main-menu ul.menu").position().left+150;
-				var top=jQuery(".profileTab").position().top+17;
+				var left=jQuery("#block-superfish-1 ul.menu").position().left+150;
+				var top=jQuery(".profileTab").position().top+40;
 
 				jQuery(".tourLayer").animate({
 				    top: "+="+top
@@ -823,8 +883,8 @@ function startTour() {
 
 				jQuery(".info3").removeClass("info3").addClass("info9");
 
-				var left=jQuery(".aboutUs").position().left-jQuery(".tourLayer").width()+100;
-				var top=jQuery(".aboutUs").position().top-jQuery(".tourLayer").height()-175;
+				var left=jQuery(".aboutUs").position().left-jQuery(".tourLayer").width()+120;
+				var top=jQuery(".aboutUs").position().top-jQuery(".tourLayer").height()-120;
 
 				jQuery(".tourLayer").animate({
 				    top: "+="+top
@@ -856,8 +916,8 @@ function startTour() {
 
 				jQuery(".info3").removeClass("info3").addClass("info10");
 
-				var left=jQuery("ul.menu").position().left-60;
-				var top=jQuery("ul.menu").position().top+45;
+				var left=jQuery("ul.menu").position().left-65;
+				var top=jQuery("ul.menu").position().top+25;
 
 				jQuery(".tourLayer").animate({
 				    top: "+="+top
@@ -969,8 +1029,8 @@ function startTour() {
 					   			jQuery(".tttext").text(text);
 
 					   			//muevo el cartel a su nuevo sitio
-					   			 top=jQuery("#block-system-main-menu li:eq(2) a").position().top+125;
-					   			 left=jQuery("#block-system-main-menu li:eq(2) a").position().left-75;
+					   			 top=jQuery("#block-superfish-1 li:eq(2) a").position().top+125;
+					   			 left=jQuery("#block-superfish-1 li:eq(2)").position().left-75;
 
 					   			jQuery(".tourLayer").fadeIn("fast",function() {
 				   					jQuery(".tourLayer").animate({
@@ -1029,6 +1089,8 @@ function hacerDia() {
 
 function submenu() {
 	if(jQuery(window).width()>1006) {
+		//17 diciembre RLR quitar los submenus
+		return false;
 		jQuery("#block-system-main-menu .mnThemes").mouseover(function() {
 			if(jQuery("#submenu").length>0) {
 				jQuery("#submenu").remove();
@@ -1134,5 +1196,114 @@ function quitarSubmenu() {
 
 }
 function tourMobile() {
+	jQuery(".containerThemes").hide();
+	jQuery("#footer").hide();
+	jQuery("#header").hide();
+	jQuery(".region-prefooter").hide();
+	jQuery("body").attr("style","background:#4d6179 !important");
+    
+	jQuery(".mobileTourLayer").fadeIn("fast");
+	jQuery(".mobileTourLayer .page1").fadeIn("fast");
 
+	skipear();
+	nextear();
+	startear();
+}
+
+function skipear() {
+	jQuery(".mobileTourLayer .skipMobile").each(function() {
+		jQuery(this).click(function() {
+			jQuery(".mobileTourLayer .page").fadeOut("fast");
+			jQuery(".mobileTourLayer").fadeOut("fast",function() {
+				jQuery(".containerThemes").show();
+				jQuery("#footer").show();
+				jQuery("#header").show();
+				jQuery(".region-prefooter").show();
+				jQuery("body").removeAttr("style");
+			});
+		});
+	});
+}
+
+function nextear() {
+	jQuery(".mobileTourLayer .nextMobile").each(function(contador) {
+		jQuery(this).click(function() {
+			var capa=contador+1;
+			jQuery(".mobileTourLayer .page:eq("+contador+")").slideUp("fast",function() {
+				jQuery(".mobileTourLayer .page:eq("+capa+")").slideDown("fast");
+			});
+		});
+	});
+}
+
+function startear() {
+	jQuery(".mobileTourLayer .start").click(function() {
+		jQuery(".mobileTourLayer .page").fadeOut("fast");
+		jQuery(".mobileTourLayer").fadeOut("fast",function() {
+			jQuery(".containerThemes").show();
+			jQuery("#footer").show();
+			jQuery("#header").show();
+			jQuery(".region-prefooter").show();
+			jQuery("body").removeAttr("style");
+		});
+	});
+}
+
+function abrirReadMore(){
+	
+	jQuery(".readmoretheme").each(function() {
+		enlace= jQuery(".readmoretheme:eq(0)").parent().parent().prev().prev().prev().find("a").attr('href');
+		//this.attr('href') = enlace;
+	});
+
+}
+
+
+function abrirMoreinfo(){
+	jQuery(".moreinfotheme").each(function() {
+	  jQuery(this).css("cursor","pointer");
+	  
+	  jQuery(this).click(function() {
+		
+	  
+		if(jQuery(window).width()>1023) {	  
+			jQuery(this).parent().parent().prev().find(".morethemeinfono").removeClass("morethemeinfono").addClass("morethemeinfo");
+			jQuery(this).parent().parent().prev().find(".morethemeinfonoLG").removeClass("morethemeinfonoLG").addClass("morethemeinfoLG");
+		}
+		else
+		{
+			jQuery(this).parent().parent().prev().find(".morethemeinfono").removeClass("morethemeinfono").addClass("morethemeinfo");
+			jQuery(this).parent().parent().prev().find(".morethemeinfonoLG").removeClass("morethemeinfonoLG").addClass("morethemeinfoLG");
+			
+			//var top=(jQuery(window).height()/2)-(jQuery(".morethemeinfo").height()/2);
+			var top=jQuery(this).position().top;
+			var left=jQuery(this).position().left - 210;
+			//var left=(jQuery(window).width()/2)-(jQuery(".morethemeinfo").width()/2);
+			jQuery(".morethemeinfo").css("top",top+"px").css("left",left+"px");
+		}
+	  });
+	});
+	jQuery(".menos").each(function() {
+	  	
+	  jQuery(this).css("cursor","pointer");
+	  
+	  jQuery(this).click(function() {
+	
+			jQuery(this).parent().parent().find(".morethemeinfo").removeClass("morethemeinfo").addClass("morethemeinfono");
+			jQuery(this).parent().parent().find(".morethemeinfoLG").removeClass("morethemeinfoLG").addClass("morethemeinfonoLG");
+		});
+	  
+	});
+}
+
+
+
+function scrollpopup(){
+	
+	jQuery(document).scroll(function() {
+			
+		//	var top=(jQuery(window).height()/2)-(jQuery(".morethemeinfo").height()/2)-50;
+		//	var left=(jQuery(window).width()/2)-(jQuery(".morethemeinfo").width()/2);
+		//	jQuery(".morethemeinfo").css("top",top+"px").css("left",left+"px");
+	});
 }

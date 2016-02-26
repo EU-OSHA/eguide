@@ -6,12 +6,14 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
+
+ 
 ?>
 
 <div id="page">
-  <header class="header" id="header" role="banner">
+  <header class="header" id="header">
 
-    <?php if ($logo): ?>
+    <?php if ($logo): ?>     
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
 
@@ -38,7 +40,7 @@
           ),
           'heading' => array(
             'text' => $secondary_menu_heading,
-            'level' => 'h2',
+            'level' => 'p',
             'class' => array('element-invisible'),
           ),
         )); ?>
@@ -56,9 +58,10 @@
       <?php print $breadcrumb; ?>
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
-      <?php if ($title): ?>
-        <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
-      <?php endif; ?>
+     
+
+
+     
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php print render($tabs); ?>
@@ -86,7 +89,7 @@
             ),
             'heading' => array(
               'text' => t('Main menu'),
-              'level' => 'h2',
+              'level' => 'p',
               'class' => array('element-invisible'),
             ),
           )); ?>
@@ -118,4 +121,15 @@
 
 <?php print render($page['bottom']); ?>
 
+<script>
 
+	
+	jQuery(".search-result a").each(function() { 
+		jQuery(this).removeAttr("href");
+	});
+	
+	//Migas home
+	jQuery(".migas a:eq(0)").attr("href","/en/select-your-profile");
+	
+
+</script>

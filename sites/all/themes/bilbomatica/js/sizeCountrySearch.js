@@ -19,6 +19,7 @@ function hideDivs() {
 function countrySearch() {
 	jQuery("#countries .containerC").hide();
 	jQuery(".country").click(function() {
+		return false; //Modificación para que no permita cambiar idioma
 		jQuery("#profileDiv").hide();
 		if(jQuery(this).hasClass("selected")) {
 			jQuery("#countries").slideUp();
@@ -36,11 +37,12 @@ function countrySearch() {
 	});
 	
 	jQuery(".search").click(function() {
+		
 		jQuery("#countries").hide();
 		jQuery("#countries .containerC").hide();
 		jQuery("#profileDiv").hide();
 		if(jQuery(this).hasClass("selected")) {			
-			jQuery("#searchDiv").slideUp();
+			//jQuery("#searchDiv").slideUp();
 			jQuery(this).removeClass("selected");
 		} else {
 			jQuery(this).addClass("selected");
@@ -48,9 +50,9 @@ function countrySearch() {
 			jQuery(".profileTab").removeClass("selected");
 			jQuery("#countries").hide();
 			jQuery("#profileDiv").hide();
-			jQuery("#searchDiv").slideDown("fast",function() {
-				jQuery("#searchField").focus();
-			});
+			//jQuery("#searchDiv").slideDown("fast",function() {
+			//	jQuery("#searchField").focus();
+			//});
 		}
 	});
 
@@ -106,7 +108,7 @@ function codeLanguagesList() {
 					jQuery(this).hide();
 				});
 
-				topParent=jQuery(this).position().top+10;
+				topParent=jQuery(this).position().top+1000;
 				leftParent=jQuery(this).position().left;
 				var width=jQuery(this).width();
 

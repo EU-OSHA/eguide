@@ -17,7 +17,10 @@ if(isset($_COOKIE["nidTheme"])) {
 }
 if(isset($_COOKIE["backgroundTheme"])) {
   $backgroundTheme=$_COOKIE["backgroundTheme"];
+  
 }
+
+
 if(isset($_GET["mn"])) {
   $nm=1;
  setcookie("nidTheme","");
@@ -57,7 +60,7 @@ if(isset($_GET["mn"])) {
           ),
           'heading' => array(
             'text' => $secondary_menu_heading,
-            'level' => 'h2',
+            'level' => 'p',
             'class' => array('element-invisible'),
           ),
         )); ?>
@@ -70,9 +73,9 @@ if(isset($_GET["mn"])) {
 <div class="line"></div>
   <div id="main">
 
-    <div id="content" class="column" role="main">
+    <div id="content" class="column test" role="main">
       <?php print render($page['highlighted']); ?>
-      <?php print $breadcrumb; ?>
+      <?php //print $breadcrumb; ?>
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
@@ -86,17 +89,30 @@ if(isset($_GET["mn"])) {
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
 
-    <?php
+    <div class="migas">
+	<a href="../../select-your-profile">Home</a> / 
+    <a class="active"><?php echo  t("Quiz"); ?></a>
+	</div>
+	
+	
+	<?php
 
-    if($nm==0 && $backgroundTheme!="") {
-      echo "<div class='theme-selected' style='background:url(".$domain."/".$backgroundTheme.") center bottom no-repeat #99b400'>";
-    } else {
-      echo "<div class='theme-selected' style='background:url(".$domain."/sites/all/themes/bilbomatica/img/bckQuiz.png) center 95% no-repeat #99b400'>";
-    }
+    /*if($nm==0 && $backgroundTheme!="") {
+      echo "<div class='theme-selected 2' style='background:url(".$domain."".$backgroundTheme.") center bottom no-repeat #99b400'>";
+    } else {*/
+	
+      //echo "<div class='theme-selected 1' style='background:url(".$domain."".$backgroundTheme.") center 95% no-repeat #99b400'>";
+	  
+	
+	  
+	  
+	  echo "<div class='theme-selected 1' style='background:url(/sites/all/themes/bilbomatica/img/bckQuiz.png) center 95% no-repeat #99b400'>";
+	  
+    /*}*/
     ?>
 		<div class="backT">
       <?php
-       if($nm==0 && $backgroundTheme!="") {
+     /*  if($nm==0 && $backgroundTheme!="") {
           if(isset($_COOKIE["urlTheme"])) {
             $url=$_COOKIE["urlTheme"];
             $title="";
@@ -107,14 +123,15 @@ if(isset($_GET["mn"])) {
           }
         } else {
           //echo "<a href='javascript:history.back()' class='backThemes'>".t("Back")."</a>";
-        }
+        }*/
      ?>
       
     </div>
     <?php 
       $nodeTheme = node_load($nidTheme);
       $order=$nodeTheme->field_order['und'][0]['value'];
-      if($nm==0 && $backgroundTheme!="") {
+	  echo "<h1 class='temazoQuiz'>".$title."</h1>";
+   /*   if($nm==0 && $backgroundTheme!="") {
           echo "<h1 class='temazo'>";
           echo t("Theme");
           echo " <span>".$order."</span>";
@@ -123,13 +140,16 @@ if(isset($_GET["mn"])) {
         } else {
            echo "<h1 class='temazo'>".$title."</h1>";
         }
+		*/
     ?>
 		
 	</div>
 
 	<div class="sections steps quiz">
-		<h2 class="h2Themes"><?php echo t("Quiz"); ?>:</h2>
-			 <?php print render($page['content']); ?>
+		<!--<h2 class="h2Themes"><?php echo t("Quiz"); ?>:</h2>-->
+			 <?php 
+          print render($page['content']);
+        ?>
 	</div>
 
       <?php print $feed_icons; ?>
@@ -151,7 +171,7 @@ if(isset($_GET["mn"])) {
             ),
             'heading' => array(
               'text' => t('Main menu'),
-              'level' => 'h2',
+              'level' => 'p',
               'class' => array('element-invisible'),
             ),
           )); ?>
@@ -204,7 +224,9 @@ jQuery(document).ready(function() {
 		var link=jQuery(".usefulLinks a:eq(0)").attr("href");
 		location.href=link;
 	});
-
+	
+	jQuery("#block-block-9").css("display","none");
+	
 });
 </script>
 

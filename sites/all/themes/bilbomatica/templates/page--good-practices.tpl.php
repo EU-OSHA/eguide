@@ -39,7 +39,7 @@
           ),
           'heading' => array(
             'text' => $secondary_menu_heading,
-            'level' => 'h2',
+            'level' => 'p',
             'class' => array('element-invisible'),
           ),
         )); ?>
@@ -71,7 +71,7 @@
       <div class="highLight goodPracticesBanner detail">
           <a href="javascript:history.back()" class="backThemes"><?php echo t("Back"); ?></a>
         <div class="containerSmall">
-        <h1>Good practices</h1>
+        <h2 class="banner">Good practices</h2>
         </div>
         </div>
       <?php 
@@ -113,7 +113,7 @@
             ),
             'heading' => array(
               'text' => t('Main menu'),
-              'level' => 'h2',
+              'level' => 'p',
               'class' => array('element-invisible'),
             ),
           )); ?>

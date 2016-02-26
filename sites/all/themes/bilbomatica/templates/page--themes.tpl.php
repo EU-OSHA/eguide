@@ -30,6 +30,8 @@
           <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
         <?php endif; ?>
       </div>
+    <?php else: ?>
+    <h1 class="hidden"><?php print $node->title; ?></h1>
     <?php endif; ?>
 
     <?php if ($secondary_menu): ?>
@@ -41,7 +43,7 @@
           ),
           'heading' => array(
             'text' => $secondary_menu_heading,
-            'level' => 'h2',
+            'level' => 'p',
             'class' => array('element-invisible'),
           ),
         )); ?>
@@ -59,9 +61,7 @@
       <?php print $breadcrumb; ?>
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
-      <?php if ($title): ?>
-        <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
-      <?php endif; ?>
+    
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php print render($tabs); ?>
@@ -79,18 +79,40 @@
 	<div class="theme-selected" style="background:url('<?php echo  $imageFondo; ?>') center bottom no-repeat #99b400">
 		<div class="backT">
 			<a href="list-themes" class="backThemes"><?php echo t("Back"); ?></a>
-		</div>
-		<?php 
-    echo "<h1 class='temazo'>";
-    echo t("Theme");
-    echo " <span>".$node->field_order['und'][0]['value']."</span>";
-    echo "</h1>";
-    echo "<h1>".$node->title."</h1>"; 
+			</div>
+
+		<?php
+			
+			if (isset($_COOKIE["profile"])) {
+				$profile=$_COOKIE["profile"];
+			}
+			
+			if ($profile==1){
+				$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>Worker</span></div>";
+			}else if ($profile==2){
+				$perfil =  "<div class='perfil2T'><span class='fondoperfilE'>Employer</span></div>";
+			}else if ($profile==5){
+				$perfil =  "<div class='perfil5T'><span class='fondoperfilH'>HR Manager</span></div>";
+			}else if ($profile==6){
+				$perfil =  "<div class='perfil6T'><span class='fondoperfilO'>OSH Professional</span></div>";
+			}
+
+			print ($perfil);
+			
+    echo "<div class='temazo'>";
+    //echo t("Theme");
+    echo " <div class='temazocentrado'>".$node->field_order['und'][0]['value']."</div>";
+    echo "</div>";
+	
+	$titulo = $node->title;
+	$titulo = substr ($titulo,3);
+	
+    echo "<div class='temazocentrado'>".$titulo."</div>"; 
     ?>
 	</div>
 
 	<div class="sections steps">
-		<h2 class="h2Themes"><?php print $node->body['und'][0]['value']; ?></h2>
+		<div class="h2Themes"><?php print $node->body['und'][0]['value']; ?></div>
 		<div class="containerSections">
 			<?php 
 
@@ -166,7 +188,7 @@
             ),
             'heading' => array(
               'text' => t('Main menu'),
-              'level' => 'h2',
+              'level' => 'p',
               'class' => array('element-invisible'),
             ),
           )); ?>
@@ -221,6 +243,10 @@ jQuery(document).ready(function() {
 	});
 
 	jQuery("ul.menu li:eq(0) a").addClass("is-active-trail").addClass("active");
+	
+	//Migas home
+	jQuery(".migas a:eq(0)").attr("href","/en/select-your-profile");
+		
 });
 </script>
 
@@ -231,8 +257,8 @@ jQuery(document).ready(function() {
   <div class="halfTour text">
     <div class="closeTour"><img src="/sites/all/themes/bilbomatica/img/closeTour.png" alt="Close tour" id="closeTour"></div>
     <div>
-      <?php echo t("Each Theme addresses different questions and issues related to its topic.")?>
-      <?php echo t("To learn more about a specific issue, you can click on the different questions.")?>
+      <?php echo t("Each theme addresses different questions and issues related to its topic.")?>
+      <?php echo t("topic. Click on the menu items to learn more about a specific issue.")?>
     </div>
   </div>
 </div>

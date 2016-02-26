@@ -49,7 +49,7 @@ if(isset($_COOKIE["backgroundTheme"])) {
           ),
           'heading' => array(
             'text' => $secondary_menu_heading,
-            'level' => 'h2',
+            'level' => 'p',
             'class' => array('element-invisible'),
           ),
         )); ?>
@@ -150,6 +150,9 @@ $title=$_COOKIE["themeTitle"];
 $url="javascript:history.back()";
 $title="Previous page";
 }
+
+//$title = str_replace($title,":","-");
+
 ?>
 
 <div class="migas">
@@ -175,17 +178,49 @@ $title="Previous page";
 			
 		</div>
 		<?php 
+		
+		if (isset($_COOKIE["profile"])) {
+				$profile=$_COOKIE["profile"];
+			}
+			
+			if ($profile==1){
+				$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>Worker</span></div>";
+			}else if ($profile==2){
+				$perfil =  "<div class='perfil2T'><span class='fondoperfilE'>Employer</span></div>";
+			}else if ($profile==5){
+				$perfil =  "<div class='perfil5T'><span class='fondoperfilH'>HR Manager</span></div>";
+			}else if ($profile==6){
+				$perfil =  "<div class='perfil6T'><span class='fondoperfilO'>OSH Professional</span></div>";
+			}
+
+			print ($perfil);
+		
+		
+		
+		
       $nodeTheme = node_load($nidTheme);
       $order=$nodeTheme->field_order['und'][0]['value'];
 
-        echo "<h1 class='temazo'>";
+      /*  echo "<div class='temazo'>";
         echo t("Theme");
         echo " <span>".$order."</span>";
-        echo "</h1>";
-        echo "<h1>".$title."</h1>";
+        echo "</div>";
+        echo "<h1>".$title."</h1>";*/
+	echo "<div class='temazo'>";
+    echo " <div class='temazocentrado'>".$order."</div>";
+    echo "</div>";
+	
+	$titulo = substr ($title,3);
+	
+    echo "<div class='temazocentrado'>".$titulo."</div>"; 
     ?>
+		
 	</div>
 
+	
+	
+	
+	
 	<div class="sections steps">
 
   <?php 
@@ -246,7 +281,7 @@ $title="Previous page";
             ),
             'heading' => array(
               'text' => t('Main menu'),
-              'level' => 'h2',
+              'level' => 'p',
               'class' => array('element-invisible'),
             ),
           )); ?>
@@ -280,6 +315,16 @@ $title="Previous page";
 <script>
 jQuery(document).ready(function() {
   jQuery("ul.menu li:eq(1) a").addClass("is-active-trail").addClass("active");
+  
+  //Migas home
+	jQuery(".migas a:eq(0)").attr("href","/en/select-your-profile");
+	
+  //Migas themes
+	jQuery(".migas a:eq(1)").attr("href","/en/list-themes");
+  //Migas theme	
+  var texttheme = jQuery(".migas a:eq(2)").text()	;
+  texttheme = texttheme.replace(":"," -");
+  jQuery(".migas a:eq(2)").text(texttheme);
 });
 </script>
 
@@ -293,8 +338,8 @@ jQuery(document).ready(function() {
   <div class="halfTour text">
     <div class="closeTour"><img src="/sites/all/themes/bilbomatica/img/closeTour.png" alt="Close tour" id="closeTour"></div>
     <div class="tttext">
-      <?php echo t("You can move to the next questions by clicking on the 'next' or go back on 'previous'.")?>
-      <?php echo t(" The back button brings you back to the Theme 1 overview page.")?>
+      <?php echo t("You can move between questions by clicking on ‘next’ or ‘previous’.")?> 
+      <?php echo t(" The back button brings you back to the theme overview page.")?>
     </div>
   </div>
 </div>
@@ -304,6 +349,6 @@ jQuery(document).ready(function() {
 <div class="next"><a href="#"><?php echo t("Next ››"); ?></a></div>
 
 <div id="translationPrevious"><?php echo t("Previous"); ?></div>
-<div id="textTranslation"><?php echo t("By clicking on 'Themes' you will go back to the page where you can select a theme."); ?></div>
+<div id="textTranslation"><?php echo t("By clicking on 'Themes' you will go back to the theme overview page."); ?></div>
 
 

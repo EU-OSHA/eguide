@@ -30,18 +30,18 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   word-wrap: break-word;
-  *behavior: url("/path/to/boxsizing.htc");
+ /* *behavior: url("/path/to/boxsizing.htc");
   _display: inline;
   _overflow: hidden;
-  _overflow-y: visible;
+  _overflow-y: visible;*/
 }
 
 /* Containers for grid items and flow items. */
 #header,
 #main,
 #footer {
-  *position: relative;
-  *zoom: 1;
+ /* *position: relative;
+  *zoom: 1;*/
 }
 #header:before,
 #header:after,
@@ -159,10 +159,10 @@
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     word-wrap: break-word;
-    *behavior: url("/path/to/boxsizing.htc");
+   /* *behavior: url("/path/to/boxsizing.htc");
     _display: inline;
     _overflow: hidden;
-    _overflow-y: visible;
+    _overflow-y: visible;*/
   }
 
   /* Span 1 column, starting in the 1st column from left. */
@@ -287,7 +287,7 @@
 @media all and (min-width: 1px) and (max-width: 800px) {
 .view-did-you-know .views-row {
     width:100% !important;
-    max-width: auto !important;
+   /* max-width:auto !important;*/
     float:none !important;
     min-height:auto !important;
   }
@@ -305,7 +305,7 @@
 
 
 
-@media all and (min-width: 1px) and (max-width: 1006px) {
+@media all and (min-width: 1px) and (max-width: 1023px) {
 
   body {
     background: #FFF !important;
@@ -433,6 +433,7 @@
     float:none !important;
     width:100% !important;
     height: 645px !important;
+	margin-top: 5em;
   }
   .theme-selected .backT {
     margin:0 !important;
@@ -564,7 +565,7 @@
   #moreInfoDiv {
     width:100% !important;
     top:0 !important;
-    transform: translate(-50%, 0%) !important;
+    /*transform: translate(-50%, 0%) !important;*/
     overflow:auto !important;
   }
   #moreInfoDiv h1 {
@@ -604,11 +605,14 @@
     width: 100% !important;
   }
   .containerThemes li {
-    float: none !important;
-    height: auto !important;
-    margin: 2em 0 !important;
-    padding: 3.3em 0;
-    width: 100% !important;
+   /* float: none !important;*/
+    height: 160px !important;
+    /*margin: 2em 0 !important;
+    padding: 3.3em 0;*/
+    width: 95% !important;
+	margin-left: 0px!important;
+    border: 1px solid;
+	margin-bottom: 0em!important; 
   }
   .views-field-field-order {
     margin:0 !important;
@@ -771,7 +775,7 @@
     float:left;
     padding:0;
     height: 2.8em;
-    font-size:1.4em !important;
+    font-size:1em !important;
   }
   #containerTools .tabs li div {
     margin: 0.8em 0 0 0.6em;
@@ -873,6 +877,75 @@
    background-image: none !important;
   }
 
+  .highLight.search.page-search-a-term {
+    background: #003386 !important;
+  }
+  .highLight.search .containerSmall {
+    background-image: none !important;
+  }
+  
+  /*Read more*************************************************************************************************************************/
+  .moreinfotheme {
+    margin-left: 0px!important; 
+    float: right;
+    position: relative!important;
+   /* top: -287px!important;*/
+   top: 2.4em!important;
+   
+	}
+
+.readmoretheme {
+    position: relative!important;
+    top:  2.4em!important;
+   /* margin-top: -287px!important;*/
+   
+	float: right;
+}
+
+.read a {
+	padding:0px;
+}
+
+.morethemeinfo {
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    height: 220px;
+    width: 250px;
+    text-align: center;
+    z-index: 2;
+	top: auto;
+	margin-top: -180px;
+}
+
+.menos {
+    color: #fff;
+    font-size: 30px;
+     margin-right: -20px; 
+    position: absolute;
+    /* top: 189px; */
+    /* right: 30px; */
+}
+
+
+.morethemeinfo li{
+	border:0;
+	height: auto!important;
+}
+
+  
+.img-start {
+	margin-left: 0px!important;
+}  
+  
+  
+  
+  
+  
+  
+  /*Fin 1024*/
+  
 }
 
 
@@ -890,3 +963,13 @@
         font-size: 80% !important;
     }
 }
+
+@media all and (max-width: 620px) {
+	.img-start {
+		display:none;
+	}
+    .startText {
+		margin-left:10px;
+	}
+}
+

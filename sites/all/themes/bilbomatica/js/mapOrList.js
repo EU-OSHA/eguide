@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
 function selection() {
 	jQuery(".MapSC").addClass("selected"); //first time
 	jQuery("#listText").hide(); //first time
-	jQuery(".ListSC .arrow").hide(); //first time
+	jQuery(".ListSC .arrow").removeClass(); //first time
 	
 	jQuery(".MapSC").click(function() {
 		if(!jQuery(this).hasClass("selected")) {
@@ -34,7 +34,7 @@ function selection() {
 			jQuery("#mapImg").hide();
 			jQuery(".MapSC .arrow").hide(); 
 			jQuery("#listText").fadeIn(); 
-			jQuery(".ListSC .arrow").show(); 
+			jQuery(".ListSC div").addClass("arrow"); 
 		}
 		if(jQuery("#containerPopLanguages").length>0) {
     		jQuery("#containerPopLanguages").remove();
@@ -109,7 +109,8 @@ function cargaMapa() {
 	    selectedRegion: null,
 	    showTooltip: false,
 	    onRegionClick: function(element,e,code,region) { //hardcodeado by gonzacid -> jquery.vmaps.js
-	    	
+	    	barrablanca = (jQuery(window).width() - jQuery("#vmap").width())/2 ;//ñapa by rramos para pantallas grandes
+			
 	    	if(code!="tr" && code!="ua" && code!="by" && code!="ba" && code!="rs" && code!="al" && code!="mk" && code!="md") {
 		    	if(jQuery("#containerPopLanguages").length>0) {
 		    		jQuery("#containerPopLanguages").remove();
@@ -126,9 +127,9 @@ function cargaMapa() {
 		        var html="<div id='containerPopLanguages'><div id='countryPop'>"+country+"</div><ul id='languageCountriesMap'>"+jQuery("ul."+code).html()+"</ul></div><div id='arrowPop'></div>";
 		  		jQuery("#vmap").after(html);
 		  		if(jQuery("#admin-menu").length>0) {
-		  				jQuery("#arrowPop").css("position","absolute").css("top",y-400+"px").css("left",x-40+"px");
+		  				jQuery("#arrowPop").css("position","absolute").css("top",y-400+"px").css("left",x-10 - barrablanca+"px");
 		  		} else {
-		  			jQuery("#arrowPop").css("position","absolute").css("top",y-90+"px").css("left",x-40+"px");
+		  			jQuery("#arrowPop").css("position","absolute").css("top",y-90+"px").css("left",x-10 - barrablanca +"px");
 		  		}
 		  		
 		  		var topCon=jQuery("#arrowPop").position().top-jQuery("#containerPopLanguages").height()-23;

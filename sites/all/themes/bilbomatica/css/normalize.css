@@ -39,8 +39,8 @@ audio,
 canvas,
 video {
   display: inline-block;
-  *display: inline;
-  *zoom: 1;
+  /*display: inline;
+  zoom: 1;*/
 }
 
 /**
@@ -100,7 +100,7 @@ audio:not([controls]) {
  *    `em` units.
  */
 html {
-  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif; /* 1 */
+  font-family: "Noto Sans",sans-serif,Verdana, Tahoma, "DejaVu Sans", sans-serif; /* 1 */
 
   /* Delete all but one of the following font-size declarations: */
 
@@ -265,7 +265,8 @@ hr {
   box-sizing: content-box;
   height: 0;
   border: 1px solid #666;
-  padding-bottom: -1px;
+ /* padding-bottom: -1px;*/
+ margin-bottom: -1px;
   margin: 1.5em 0;
 }
 
@@ -283,7 +284,7 @@ samp,
 tt,
 var {
   font-family: "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
-  _font-family: 'courier new', monospace;
+ /* _font-family: 'courier new', monospace;*/
   font-size: 1em;
   line-height: 1.5em;
 }
@@ -410,7 +411,7 @@ fieldset {
 legend {
   border: 0; /* 1 */
   padding: 0; /* 2 */
-  *margin-left: -7px; /* 3 */ /* LTR */
+ /* *margin-left: -7px;*/ /* 3 */ /* LTR */
 }
 
 /**
@@ -428,7 +429,7 @@ textarea {
   font-size: 100%; /* 2 */
   margin: 0; /* 3 */
   vertical-align: baseline; /* 4 */
-  *vertical-align: middle; /* 4 */
+ /* *vertical-align: middle;*/ /* 4 */
   max-width: 100%; /* 5 */
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -470,7 +471,7 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button; /* 2 */
   cursor: pointer; /* 3 */
-  *overflow: visible; /* 4 */
+ /* *overflow: visible;*/ /* 4 */
 }
 
 /**
@@ -493,8 +494,8 @@ input[type="radio"] {
   -moz-box-sizing: border-box;
   box-sizing: border-box; /* 1 */
   padding: 0; /* 2 */
-  *height: 13px; /* 3 */
-  *width: 13px; /* 3 */
+ /* *height: 13px;*/ /* 3 */
+ /* *width: 13px;*/ /* 3 */
 }
 
 /**
