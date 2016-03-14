@@ -1,4 +1,6 @@
 <?php
+  global $base_url;
+  global $base_root;
 /**
  * @file
  * Returns the HTML for a single Drupal page.
@@ -6,9 +8,6 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-	setcookie("themeTitle", $node->title);
-	setcookie("urlTheme",$_SERVER['REQUEST_URI']);
-  setcookie("nidTheme","");
 ?>
 
 <div id="page">
@@ -72,7 +71,7 @@
 
       <?php //print render($page['content']);
         $imageFondo="/sites/default/files/".$node->field_theme_image['und'][0]['filename'];
-         setcookie("backgroundTheme",$imageFondo);
+         
        ?>
 
     
@@ -83,9 +82,30 @@
 
 		<?php
 			
-			if (isset($_COOKIE["profile"])) {
-				$profile=$_COOKIE["profile"];
-			}
+			$employer = "employer";
+      $pos1 = strpos($base_root,$employer);
+
+      $worker = 'worker';
+      $pos2 = strpos($base_root,$worker);
+
+      $manager = 'manager';
+      $pos3 = strpos($base_root,$manager);
+
+      $professional = 'professional';
+      $pos4 = strpos($base_root,$professional);
+
+      if ($pos1 != false) {
+        $profile=2;
+      } 
+      if ($pos2 != false) {
+        $profile=1;
+      }
+      if ($pos3 != false) {
+        $profile=5;
+      }
+      if ($pos4 != false) {
+        $profile=6;
+      }
 			
 			if ($profile==1){
 				$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>Worker</span></div>";
@@ -116,27 +136,19 @@
 		<div class="containerSections">
 			<?php 
 
-       $nid="";
+        $nid="";
         if (arg(0) == 'node' && is_numeric(arg(1)))  {
           $nid = arg(1); 
-          setcookie("nidTheme",$nid);
+          
         }
-  
-
 
 				$size=sizeof($page['content']['system_main']['nodes'][$nid]['field_sections']['#items']);
-
-        // echo $size;
-
         //  dpm($page['content']['system_main']);
-      
-
+    
 				for($i=0;$i<=$size;$i++){
 					if(isset($page['content']['system_main']['nodes'][$nid]['#node']->field_sections['und'][$i]['node']->title)) {
 
-            $title=$page['content']['system_main']['nodes'][$nid]['#node']->field_sections['und'][$i]['node']->title;
-
-
+						$title=$page['content']['system_main']['nodes'][$nid]['#node']->field_sections['und'][$i]['node']->title;
            
 						//no encuentro la url bonita así que hago una select con la url fea
 						$url=$page['content']['system_main']['nodes'][$nid]['field_sections'][$i]['#href'];
@@ -158,7 +170,7 @@
 			$claseoculta = "oculto";
 		}
 		?>
-		<h2><?php echo t("Do you want know more?"); ?></h2>
+		<h2><?php echo t("Do you want to know more?"); ?></h2>
 		<div class="goodPractices <?php print($claseoculta)?>">
 			<div class="goodP"><a href="good-practices?nid=<?php echo $nid; ?>"><?php echo t("Good practices"); ?></a></div>
 			<div class="keepInMind"><?php echo t("Keep in mind"); ?></div>
@@ -257,8 +269,8 @@ jQuery(document).ready(function() {
   <div class="halfTour text">
     <div class="closeTour"><img src="/sites/all/themes/bilbomatica/img/closeTour.png" alt="Close tour" id="closeTour"></div>
     <div>
-      <?php echo t("Each theme addresses different questions and issues related to its topic.")?>
-      <?php echo t("topic. Click on the menu items to learn more about a specific issue.")?>
+      <?php echo t("Each theme addresses different questions and issues related to its topic. ")?>
+      <?php echo t("Click on the menu items to learn more about a specific issue.")?>
     </div>
   </div>
 </div>

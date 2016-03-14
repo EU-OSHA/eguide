@@ -34,7 +34,7 @@
 ?>
 <?php print l($text, $term["linkto"], array(
   'attributes' => array(
-    'title' => $term["term"]->safe_description,
+    'data-titleBM' => $term["term"]->description, //antes ponía safe_description pero debido a que meten HTML esto es lo que necesitan, a pesar de lo que indican los comentarios de este módulo más arriba
     'class' => array($term["term_class"]),
   ),
   'fragment' => $term["fragment"],

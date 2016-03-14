@@ -61,6 +61,7 @@ $domain=$base_root;
       }
     </style>
    </noscript>
+     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>

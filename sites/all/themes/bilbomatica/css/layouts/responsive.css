@@ -605,14 +605,9 @@
     width: 100% !important;
   }
   .containerThemes li {
-   /* float: none !important;*/
-    height: 160px !important;
-    /*margin: 2em 0 !important;
-    padding: 3.3em 0;*/
+    float: none !important;
+    margin: 0 auto !important;
     width: 95% !important;
-	margin-left: 0px!important;
-    border: 1px solid;
-	margin-bottom: 0em!important; 
   }
   .views-field-field-order {
     margin:0 !important;
@@ -827,7 +822,6 @@
     padding: 0 0 0.2em;
   }
   .containerThemes {
-    padding: 1em 2em 0 !important;
     background-image: none !important;
     background-color: #4066a2 !important;
   }
@@ -885,47 +879,16 @@
   }
   
   /*Read more*************************************************************************************************************************/
-  .moreinfotheme {
-    margin-left: 0px!important; 
-    float: right;
-    position: relative!important;
-   /* top: -287px!important;*/
-   top: 2.4em!important;
-   
-	}
-
-.readmoretheme {
-    position: relative!important;
-    top:  2.4em!important;
-   /* margin-top: -287px!important;*/
-   
-	float: right;
-}
 
 .read a {
 	padding:0px;
 }
 
-.morethemeinfo {
-    background-color: blue;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    height: 220px;
-    width: 250px;
-    text-align: center;
-    z-index: 2;
-	top: auto;
-	margin-top: -180px;
-}
 
 .menos {
     color: #fff;
     font-size: 30px;
-     margin-right: -20px; 
     position: absolute;
-    /* top: 189px; */
-    /* right: 30px; */
 }
 
 

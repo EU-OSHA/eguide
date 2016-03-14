@@ -52,7 +52,6 @@
 }
 
 .containerThemes {
-    width: 88%;
     overflow: hidden;
 }
 
@@ -66,100 +65,29 @@
 	min-height: 53px;
 }
 
-.moreinfotheme {
-    background-color: blue;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    height: 30px;
-    /* margin-left: 210px; */
-    padding-top: 10px;
-    position: absolute;
-    text-align: center;
-    top: 46px!important;
-    width: 40px;
-    z-index: 1;
-    float: right;
-    /*margin-top: -193px;*/
-	}
 
-.readmoretheme {
-    background-color: blue;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    height: 30px;
-    /* margin-left: 210px; */
-    padding-top: 10px;
-    position: absolute;
-    text-align: center;
-    top: 46px!important;
-    width: 208px;
-    z-index: 0;
-    cursor: pointer;
-    /*margin-top: -193px;*/
-}
 
 .read a {
 	padding:0px;
-}
-
-.morethemeinfo {
-    background-color: blue;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    height: 220px;
-    width: 250px;
-    text-align: center;
-    z-index: 2;
-	top: auto;
-	margin-top: -180px;
-	right: 43px;
-}
-
-.menos {
-    color: #fff;
-    font-size: 30px;
-     margin-right: -20px; 
-    position: absolute;
-    /* top: 189px; */
-    /* right: 30px; */
-}
-
-
-.morethemeinfo li{
-	border:0;
-	height: auto!important;
-	padding-left: 10px;
 }
 
 .view-did-you-know .views-row {
     min-height: 342px!important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ul.tabs li.profileTab {
+    min-width:11.5em !important;
+}
+#block-block-4 #profileDiv div {
+    width:100%;
+}
 
 /*Fin de 480*/
 }
 
 
-
 @media all and (min-width: 481px) and (max-width: 1024px) {
+
 
 #block-block-4 #profileDiv div {
     padding-top: 1em;
@@ -200,6 +128,10 @@
 }
 
 @media (max-width: 1041px) {
+
+#block-block-4 #profileDiv div {
+    width:100%;
+}
 
 #page{
 	overflow: hidden!important;
@@ -283,24 +215,10 @@ ul.tabs {
 
 @media all and (min-width: 1057px) and (max-width: 1166px) {
 .containerThemes li {
-	margin-left: 10px!important;
-	width: 230px!important;
+	/*margin-left: 10px!important;*/
+	/*width: 230px!important;*/
 }
 
-.readmoretheme {
-	width: 188px;
-	top: 492px!important;
-}
-
-.moreinfotheme {
-	margin-left: 190px;
-	top: 492px!important;
-}
-
-.morethemeinfo{
-	width: 230px;
-	top: 312px;
-}
 
 }
 
@@ -310,20 +228,12 @@ ul.tabs {
 	width: 230px!important;
 }
 
-.readmoretheme {
-	width: 188px;
-	top: 516px!important;
 }
 
-.moreinfotheme {
-	margin-left: 190px;
-	top: 516px!important;
-}
 
-.morethemeinfo{
-	width: 230px;
-	top: 336px!important;
-    left: auto!important;
-}
 
+@media (max-width: 1280px) {
+    #block-block-4 #profileDiv {
+        width:73% !important;
+    }
 }

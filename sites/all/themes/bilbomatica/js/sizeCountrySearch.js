@@ -71,8 +71,11 @@ function countrySearch() {
 			jQuery("#searchDiv").hide();
 			jQuery("#countries").hide();
 			jQuery("#profileDiv").slideDown("fast",function() {
+				themesSizes();//para el móvil
 			});
 		}
+
+		setTimeout("themesSizes()",15000); //para el móvil
 	});
 
 

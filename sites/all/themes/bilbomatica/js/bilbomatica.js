@@ -36,6 +36,7 @@ if(jQuery(window).width()>1006) {
 	glossaryLetters();
 	glossaryClick();
 	glossarySearch();
+	glossaryOrderDivs();
 	sectionsSteps();
 	menuPie();
 	didYouKnowHeight();
@@ -47,11 +48,14 @@ if(jQuery(window).width()>1006) {
 	breadcrumbsSearch();
 	menuloginup();
 	arrowGlossary();
-	//submenu();
 	abrirMoreinfo();
 	abrirReadMore();
-	
 	scrollpopup();
+	themesSizes();
+	jQuery(window).load(function(){
+		themesSizes(); //a veces en pantallas ultrapequeñas no sale y así forzamos
+	});
+	
 	
 	jQuery(window).resize(function() {
 		arrowGlossary();
@@ -63,6 +67,8 @@ if(jQuery(window).width()>1006) {
 		if(jQuery(".tourLayer").length>0) {
 			//setTimeout("location.reload()",200);
 		}
+		themesSizes();
+		setTimeout("themesSizes()",1000);
 	});
 
 	jQuery(window).load(function() {
@@ -72,25 +78,39 @@ if(jQuery(window).width()>1006) {
 	jQuery(document).ajaxComplete(function() {
 		usefulLinks();
 	});
-
 });
 
 function icoHome() {
 	
 	var htmlHome=jQuery("#block-superfish-1 a.mnHome").text();
-		
+	var domain=jQuery("#domain").text();
 	if(jQuery(window).width()>1006) {
-		var domain=jQuery("#domain").text();
+		
 		jQuery("#block-superfish-1 a.mnHome").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
 		jQuery("#block-superfish-2 a.mnHome").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
 	} else {
-		//jQuery("#block-superfish-1 li.first a").html(htmlHome);
-		//jQuery("#block-superfish-2 li.first a").html(htmlHome);
-		//jQuery("#block-superfish-1 li.first a").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
-		
-		jQuery("#block-superfish-2 a:eq(1)").html("<img src='/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
-		//jQuery("#block-superfish-2 first a").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
+		jQuery("#block-superfish-2 a:eq(1)").html("<img src='/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");	
 	}
+
+	if(domain.indexOf("worker")!=1) {
+		domain=domain.replace("worker.","");
+	}
+	if(domain.indexOf("employer")!=1) {
+		domain=domain.replace("employer.","");
+	}
+	if(domain.indexOf("manager")!=1) {
+		domain=domain.replace("manager.","");
+	}
+	if(domain.indexOf("professional")!=1) {
+		domain=domain.replace("professional.","");
+	}
+	var linkHome=domain+jQuery(".mnHome:eq(0)").attr("href");
+
+	jQuery(".mnHome").each(function() {
+		jQuery(this).attr("href",linkHome);
+	});
+
+	jQuery("nav.mean-nav li:eq(0) a").attr("href",linkHome);
 }
 
 function linksPreFooter(){
@@ -125,19 +145,13 @@ function glossary() {
 	jQuery(".lexicon-term").each(function() {
 		jQuery(this).removeAttr("href");
 
-
-		
-		//no quieren que tenga title. Así que reemplazo el title por un data-title
-		var title=jQuery(this).attr("title");
-		jQuery(this).attr("data-titleBM",title);
-		jQuery(this).removeAttr("title");
-
+		/*lexicon-mark-term.tpl.php-> Ahí hago la magia*/
 
 		jQuery(this).click(function () {
 			removePopUps();
 			title=jQuery(this).attr("data-titleBM");
 			jQuery(this).addClass("poparizado");
-			var html="<div class='popup'><div class='closePop'><img src='/sites/all/themes/bilbomatica/img/closeGlossary.png'></div><div class='contentPop'>"+title+"</div></div><div class='arrowPopUp'></div>";
+			var html="<div class='popup'><div class='closePop'><img src='/sites/all/themes/bilbomatica/img/closeGlossary.png'></div><div class='contentPop'>"+title+"</div></div>";
 			jQuery(this).before(html);
 			//positioning
 
@@ -181,13 +195,6 @@ function glossary() {
 				var heightBox=jQuery(".popup").height();
 				var topPut=topWord-heightBox-heightWord+"px";
 				jQuery(".popup").css("top",topPut); //center
-
-				var topPutArrow=topWord+"px";
-				var widthArrow=jQuery(".arrowPopUp").width()/2;
-
-				var leftPutArrow=(leftWord+widthWord)-(widthArrow)+"px";
-				jQuery(".arrowPopUp").css("top",topPutArrow);
-				jQuery(".arrowPopUp").css("left",leftPutArrow); //center
 			} else {
 				var widthWord=jQuery("span:eq(0)",this).width()/2;
 				var widthBox=jQuery(".popup").width()/2;
@@ -200,25 +207,21 @@ function glossary() {
 				var heightBox=jQuery(".popup").height();
 				var topPut=topWord-heightBox-heightWord+"px";
 				jQuery(".popup").css("top",topPut); //center
-
-				var topPutArrow=topWord+"px";
-				var widthArrow=jQuery(".arrowPopUp").width()/2;
-
-				var leftPutArrow=(leftWord+widthWord)-(widthArrow)+"px";
-				jQuery(".arrowPopUp").css("top",topPutArrow);
-				jQuery(".arrowPopUp").css("left",leftPutArrow); //center
-
 				jQuery(this).html(textoSel);
 			}
-
-
-			
-
 
 			jQuery(".closePop").click(function () {
 				removePopUps();
 				jQuery(".poparizado").removeClass("poparizado");
 			});
+
+
+			jQuery(".popup").each(function() {
+				jQuery(this).draggable().css("cursor","move"); //lo hago dragabble porque si es muy grande no se puede ver el icono de cerrar, así la mueve y puede cerrarla.
+			});
+
+
+
 		});	
 		
 		//jQuery(this).addClass("tooltip"); //descartado por errores cuando las palabras salen en varias líneas
@@ -235,6 +238,19 @@ function glossary() {
 		   trigger: 'click'
 		});
 		*/
+
+
+		//Hago que las pestañas del buscador y a-z filter también sean linkables
+		if(jQuery(".searchGlossary a").length>0) {
+			jQuery(".searchGlossary").click(function() {
+				location.href=jQuery(".searchGlossary a").attr("href");
+			});
+		}
+		if(jQuery(".filterGlossary a").length>0) {
+			jQuery(".filterGlossary").click(function() {
+				location.href=jQuery(".filterGlossary a").attr("href");
+			});
+		}
 
 }
 
@@ -386,15 +402,13 @@ function moreInfo() {
 	var alturaCapa=0;
 	if(jQuery("#moreInfoDiv").length>0) {
 		if(jQuery(window).width()>1006) {
-			jQuery("#page").after("<div id='shadow'></div>")
-			barrablanca = (jQuery(window).width() - jQuery("#vmap").width())/2;//ñapa by rramos para pantallas grandes
+			jQuery("#page").after("<div id='shadow'></div>");
+			jQuery("#shadow").css("height",jQuery(window).height());
+			jQuery("#shadow").css("width",jQuery(window).width());
 		}
-		else
-		{
-			barrablanca=0;
-		}
+		
 		var top=(jQuery(window).height()/2)-(jQuery("#moreInfoDiv").height()/2)-50;
-		var left=(jQuery(window).width()/2)-(jQuery("#moreInfoDiv").width()/2); //- barrablanca;
+		var left=(jQuery("#page").width()/2)-(jQuery("#moreInfoDiv").width()/2); 
 		jQuery("#moreInfoDiv").css("top",top+"px").css("left",left+"px");
 
 		jQuery("#moreInfoDiv").slideDown("fast",function() {
@@ -423,7 +437,8 @@ function moreInfo() {
 
 
 function showSources(texto) {
-	var textopintar  = jQuery("#source"+texto).text();
+	var scrollTop=jQuery(window).scrollTop();
+	var textopintar  = jQuery("#source"+texto).html();
 	jQuery("div").remove(".sourcetext");
 	jQuery (".preFooter.did ul").before("<div class='sourcetext'>"+textopintar+"</div>");
 	jQuery (".preFooter.did ul").hide();
@@ -432,20 +447,21 @@ function showSources(texto) {
 		jQuery("#page").after("<div id='shadow'></div>")
 		jQuery("body").css("overflow","hidden");
 	} else {
-			jQuery("body").css("overflow-y","auto").css("overflow-x","hidden");
-			jQuery(".view-did-you-know").hide();
+		jQuery("body").css("overflow-y","auto").css("overflow-x","hidden");
+		jQuery(".view-did-you-know").hide();
 	}
 	jQuery(".preFooter.did").slideDown();
 
 	var top=(jQuery(window).height()/2)-(jQuery(".preFooter.did").height()/2)-350;
-	var left=(jQuery(window).width()/2)-(jQuery(".preFooter.did").width()/2);
+	var left=(jQuery("#page").width()/2)-(jQuery(".preFooter.did").width()/2);
 	jQuery(".preFooter.did").css("top",top+"px").css("left",left+"px");
-
++
 	jQuery(".closeMoreInfo").click(function() {
 		jQuery(".preFooter.did").slideUp("fast",function() {
 			jQuery("#shadow").remove();
 			jQuery("body").css("overflow","auto");
 			jQuery(".view-did-you-know").show();
+			jQuery(window).scrollTop(scrollTop);
 		});
 	});
 }
@@ -462,15 +478,6 @@ function viewSources(source) {
 function fontSize() {
 	jQuery(".bigSize a").click(function() {
 	
-		jQuery(".readmoretheme").addClass("readmorethemeLG");
-		jQuery(".readmoretheme").removeClass("readmoretheme");
-		
-		jQuery(".morethemeinfono").addClass("morethemeinfonoLG");
-		jQuery(".morethemeinfono").removeClass("morethemeinfono");
-		
-		jQuery(".moreinfotheme").addClass("moreinfothemeLG");
-		jQuery(".moreinfotheme").removeClass("moreinfotheme");
-	
 		jQuery("body").css("font-size","120%");
 		jQuery(".normalSize").removeClass("selected");
 		jQuery(".bigSize").addClass("selected");
@@ -479,23 +486,12 @@ function fontSize() {
 			//didYouKnowHeight();
 			jQuery(".sourceLink").addClass("sourceLinkLG");
 		}
-		
-		
-
-		
+			themesSizes();
+			jQuery("#containerTools .tabs").css("min-width","20em");
+			jQuery("#block-block-4 #profileDiv").css("width","81%");
 	});
 
 	jQuery(".normalSize a").click(function() {
-	
-		jQuery(".readmorethemeLG").addClass("readmoretheme");
-		jQuery(".readmorethemeLG").removeClass("readmorethemeLG");
-		
-		jQuery(".morethemeinfonoLG").addClass("morethemeinfono");
-		jQuery(".morethemeinfonoLG").removeClass("morethemeinfonoLG");
-		
-		jQuery(".moreinfothemeLG").addClass("moreinfotheme");
-		jQuery(".moreinfothemeLG").removeClass("moreinfothemeLG");
-	
 		jQuery("body").css("font-size","100%");
 		jQuery(".bigSize").removeClass("selected");
 		jQuery(".normalSize").addClass("selected");
@@ -504,6 +500,9 @@ function fontSize() {
 			//didYouKnowHeight();
 			jQuery(".sourceLink").removeClass("sourceLinkLG");
 		}
+		themesSizes();
+		jQuery("#containerTools .tabs").css("min-width","22em");
+		jQuery("#block-block-4 #profileDiv").css("width","70%");
 	});
 	 
 }
@@ -697,48 +696,14 @@ function wizard() {
 	});
 }
 function startTour() {
-	
 	if(Cookies.get('tour')=="1") {
-
 		/*dependiendo de la página en la que esté el usuario hay que mostrarle una capa distinta. 
 		Esta capa estará contenida en cada página; en la home en el bloque del mapa*/
 		//por el momento muestro la capa oscura
 		hacerNoche();
 
-		//HOME
-		if(jQuery(".front").length>1) {
-			jQuery(".halfTour").css("height","293px");
-			var left=jQuery("#tour").position().left;
-			var top=jQuery("#tour").position().top;
-
-			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
-			var topMaspalitroque=top+116;
-			var leftCapa=left-196;
-			jQuery(".tourLayer").animate({
-			    top: "+="+topMaspalitroque
-			  }, 300, function() {
-			    jQuery(".tourLayer").animate({
-				    left: "+="+leftCapa
-				  }, 700, function() {
-				    //pone el pointer
-				    var topPalitroque=top+35;
-				    var leftPalitroque=left+47;
-				   	jQuery(".tourLayer").after("<div class='pointerLeft'></div>");
-				   	jQuery(".pointerUp").css("left",leftPalitroque+"px").css("top",topPalitroque+"px").fadeIn();
-				   	jQuery(".skip").fadeIn();
-				    var topNext=jQuery(window).height()-180;
-				   	jQuery(".next").fadeIn().css("top",topNext+"px");
-				   	jQuery(".next").click(function() {
-				   		location.href=jQuery(".next a").attr("href");
-				   	});
-				});
-			});
-		} 
-
-		//SELECT YOUR PROFILE
-		
+		//SELECT YOUR PROFILE		
 		if(jQuery(".butonTour").length>0) {
-		
 			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
 			jQuery(".halfTour").css("height","300px");
 
@@ -764,13 +729,7 @@ function startTour() {
 
 				    jQuery(".skip").fadeIn();
 				   	var topNext=jQuery(window).height()-180;
-				   	jQuery(".next").fadeIn().css("top",topNext+"px");
-
-				   	jQuery(".next a").attr("href",jQuery(".half:eq(0) .button a").attr("href"));
-				   	jQuery(".next").click(function() {
-				   		location.href=jQuery(".half:eq(0) .button a").attr("href");
-				   	});
-				   	
+				   	jQuery(".next").fadeIn().css("top",topNext+"px");			   	
 				});
 			});
 		}
@@ -780,7 +739,7 @@ function startTour() {
 		if(jQuery(".section-list-themes").length>0) {
 		
 			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
-			jQuery(".halfTour").css("height","250px");
+			jQuery(".halfTour").css("height","290px");
 			
 			if (Cookies.get('tourVuelta')==0) {
 				
@@ -844,7 +803,7 @@ function startTour() {
 			} else if (Cookies.get('tourVuelta')==2) {
 				//good practices
 				//lo primero cambiar los textos
-				jQuery(".halfTour").css("height","450px");
+				jQuery(".halfTour").css("height","413px");
 				var txt=jQuery("#traduccion2").text();
 				jQuery(".halfTour.text div:eq(1)").text(txt);
 
@@ -910,9 +869,9 @@ function startTour() {
 			} else if (Cookies.get('tourVuelta')==4) {
 				//good practices
 				//lo primero cambiar los textos
-				jQuery(".halfTour").css("height","250px");
-				var txt=jQuery("#traduccion4").text();
-				jQuery(".halfTour.text div:eq(1)").text(txt);
+				jQuery(".halfTour").css("height","340px");
+				var txt=jQuery("#traduccion4").html();
+				jQuery(".halfTour.text div:eq(1)").html(txt);
 
 				jQuery(".info3").removeClass("info3").addClass("info10");
 
@@ -935,7 +894,7 @@ function startTour() {
 						   	jQuery(".next").fadeIn().css("top",topNext+"px");
 
 						   	jQuery(".next").click(function() {
-						   		hacerDia();
+						   		hacerDia("cerrar");
 					   		});
 					});
 				});
@@ -1068,8 +1027,10 @@ function stopTour() {
 function hacerNoche() {
 	jQuery("#page").after("<div id='shadow'></div>")
 	jQuery("body").css("overflow","hidden");
+	jQuery("#shadow").css("height",jQuery(window).height());
+	jQuery("#shadow").css("width",jQuery(window).width());
 }
-function hacerDia() {
+function hacerDia(cerrar) {
 	Cookies.set('tour', '0');
 	Cookies.set('tourVuelta', '0');
 	jQuery("#shadow").fadeOut("fast",function() {
@@ -1083,6 +1044,9 @@ function hacerDia() {
 		jQuery(".tourLayer").hide();
 		jQuery(".skip").hide();
 		jQuery(".next").hide();
+		if(cerrar=="cerrar") {
+			location.href=jQuery(".mnHome:eq(0)").attr("href");
+		}
 	});
 }
 
@@ -1260,50 +1224,73 @@ function abrirReadMore(){
 
 
 function abrirMoreinfo(){
-	jQuery(".moreinfotheme").each(function() {
-	  jQuery(this).css("cursor","pointer");
-	  
-	  jQuery(this).click(function() {
-		
-	  
-		if(jQuery(window).width()>1023) {	  
-			jQuery(this).parent().parent().prev().find(".morethemeinfono").removeClass("morethemeinfono").addClass("morethemeinfo");
-			jQuery(this).parent().parent().prev().find(".morethemeinfonoLG").removeClass("morethemeinfonoLG").addClass("morethemeinfoLG");
-		}
-		else
-		{
-			jQuery(this).parent().parent().prev().find(".morethemeinfono").removeClass("morethemeinfono").addClass("morethemeinfo");
-			jQuery(this).parent().parent().prev().find(".morethemeinfonoLG").removeClass("morethemeinfonoLG").addClass("morethemeinfoLG");
-			
-			//var top=(jQuery(window).height()/2)-(jQuery(".morethemeinfo").height()/2);
-			var top=jQuery(this).position().top;
-			var left=jQuery(this).position().left - 210;
-			//var left=(jQuery(window).width()/2)-(jQuery(".morethemeinfo").width()/2);
-			jQuery(".morethemeinfo").css("top",top+"px").css("left",left+"px");
-		}
+	jQuery(".moreinfotheme").each(function() {  
+	  jQuery(this).click(function() {	  
+		jQuery(this).parent().parent().prev().find(".morethemeinfono").show();
 	  });
 	});
-	jQuery(".menos").each(function() {
-	  	
-	  jQuery(this).css("cursor","pointer");
-	  
-	  jQuery(this).click(function() {
-	
-			jQuery(this).parent().parent().find(".morethemeinfo").removeClass("morethemeinfo").addClass("morethemeinfono");
-			jQuery(this).parent().parent().find(".morethemeinfoLG").removeClass("morethemeinfoLG").addClass("morethemeinfonoLG");
-		});
-	  
+
+	jQuery(".menos").each(function() {	  
+		jQuery(this).click(function() {
+			jQuery(this).parent().hide();
+		});  
 	});
 }
 
-
-
-function scrollpopup(){
-	
+function scrollpopup(){	
 	jQuery(document).scroll(function() {
 			
 		//	var top=(jQuery(window).height()/2)-(jQuery(".morethemeinfo").height()/2)-50;
 		//	var left=(jQuery(window).width()/2)-(jQuery(".morethemeinfo").width()/2);
 		//	jQuery(".morethemeinfo").css("top",top+"px").css("left",left+"px");
 	});
+}
+
+function glossaryOrderDivs() {
+	if(jQuery(".search-api-page-results").length>0) {
+		jQuery("li.search-result").each(function() {
+			var title=jQuery.trim(jQuery("h3",this).text()).toLowerCase();
+			jQuery(this).attr("data-orden",title);
+		});
+	}
+
+	var divList = jQuery("li.search-result");
+	divList.sort(function(a, b){
+	    return jQuery(a).data("orden")>jQuery(b).data("orden");
+	});
+	jQuery(".search-api-page-results").html(divList);
+
+	jQuery("li.search-result").each(function() {
+		jQuery(this).css("margin-bottom","1em");
+	});
+}
+function themesSizes() {
+	if(jQuery(".view-themes").length>0) {
+		var anchoCaja=jQuery(".view-themes .views-row").width()-42; //-40 es el tamaño del símbolo + más 2 px de separación
+		jQuery(".readmoretheme").css("display","block").css("width",anchoCaja+"px");
+
+		jQuery(".view-themes .views-row").each(function() {
+			var topBotones=jQuery(this).position().top+jQuery(this).height()-40; //40 son los px de altura de los botones
+			jQuery(".field-content .moreinfotheme",this).css("top",topBotones+"px");
+			jQuery(".field-content .readmoretheme",this).css("top",topBotones+"px");
+
+
+			var leftBotonMas=jQuery(".field-content .readmoretheme",this).position().left+jQuery(".field-content .readmoretheme",this).width()+2;
+			jQuery(".field-content .moreinfotheme",this).css("left",leftBotonMas+"px");
+
+			//adapto el tamaño de las ventanas de más info
+			var ancho=jQuery(this).width()-40; //40 de los padding
+			var alto=jQuery(this).height()-40;
+			jQuery(".morethemeinfono",this).css("width",ancho+"px");
+			jQuery(".morethemeinfono",this).css("height",alto+"px");
+
+			var topPonerCaja=jQuery(this).position().top;
+			jQuery(".morethemeinfono",this).css("top",topPonerCaja+"px");
+			
+
+			jQuery(".morethemeinfono .menos",this).css("top",alto+5+"px");
+
+			
+		});
+	}
 }

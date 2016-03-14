@@ -1,4 +1,6 @@
 <?php
+  global $base_url;
+  global $base_root;
 /**
  * @file
  * Returns the HTML for a single Drupal page.
@@ -8,18 +10,26 @@
  */
 $nidTheme="";
 $backgroundTheme="";
+//Get the theme nid
+$nid = $node->nid;
+$sql =  "SELECT `entity_id` FROM `field_data_field_sections` WHERE `field_sections_nid` =". $nid;
 
-if(isset($_COOKIE["nidTheme"])) {
-  $nidTheme=$_COOKIE["nidTheme"];
-}
-if(isset($_COOKIE["backgroundTheme"])) {
-  $backgroundTheme=$_COOKIE["backgroundTheme"];
-}
+$resultS = db_query($sql);
+    foreach($resultS as $item) {
+		$nidTheme=$item->entity_id;
+	}
+//Get the 
+$nodetheme = node_load($nidTheme);	
+//dpm($nodetheme);
+$backgroundTheme = $nodetheme->field_theme_image['und'][0]['filename'];
+$backgroundTheme = image_style_url('original', $backgroundTheme);
+
+$title=$nodetheme->title;
+$url  = url('node/'.$nidTheme);
 
 ?>
 
 <div id="page">
-
   <header class="header" id="header" role="banner">
 
     <?php if ($logo): ?>
@@ -143,13 +153,7 @@ if(isset($_COOKIE["backgroundTheme"])) {
 
 
 <?php
-if(isset($_COOKIE["urlTheme"])) {
- $url=$_COOKIE["urlTheme"];
-$title=$_COOKIE["themeTitle"];
-} else {
-$url="javascript:history.back()";
-$title="Previous page";
-}
+
 
 //$title = str_replace($title,":","-");
 
@@ -166,22 +170,37 @@ $title="Previous page";
 <div class="theme-selected" style="background:url('<?php echo $backgroundTheme; ?>') center bottom no-repeat #99b400">
 		<div class="backT">
       <?php
-        if(isset($_COOKIE["urlTheme"])) {
-          $url=$_COOKIE["urlTheme"];
-          $title="";
-          if(isset($_COOKIE["themeTitle"])) {
-            $title=$_COOKIE["themeTitle"];
-             echo "<a href='".$url."' class='backThemes'>".t("Back")."</a>";
-          }
-        }
+        echo "<a href='".$url."' class='backThemes'>".t("Back")."</a>";
+        
      ?>
 			
 		</div>
 		<?php 
 		
-		if (isset($_COOKIE["profile"])) {
-				$profile=$_COOKIE["profile"];
-			}
+		  $employer = "employer";
+      $pos1 = strpos($base_root,$employer);
+
+      $worker = 'worker';
+      $pos2 = strpos($base_root,$worker);
+
+      $manager = 'manager';
+      $pos3 = strpos($base_root,$manager);
+
+      $professional = 'professional';
+      $pos4 = strpos($base_root,$professional);
+
+      if ($pos1 != false) {
+        $profile=2;
+      } 
+      if ($pos2 != false) {
+        $profile=1;
+      }
+      if ($pos3 != false) {
+        $profile=5;
+      }
+      if ($pos4 != false) {
+        $profile=6;
+      }
 			
 			if ($profile==1){
 				$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>Worker</span></div>";
@@ -243,23 +262,53 @@ $title="Previous page";
 
 		<h2><?php echo $page['content']['system_main']['nodes'][$nid]['#node']->title; ?></h2>
 
-   <?php print render($page['content']); ?>
+   <?php 
+      //print render($page['content']); 
+      
+      $pathBASE=str_replace("employer.","",$base_url);
+      $pathBASE=str_replace("worker.","",$pathBASE);
+      $pathBASE=str_replace("manager.","",$pathBASE);
+      $pathBASE=str_replace("professional.","",$pathBASE);
+      $pathBASE=str_replace("http://","",$pathBASE);
+     // echo $pathBASE;
+
+      if(count($node->field_text_1)>0) {
+        $valorHTML1=$node->field_text_1['und'][0]['value'];
+        $valorHTML1=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$valorHTML1);
+        $valorHTML1=str_replace("eguides-staging.mainstrat.com",$pathBASE,$valorHTML1);
+        $valorHTML1=str_replace("test-eguides.osha.europa.eu",$pathBASE,$valorHTML1);
+        print $valorHTML1;
+      }
+      if(count($node->field_text_2)>0) {
+        $valorHTML2=$node->field_text_2['und'][0]['value'];
+        $valorHTML2=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$valorHTML2);
+        $valorHTML2=str_replace("eguides-staging.mainstrat.com",$pathBASE,$valorHTML2);
+        $valorHTML2=str_replace("test-eguides.osha.europa.eu",$pathBASE,$valorHTML2);
+        print $valorHTML2;
+      }
+
+   ?>
 
 
-    <?php //echo $page['content']['system_main']['nodes'][$nid]['#node']->field_text_1['und'][0]['value']; ?>
-    <!--
-    <div class="imageLesson">
-      <?php
-       /* 
-       $image=$page['content']['system_main']['nodes'][$nid]['#node']->field_image_step['und'][0]['uri'];
-        $img = str_replace("public://", "", $image);
-        */
-      ?>
-      <img src="/sites/default/files/<?php echo $img; ?>" alt="<?php //echo $page['content']['system_main']['nodes'][$nid]['#node']->field_image_step['und'][0]['alt']; ?>" title="<?php echo $page['content']['system_main']['nodes'][27]['#node']->field_image_step['und'][0]['title']; ?>">
+  <?php 
+    if ($anterior==1 || $siguiente==1) {
+      echo "<div class='pagSteps' style='margin-bottom:1em'>";
+        echo "<div class='medium blue'>";
+            if ($anterior==1) {
+              echo "<a href='".$urlAnterior."'><img alt='Previous' src='/sites/all/themes/bilbomatica/img/previousSection.png'> ".t("Previous")."</a> ";
+            }
+        echo"&nbsp;</div>";
+        echo "<div class='medium green'>&nbsp;";
+            if ($siguiente==1) {
+              echo " <a href='".$urlSiguiente."'>".t("Next")." <img alt='Next section' src='/sites/all/themes/bilbomatica/img/nextSection.png'></a>";
+            }
+        echo"</div>";
+      echo "</div>";
+    }
 
-    </div>
-    <?php //echo $page['content']['system_main']['nodes'][$nid]['#node']->field_text_2['und'][0]['value']; ?>
-    -->
+  ?>
+
+
 	</div>
 
       <?php print $feed_icons; ?>

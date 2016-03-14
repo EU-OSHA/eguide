@@ -1,6 +1,7 @@
 body {
  font-family: 'Noto Sans', sans-serif;
  background: #f9f9fa;
+ overflow-x: hidden !important;
 }
 #page {
 	max-width: 1366px;
@@ -239,10 +240,14 @@ ul.tabs li.country.selected {
 */
 
 ul.tabs li.profileTab {
-	padding: 0.3em 1.5em 0.65em 0.8em;
+	padding: 0.3em 1.7em 0.65em 1em;
 	background: url("/sites/all/themes/bilbomatica/img/icoDown.png") no-repeat scroll 96% center;
 	font-size:11px;
 	font-weight: bold;
+	
+}
+ul.tabs li.profileTab div {
+	white-space: nowrap;
 }
 
 ul.tabs li.profileTab.selected {
@@ -561,9 +566,13 @@ input[type="text"]:focus,input[type="email"]:focus,textarea:focus {
 	margin:0;
 	padding:0;
 }
-.containerThemes li {
+
+.view-themes .views-row {
 	width:250px;
 	height:220px;
+}
+
+.containerThemes li {
 	background:#98b400;
 	float:left;
 	list-style: none;
@@ -882,15 +891,12 @@ a.backThemes {
     max-width: 20em;
     padding: .7em .7em .7em .7em;
     position: absolute;
-    background: rgba(0, 0, 0, 0.8)
+    background:url('../img/arrowPopup.png') 50% 100% no-repeat;
 }
-.arrowPopUp {
-	background: url("../img/arrowPopup.png") 0 0 no-repeat;
-	width:13px;
-	height: 7px;
-	position:absolute;
-	opacity: 0.8;
+.popup a {
+	color:#FFF !important;
 }
+
 #countries {
 	display:none;
 	  border-top:1px solid #336699;
@@ -1309,17 +1315,7 @@ a.lexicon-item.active,.letterSelected {
     margin-top: 0.7em;
     margin-right: 2em;
 }
-.view-useful-links .views-row a{
-    background: #99b400 url("../img/i-_arrow-right-white.png") no-repeat scroll 95% 88%;
-    color: #fff;
-    float: left;
-    margin-bottom: 20px;
-    margin-right: 1%;
-    min-width: 180px;
-    padding: 1em 2em 1.5em 1em;
-    text-decoration: none;
-    width: 15%;
-}
+
 .categoriesUsefulLinks {
 	text-align:center;
 	padding: 1em 0 3.5em;
@@ -1523,8 +1519,6 @@ ul.menu ul {
 }
 #shadow {
 	position:absolute;
-	width:3000em;
-	height:3000em;
 	background: rgba(0,51,153,.7);
 	z-index: 9998;
 	top:0;
@@ -2137,13 +2131,12 @@ h1.h1{
     font-size: 20px;
     font-weight: bold;
     height: 30px;
-    margin-left: 210px;
     padding-top: 10px;
     position: absolute;
     text-align: center;
-    top: 518px;
-    width: 40px;
     z-index: 0;
+    width: 40px;
+    cursor: pointer;
 }
 
 .moreinfotheme:hover{
@@ -2158,75 +2151,71 @@ h1.h1{
     font-size: 20px;
     font-weight: bold;
     height: 30px;
-    /*margin-left: 210px;*/
     padding-top: 10px;
-    position: absolute;
     text-align: center;
-    top: 518px;
-    width: 209px;
     z-index: 0;
 	cursor: pointer;
+	position: absolute;
 }
 
 .readmoretheme:hover{
 	background-color: white;
     color: #003399;
-    font-size: 20px;
-    font-weight: bold;
-    height: 30px;
-    /*margin-left: 210px;*/
-    padding-top: 10px;
-    position: absolute;
-    text-align: center;
-    width: 209px;
-    z-index: 0;
-	cursor: pointer;
 }
 
-
-
 .morethemeinfo{
-	background-color: #003399;
+	background: #003399;
     color: white;
-    font-size: 12px;
 	font-family: 'Noto Sans', sans-serif;
     font-weight: bold;
-    height: 220px;
-	width: 230px;
-    position: absolute;
-    top: 338px;
     z-index: 1;
-	padding-left: 10px;
-    padding-right: 10px;
-	
+    position: absolute;
 }
 
 .morethemeinfo li {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     color: #fff;
-    float: left;
+    background: #003399;
     font-size: 12px;
-    list-style: outside none none;
-    text-align: left;
-	height: auto;
-	width: 208px;
-	margin-bottom: 1em;
-    margin-left: 25px!important;
-    margin-top: 10px;
-	list-style-image: url(../img/i-_arrow-light-green.png)
+	list-style-image: url(../img/i-_arrow-light-green.png);
+	display: block;
+	float:none;
 }
-
 
 
 .menos{
 	color: #fff;
 	font-size: 30px;
-    margin-right: -20px;
     position: absolute;
-    top: 189px;
-	right: 30px;
+	right: -11px;
+	cursor: pointer;
+	width:40px;
+	height: 40px;
 }
 
+.morethemeinfono {
+    background: #003399 none repeat scroll 0 0 !important;
+    color: #fff !important;
+    position: absolute;
+    z-index: 9999;
+    display: none;
+    font-size:.9em !important;
+    padding:20px;
+}
+.morethemeinfono li {
+	background: #003399 url("../img/i-_arrow-light-green.png") no-repeat scroll 0 7px !important;
+    border: 0 none !important;
+    display: block;
+    float: none;
+    font-weight: bold;
+    height: auto !important;
+    margin: 0 0 10px;
+    padding: 0 0 0 2em;
+    width: auto !important;
+}
+.morethemeinfono a {
+	font-size:100% !important;
+	font-weight: bold !important;
+}
 
 /*Letra grande*/
 .readmorethemeLG{
@@ -2458,6 +2447,7 @@ display:none;
 	height: 1%;
     overflow: hidden;
 	width:100%;
+
 }
 
 #block-block-4  #profileDiv{
@@ -2467,6 +2457,7 @@ display:none;
     text-align: center;
 	height: 1%;
     overflow: hidden;
+    display:none;
 }
 
 #block-block-4  #profileDiv div{
@@ -2719,43 +2710,27 @@ display:none;
     margin-top: -5em;
 }
 
-.views-field-field-link{
-	background: #99b400 url("../img/i-_arrow-right-white.png") no-repeat scroll 95% 88%;
+.views-field-field-link  a{
+    background: #99b400 url("../img/i-_arrow-right-white.png") no-repeat scroll 95% 88%;
     color: #fff;
     float: left;
-    margin-bottom: 20px;
-    margin-right: 1%;
-    min-width: 180px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 120px;
+    margin: 0 1% 1em 0;
     padding: 1em 2em 1.5em 1em;
-    text-decoration: none!important;
-    width: 19%;
-	height: 120px;
-}
-
-.views-field-field-link  a{
-   text-decoration: none!important;
-   color: #FFF;
-   width:19%;
-   font-weight: bold;
-   font-size: 14px;
-}
-
-.view-useful-links td{
-  width:110px;
-}
-
-.view-useful-links table td,table th{
- border:none;
- border-collapse: collapse;
- padding:.3em;
+    text-decoration: none !important;
+    width: 180px;
 }
 
 .view-useful-links h3{
-	color:#003399;
-	border-bottom: solid;
+	border-bottom: medium solid;
+    clear: both;
+    color: #003399;
+    margin: 1.5em 0;
+    padding: 1em 0;
 }
 .flechaizq{
-    /*background: #99b400 url("../img/i-_arrow-right-white.png") no-repeat scroll 95% 88%;*/
     color: transparent;
     float: right;
     height: 20px;
@@ -2876,18 +2851,7 @@ display:none;
 	height: 11.4em;
 }
 
-.morethemeinfono .menos{
-	display:none;
-}
-.morethemeinfonoLG .menos{
-	display:none;
-}
-.morethemeinfono{
-display:none;
-}
-.morethemeinfonoLG{
-display:none;
-}
+
 #site-map .n4{
 display:none;
 }
@@ -2902,4 +2866,11 @@ display:none;
 .lexicon-termthemes{
 	font-size: 13.008px!important;
 	line-height: 1.538em;
+}
+
+.good-practicesBox  .views-field-field-image-step{
+	height: 2.8em;
+}
+.front #block-block-13 #searchField,.front #block-block-13 #searchButton { 
+	margin-top:3px;
 }
