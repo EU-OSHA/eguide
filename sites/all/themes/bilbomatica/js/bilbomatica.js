@@ -742,7 +742,7 @@ function startTour() {
 			jQuery(".halfTour").css("height","290px");
 			
 			if (Cookies.get('tourVuelta')==0) {
-				alert("aqui");
+				
 				var top=jQuery(".containerThemes").position().top-15;
 				var left=jQuery(".numero:eq(0)").position().left+96;
 				
