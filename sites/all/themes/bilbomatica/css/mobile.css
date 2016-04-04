@@ -236,4 +236,7 @@ ul.tabs {
     #block-block-4 #profileDiv {
         width:73% !important;
     }
+    .view-did-you-know .views-field-field-image-step .field-content img {
+        height:151px !important;
+    }
 }

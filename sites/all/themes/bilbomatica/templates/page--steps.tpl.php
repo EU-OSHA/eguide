@@ -1,3 +1,25 @@
+
+<!-- CAPA TOUR -->
+<div class="tourLayer">
+  <div class="halfTour info5">
+  </div>
+  <div class="halfTour text">
+    <div class="closeTour"><img src="/sites/all/themes/bilbomatica/img/closeTour.png" alt="Close tour" id="closeTour"></div>
+    <div class="tttext">
+      <?php echo t("You can move between questions by clicking on ‘next’ or ‘previous’.")?> 
+      <?php echo t(" The back button brings you back to the theme overview page.")?>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT Y SKIP-->
+<div class="skip"><?php echo t("SKIP"); ?></div>
+<div class="next"><a href="#"><?php echo t("Next ››"); ?></a></div>
+
+<div id="translationPrevious"><?php echo t("Previous"); ?></div>
+<div id="textTranslation"><?php echo t("By clicking on 'Themes' you will go back to the theme overview page."); ?></div>
+
+
 <?php
   global $base_url;
   global $base_root;
@@ -77,17 +99,17 @@ $url  = url('node/'.$nidTheme);
   <div id="main">
 
     <div id="content" class="column" role="main">
-      <?php print render($page['highlighted']); ?>
+      <?php //print render($page['highlighted']); ?>
       <?php //print $breadcrumb; ?>
       <a id="main-content"></a>
-      <?php print render($title_prefix); ?>
+      <?php //print render($title_prefix); ?>
       <?php if ($title): ?>
         <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
-      <?php print render($tabs); ?>
-      <?php print render($page['help']); ?>
+      <?php //print render($tabs); ?>
+      <?php //print render($page['help']); ?>
       <?php if ($action_links): ?>
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
@@ -218,7 +240,7 @@ $url  = url('node/'.$nidTheme);
 		
 		
       $nodeTheme = node_load($nidTheme);
-      $order=$nodeTheme->field_order['und'][0]['value'];
+	  $order=$nodeTheme->field_order['und'][0]['value'];
 
       /*  echo "<div class='temazo'>";
         echo t("Theme");
@@ -263,8 +285,9 @@ $url  = url('node/'.$nidTheme);
 		<h2><?php echo $page['content']['system_main']['nodes'][$nid]['#node']->title; ?></h2>
 
    <?php 
-      //print render($page['content']); 
+    //  print render($page['content']); 
       
+	  
       $pathBASE=str_replace("employer.","",$base_url);
       $pathBASE=str_replace("worker.","",$pathBASE);
       $pathBASE=str_replace("manager.","",$pathBASE);
@@ -272,7 +295,7 @@ $url  = url('node/'.$nidTheme);
       $pathBASE=str_replace("http://","",$pathBASE);
      // echo $pathBASE;
 
-      if(count($node->field_text_1)>0) {
+      /*if(count($node->field_text_1)>0) {
         $valorHTML1=$node->field_text_1['und'][0]['value'];
         $valorHTML1=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$valorHTML1);
         $valorHTML1=str_replace("eguides-staging.mainstrat.com",$pathBASE,$valorHTML1);
@@ -285,12 +308,27 @@ $url  = url('node/'.$nidTheme);
         $valorHTML2=str_replace("eguides-staging.mainstrat.com",$pathBASE,$valorHTML2);
         $valorHTML2=str_replace("test-eguides.osha.europa.eu",$pathBASE,$valorHTML2);
         print $valorHTML2;
+      }*/
+	  
+	  if(count($node->field_text_1)>0) {
+        
+        $node->field_text_1=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$node->field_text_1);
+        $node->field_text_1=str_replace("eguides-staging.mainstrat.com",$pathBASE,$node->field_text_1);
+        $node->field_text_1=str_replace("test-eguides.osha.europa.eu",$pathBASE,$node->field_text_1);
+        
       }
-
+      if(count($node->field_text_2)>0) {
+        $node->field_text_2=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$node->field_text_2);
+        $node->field_text_2=str_replace("eguides-staging.mainstrat.com",$pathBASE,$node->field_text_2);
+        $node->field_text_2=str_replace("test-eguides.osha.europa.eu",$pathBASE,$node->field_text_2);
+      }
+	  
+	print render($page['content']);
    ?>
 
 
   <?php 
+    return false;
     if ($anterior==1 || $siguiente==1) {
       echo "<div class='pagSteps' style='margin-bottom:1em'>";
         echo "<div class='medium blue'>";
@@ -380,24 +418,5 @@ jQuery(document).ready(function() {
 
 
 
-<!-- CAPA TOUR -->
-<div class="tourLayer">
-  <div class="halfTour info5">
-  </div>
-  <div class="halfTour text">
-    <div class="closeTour"><img src="/sites/all/themes/bilbomatica/img/closeTour.png" alt="Close tour" id="closeTour"></div>
-    <div class="tttext">
-      <?php echo t("You can move between questions by clicking on ‘next’ or ‘previous’.")?> 
-      <?php echo t(" The back button brings you back to the theme overview page.")?>
-    </div>
-  </div>
-</div>
-
-<!-- NEXT Y SKIP-->
-<div class="skip"><?php echo t("SKIP"); ?></div>
-<div class="next"><a href="#"><?php echo t("Next ››"); ?></a></div>
-
-<div id="translationPrevious"><?php echo t("Previous"); ?></div>
-<div id="textTranslation"><?php echo t("By clicking on 'Themes' you will go back to the theme overview page."); ?></div>
 
 

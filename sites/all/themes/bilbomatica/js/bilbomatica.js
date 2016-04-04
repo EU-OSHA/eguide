@@ -742,7 +742,7 @@ function startTour() {
 			jQuery(".halfTour").css("height","290px");
 			
 			if (Cookies.get('tourVuelta')==0) {
-				
+				alert("aqui");
 				var top=jQuery(".containerThemes").position().top-15;
 				var left=jQuery(".numero:eq(0)").position().left+96;
 				
@@ -769,6 +769,7 @@ function startTour() {
 					});
 				});
 			} else if (Cookies.get('tourVuelta')==1) {
+			
 				//lo primero cambiar los textos
 				jQuery(".halfTour").css("height","300px");
 				var txt=jQuery("#traduccion1").text();
@@ -776,7 +777,14 @@ function startTour() {
 
 				//cambiar info3 por info7
 				jQuery(".info3").removeClass("info3").addClass("info7");
+				
 				var left = jQuery("#searchField").position().left-jQuery(".tourLayer").width()+jQuery("ul.tabs li:eq(0)").width()+70;
+				
+				var ventana_ancho = jQuery(window).width();
+				if(ventana_ancho>1600){
+					var left = ventana_ancho -  jQuery("#searchField").position().left + 150;
+				}
+				
 				var top=jQuery(".profileTab").position().top+30;
 				
 				jQuery(".tourLayer").animate({
@@ -801,6 +809,7 @@ function startTour() {
 					});
 				});
 			} else if (Cookies.get('tourVuelta')==2) {
+			
 				//good practices
 				//lo primero cambiar los textos
 				jQuery(".halfTour").css("height","413px");
@@ -811,7 +820,13 @@ function startTour() {
 
 				var left=jQuery("#block-superfish-1 ul.menu").position().left+150;
 				var top=jQuery(".profileTab").position().top+40;
-
+				
+				var ventana_ancho = jQuery(window).width();
+				if(ventana_ancho>1200){
+					sobra = (ventana_ancho - 1366)/2;
+					var left=jQuery("#block-superfish-1 ul.menu").position().left+150 - sobra;
+				}
+				
 				jQuery(".tourLayer").animate({
 				    top: "+="+top
 				  }, 300, function() {
@@ -844,7 +859,12 @@ function startTour() {
 
 				var left=jQuery(".aboutUs").position().left-jQuery(".tourLayer").width()+120;
 				var top=jQuery(".aboutUs").position().top-jQuery(".tourLayer").height()-120;
-
+				
+				var ventana_ancho = jQuery(window).width();
+				if(ventana_ancho>1200){
+					sobra = (ventana_ancho - 1366)/2;
+					var left=jQuery(".aboutUs").position().left-jQuery(".tourLayer").width()+150 - sobra;
+				}
 				jQuery(".tourLayer").animate({
 				    top: "+="+top
 				  }, 300, function() {
@@ -877,7 +897,14 @@ function startTour() {
 
 				var left=jQuery("ul.menu").position().left-65;
 				var top=jQuery("ul.menu").position().top+25;
-
+				
+				var ventana_ancho = jQuery(window).width();
+				if(ventana_ancho>1200){
+					sobra = (ventana_ancho - 1366)/2;
+					var left=jQuery("ul.menu").position().left-40 - sobra;
+				}
+				
+				
 				jQuery(".tourLayer").animate({
 				    top: "+="+top
 				  }, 300, function() {
@@ -921,12 +948,21 @@ function startTour() {
 
 				  	jQuery(".tourLayer").after("<div class='pointerRight'></div>");
 				  	jQuery(".pointerRight").css("left",leftPalitroque+"px").css("top",topPalitroque+"px").fadeIn();
-				 
+					
 				    jQuery(".skip").fadeIn().css("top","56px");
-
+					
 				   	var topNext=jQuery(window).height()-85;
 				   	jQuery(".next").fadeIn().css("top",topNext+"px");
-
+					
+					
+					var ventana_ancho = jQuery(window).width();
+					
+					if(ventana_ancho>1600){
+						derecha = (ventana_ancho - 1400)/2;
+						jQuery(".skip").css("right",derecha+"px");	
+						jQuery(".next").css("right",derecha+"px");
+					}
+					
 				   	jQuery(".next a").attr("href",jQuery(".section:eq(0) a").attr("href"));
 				   	jQuery(".next").click(function() {
 				   		location.href=jQuery(".section:eq(0) a").attr("href");
@@ -938,6 +974,7 @@ function startTour() {
 
 		//STEPS
 		if(jQuery(".node-type-steps").length>0) {
+		
 			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
 			jQuery(".halfTour").css("height","250px");
 
@@ -967,7 +1004,13 @@ function startTour() {
 
 				   	var text=jQuery("#translationPrevious").text();
 					jQuery(".medium.blue").html("<a href='#'><img src='/sites/all/themes/bilbomatica/img/previousSection.png' alt='Previous'> "+text+"</a>");
-
+					
+					var ventana_ancho = jQuery(window).width();
+					if(ventana_ancho>1600){
+						derecha = (ventana_ancho - 1400)/2;
+						jQuery(".skip").css("right",derecha+"px");	
+						jQuery(".next").css("right",derecha+"px");
+					}
 		
 				   	jQuery(".next").click(function() {
 				   		if(jQuery(this).hasClass("segundoClick")) {
