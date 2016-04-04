@@ -309,18 +309,30 @@ $url  = url('node/'.$nidTheme);
         $valorHTML2=str_replace("test-eguides.osha.europa.eu",$pathBASE,$valorHTML2);
         print $valorHTML2;
       }*/
-	  
+	 	
 	  if(count($node->field_text_1)>0) {
-        
-        $node->field_text_1=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$node->field_text_1);
-        $node->field_text_1=str_replace("eguides-staging.mainstrat.com",$pathBASE,$node->field_text_1);
-        $node->field_text_1=str_replace("test-eguides.osha.europa.eu",$pathBASE,$node->field_text_1);
+        $val = $node->field_text_1['und'][0]['value'];
+		$val =str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$val);
+		$val =str_replace("eguides-staging.mainstrat.com",$pathBASE,$val);
+		$val =str_replace("test-eguides.osha.europa.eu",$pathBASE,$val);
+		$page['content']['system_main']['nodes'][$node->nid]['field_text_1'][0]['#markup']=$val;
+		
+        //$node->field_text_1['und'][0]['value']=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$node->field_text_1);
+       // $node->field_text_1['und'][0]['value']=str_replace("eguides-staging.mainstrat.com",$pathBASE,$node->field_text_1);
+       // $node->field_text_1['und'][0]['value']=str_replace("test-eguides.osha.europa.eu",$pathBASE,$node->field_text_1);
         
       }
       if(count($node->field_text_2)>0) {
-        $node->field_text_2=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$node->field_text_2);
-        $node->field_text_2=str_replace("eguides-staging.mainstrat.com",$pathBASE,$node->field_text_2);
-        $node->field_text_2=str_replace("test-eguides.osha.europa.eu",$pathBASE,$node->field_text_2);
+	  
+		$val2 = $node->field_text_2['und'][0]['value'];
+		$val2 =str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$val);
+		$val2 =str_replace("eguides-staging.mainstrat.com",$pathBASE,$val);
+		$val2 =str_replace("test-eguides.osha.europa.eu",$pathBASE,$val);
+		$page['content']['system_main']['nodes'][$node->nid]['field_text_2'][0]['#markup']=$val;
+			  
+        //$node->field_text_2['und'][0]['value']=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$node->field_text_2);
+        //$node->field_text_2['und'][0]['value']=str_replace("eguides-staging.mainstrat.com",$pathBASE,$node->field_text_2);
+        //$node->field_text_2['und'][0]['value']=str_replace("test-eguides.osha.europa.eu",$pathBASE,$node->field_text_2);
       }
 	  
 	print render($page['content']);
