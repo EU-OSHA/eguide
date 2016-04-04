@@ -336,11 +336,12 @@ $url  = url('node/'.$nidTheme);
       }
 	  
 	print render($page['content']);
+	
    ?>
-
+  
 
   <?php 
-    return false;
+  
     if ($anterior==1 || $siguiente==1) {
       echo "<div class='pagSteps' style='margin-bottom:1em'>";
         echo "<div class='medium blue'>";
