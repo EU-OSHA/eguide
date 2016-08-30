@@ -1,6 +1,55 @@
 var menuR=0;
 jQuery(document).ready(function() {
 
+if (jQuery(".searchField").length >0){
+	var miga = jQuery("#block-block-9").html();
+	miga = miga.replace("/ search","");
+	jQuery("#block-block-9").html(miga);
+}
+
+if (jQuery(".BarStartTour").length > 0){
+	if(jQuery(window).width()<1007) {
+		jQuery("#containerTools").attr("style","padding-top:1.5em !important");
+	}
+}
+
+if (jQuery(".lexicon-links").length >0){
+	
+	glosaryTxt= jQuery(".lexicon-links").html();
+	glosaryTxt = glosaryTxt.replace("a |","|");
+	glosaryTxt = glosaryTxt.replace("| b |","|");
+	glosaryTxt = glosaryTxt.replace("| c |","|");
+	glosaryTxt = glosaryTxt.replace("| d |","|");
+	glosaryTxt = glosaryTxt.replace("| e |","|");
+	glosaryTxt = glosaryTxt.replace("| f |","|");
+	glosaryTxt = glosaryTxt.replace("| g |","|");
+	glosaryTxt = glosaryTxt.replace("| h |","|");
+	glosaryTxt = glosaryTxt.replace("| i |","|");
+	glosaryTxt = glosaryTxt.replace("| j |","|");
+	glosaryTxt = glosaryTxt.replace("| k |","|");
+	glosaryTxt = glosaryTxt.replace("| l |","|");
+	glosaryTxt = glosaryTxt.replace("| m |","|");
+	glosaryTxt = glosaryTxt.replace("| n |","|");
+	glosaryTxt = glosaryTxt.replace("| o |","|");
+	glosaryTxt = glosaryTxt.replace("| p |","|");
+	glosaryTxt = glosaryTxt.replace("| q |","|");
+	glosaryTxt = glosaryTxt.replace("| r |","|");
+	glosaryTxt = glosaryTxt.replace("| s |","|");
+	glosaryTxt = glosaryTxt.replace("| t |","|");
+	glosaryTxt = glosaryTxt.replace("| u |","|");
+	glosaryTxt = glosaryTxt.replace("| v |","|");
+	glosaryTxt = glosaryTxt.replace("| w |","|");
+	glosaryTxt = glosaryTxt.replace("| x |","|");
+	glosaryTxt = glosaryTxt.replace("| y |","|");
+	glosaryTxt = glosaryTxt.replace("| z","|");
+	glosaryTxt = glosaryTxt.replace("| |","|");
+	  
+    //alert(glosaryTxt);
+	jQuery(".lexicon-links").html(glosaryTxt);
+	
+}
+
+
 //deshabilito el link mnOtherResources
 if(jQuery(window).width()>1006) {
 	jQuery(".mnOtherResources").removeAttr("href");
@@ -84,12 +133,13 @@ function icoHome() {
 	
 	var htmlHome=jQuery("#block-superfish-1 a.mnHome").text();
 	var domain=jQuery("#domain").text();
+	//alert(htmlHome);
 	if(jQuery(window).width()>1006) {
 		
-		jQuery("#block-superfish-1 a.mnHome").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
-		jQuery("#block-superfish-2 a.mnHome").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");
+		jQuery("#block-superfish-1 a.mnHome").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home' accesskey='1'>");
+		jQuery("#block-superfish-2 a.mnHome").html("<img src='"+domain+"/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home' accesskey='1'>");
 	} else {
-		jQuery("#block-superfish-2 a:eq(1)").html("<img src='/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home'>");	
+		jQuery("#block-superfish-2 a:eq(1)").html("<img src='/sites/all/themes/bilbomatica/img/homeIco.png' alt='Home' accesskey='1'>");	
 	}
 
 	if(domain.indexOf("worker")!=1) {
@@ -687,9 +737,11 @@ function wizard() {
 	jQuery("#tour").click(function() {
 	
 		//direfencio si está en la versión Mobile o desktop
+		//lan = jQuery(".LanHid").text();
+		tourhref = jQuery("#search-api-page-search-form-pruebas").attr('action');
 		if(jQuery(window).width()>1006) {
 			Cookies.set('tour', '1');
-			location.href=location.protocol + "//" + location.host + "/select-your-profile";
+			location.href=location.protocol + "//" + location.host + tourhref;
 		} else {
 			tourMobile();
 		}
@@ -701,13 +753,13 @@ function startTour() {
 		Esta capa estará contenida en cada página; en la home en el bloque del mapa*/
 		//por el momento muestro la capa oscura
 		hacerNoche();
-
+		
 		//SELECT YOUR PROFILE		
 		if(jQuery(".butonTour").length>0) {
 			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
 			jQuery(".halfTour").css("height","300px");
 
-			var top=jQuery(".subStartTour").position().top+85;
+			var top=jQuery(".subStartTour").position().top+25;
 			var left=jQuery("#page").width()/2-(jQuery(".tourLayer").width()/2);
 			jQuery(".tourLayer").animate({
 			    top: "+="+top
@@ -762,7 +814,8 @@ function startTour() {
 					   	jQuery(".next").fadeIn().css("top",topNext+"px");
 					   	jQuery(".next a").attr("href",jQuery(".read:eq(0) a").attr("href"));
 					   	jQuery(".next").click(function() {
-					   		location.href=jQuery(".views-field-title-1:eq(0) a").attr("href");;
+					   		//location.href=jQuery(".views-field-title-1:eq(0) a").attr("href");
+							location.href=jQuery(".views-field-php-3:eq(0) a").attr("href");
 							
 					   	});
 					   	
@@ -932,7 +985,7 @@ function startTour() {
 		//THEME
 		if(jQuery(".node-type-themes").length>0) {
 			jQuery(".tourLayer").css("left","0").css("top","0").fadeIn();
-			jQuery(".halfTour").css("height","250px");
+			jQuery(".halfTour").css("height","260px");
 
 			var top=jQuery(".theme-selected").position().top+(jQuery(".tourLayer").height()/1.5);
 			var left=(jQuery(window).width()/2)-jQuery(".tourLayer").width()-50;
@@ -1307,6 +1360,10 @@ function glossaryOrderDivs() {
 		jQuery(this).css("margin-bottom","1em");
 	});
 }
+
+
+
+
 function themesSizes() {
 	if(jQuery(".view-themes").length>0) {
 		var anchoCaja=jQuery(".view-themes .views-row").width()-42; //-40 es el tamaño del símbolo + más 2 px de separación

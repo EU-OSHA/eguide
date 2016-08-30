@@ -71,23 +71,24 @@
       <div class="highLight goodPracticesBanner detail">
           <a href="javascript:history.back()" class="backThemes"><?php echo t("Back"); ?></a>
         <div class="containerSmall">
-        <h2 class="banner">Good practices</h2>
+        <h2 class="banner"><?php print t('Good practices');?></h2>
         </div>
         </div>
       <?php 
 
         //print render($page['content']); 
-
-        //dpm($node);
+        global $language ;
+		$lang_name = $language->language ;
+      
         echo "<div class='containerG'>";
 
           echo "<div class='good-practicesBox'>
-                  <div class='views-field-field-image-step'><img src='/sites/default/files/".$node->field_image_step['und'][0]['filename']."' alt='".$node->title."'></div>
-                  <div class='views-field-title'>".$node->title."</div>
+                  <div class='views-field-field-image-step'><img src='/sites/default/files/".$node->field_image_step['und'][0]['filename']."' alt='".$node->title_field[$lang_name][0]['value']."'></div>
+                  <div class='views-field-title'>".$node->title_field[$lang_name][0]['value']."</div>
                   <div class='views-field-field-short-text'>".$node->field_short_text['und'][0]['value']."</div>
                 </div>";
 
-          echo "<div>".$node->field_text['und'][0]['value']."</div>";
+          echo "<div>".$node->field_text[$lang_name][0]['value']."</div>";
         echo "</div>";
 
 

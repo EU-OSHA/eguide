@@ -90,8 +90,8 @@ if(isset($_GET["mn"])) {
       <?php endif; ?>
 
     <div class="migas">
-	<a href="../../select-your-profile">Home</a> / 
-    <a class="active"><?php echo  t("Quiz"); ?></a>
+	
+	<a href="<?php print $front_page; ?>"><?php echo  t("Home");?></a> / <a class="active"><?php echo  t("Quiz"); ?></a>
 	</div>
 	
 	
@@ -130,7 +130,7 @@ if(isset($_GET["mn"])) {
     <?php 
       $nodeTheme = node_load($nidTheme);
       $order=$nodeTheme->field_order['und'][0]['value'];
-	  echo "<h1 class='temazoQuiz'>".$title."</h1>";
+	  echo "<h1 class='temazoQuiz'>".t("Quiz")."</h1>";
    /*   if($nm==0 && $backgroundTheme!="") {
           echo "<h1 class='temazo'>";
           echo t("Theme");
@@ -197,7 +197,9 @@ if(isset($_GET["mn"])) {
 
   </div>
 
-  <?php print render($page['footer']); ?>
+  <?php
+	
+  print render($page['footer']); ?>
 
 </div>
 

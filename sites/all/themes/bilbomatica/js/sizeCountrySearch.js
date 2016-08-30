@@ -19,7 +19,7 @@ function hideDivs() {
 function countrySearch() {
 	jQuery("#countries .containerC").hide();
 	jQuery(".country").click(function() {
-		return false; //Modificación para que no permita cambiar idioma
+		//return false; //Modificación para que no permita cambiar idioma
 		jQuery("#profileDiv").hide();
 		if(jQuery(this).hasClass("selected")) {
 			jQuery("#countries").slideUp();
@@ -107,11 +107,12 @@ function codeLanguagesList() {
 		jQuery("#countries ul li").each(function() {
 			jQuery(this).css("cursor","pointer");
 			jQuery(this).click(function() {
+			
 				jQuery("#countries ul li ul").each(function() {
 					jQuery(this).hide();
 				});
 
-				topParent=jQuery(this).position().top+1000;
+				topParent=jQuery(this).position().top;
 				leftParent=jQuery(this).position().left;
 				var width=jQuery(this).width();
 

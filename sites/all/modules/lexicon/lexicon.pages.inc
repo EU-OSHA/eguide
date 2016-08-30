@@ -27,9 +27,11 @@ function _lexicon_page($letter = NULL) {
   // for by comparing the current path to the path that is configured for each
   // Lexicon.
   foreach ($vids as $vid) {
+	
     $tmp_path = variable_get('lexicon_path_' . $vid, 'lexicon/' . $vid);
     if (strpos($curr_path, $tmp_path) !== FALSE) {
       $found_vid = $vid;
+	  
     }
   }
 
@@ -57,6 +59,7 @@ function _lexicon_page($letter = NULL) {
  * through the various theme templates.
  */
 function _lexicon_overview($vocab, $letter = NULL) {
+  
   $dest = drupal_get_destination();
 
   $vid = $vocab->vid;
@@ -87,6 +90,8 @@ function _lexicon_overview($vocab, $letter = NULL) {
 
   // Load the entire vocabulary with entities.
   $tree = taxonomy_get_tree($vid, 0, NULL, TRUE);
+  
+
   // Since the tree might not be sorted alphabetically sort it.
   uasort($tree, '_lexicon_tree_sort');
 
@@ -94,12 +99,27 @@ function _lexicon_overview($vocab, $letter = NULL) {
   // If the overview is separated in sections per letter or the Lexicon is
   // displayed spread over multiple pages per letter create the alphabar.
   if ($separate || $page_per_letter) {
+     if ($tree) {
+	  //RRL 27-06-2016 Exclude not translated terms***********************************
+	  global $language ;
+	  $lang_name = $language->language ;
+	  $i = 0;
+	  ksort ($tree);
+		foreach ($tree as $term) {
+			if($term->name_field[$lang_name] == ''){
+				unset($tree[$i]);
+			}
+			$i = $i +1;
+		}
+		//Fin RRL***********************************************************************
+	}	
+  
     $lexicon_alphabar = _lexicon_alphabar($vid, $tree);
   }
 
   $lexicon_overview_sections = array();
   $lexicon_introduction = NULL;
-
+  
   // Check if the Lexicon is spread over multiple pages per letter and if a
   // letter argument is present.
   if (!$letter) {
@@ -109,11 +129,15 @@ function _lexicon_overview($vocab, $letter = NULL) {
       $lexicon_introduction = t(check_markup($introduction_text['value'], $introduction_text['format']));
     }
   }
+  
   if (!($page_per_letter && !$letter)) {
     $lexicon_overview_items = '';
     $lexicon_section = new stdClass();
+	
     if ($tree) {
-      $not_first = FALSE;
+	
+		
+	  $not_first = FALSE;
       // Build up the list by iterating through all terms within the vocabulary.
       foreach ($tree as $term) {
         // If terms should not be marked if a term has no description continue with the next term.

@@ -274,6 +274,7 @@
 
 
 @media all and (min-width: 1px) and (max-width: 1215px) {
+
   .view-did-you-know .views-row {
     width:30% !important;
   }
@@ -315,7 +316,10 @@
    padding: 0 !important;
    margin-top:16px !important;
   }
-
+ .whiteBg {
+    min-height: 5em!important;
+    padding: 2.5em 0;
+ }
 
   .highLight h1 {
     font-size: 1.7em !important;

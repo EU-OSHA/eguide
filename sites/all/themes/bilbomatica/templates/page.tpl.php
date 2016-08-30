@@ -131,5 +131,20 @@
 	//Migas home
 	jQuery(".migas a:eq(0)").attr("href","/en/select-your-profile");
 	
-
+	if (jQuery(".containerThemes").length > 0 || jQuery("#moreInfoBut").length > 0){//List themes
+		
+		jQuery(".lexicon-termthemes").each(function() { 
+			jQuery(this).after(jQuery(this).text());
+			jQuery(this).remove();
+		});
+		
+		jQuery(".lexicon-term").each(function() { 
+			jQuery(this).after(jQuery(this).text());
+			jQuery(this).remove();
+		});
+		
+		
+		
+	}
+	
 </script>

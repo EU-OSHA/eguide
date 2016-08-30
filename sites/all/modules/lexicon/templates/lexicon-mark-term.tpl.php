@@ -31,10 +31,16 @@
  *   'absolute' => $term["absolute_link"]
  *   ));?>
  */
+ //'data-titleBM' => $term["term"]->description
+ //dpm ($term);
 ?>
+
+
+
 <?php print l($text, $term["linkto"], array(
   'attributes' => array(
-    'data-titleBM' => $term["term"]->description, //antes ponía safe_description pero debido a que meten HTML esto es lo que necesitan, a pesar de lo que indican los comentarios de este módulo más arriba
+    'data-titleBM' => $term["term"]->description,
+    'data' => "", //antes ponía safe_description pero debido a que meten HTML esto es lo que necesitan, a pesar de lo que indican los comentarios de este módulo más arriba
     'class' => array($term["term_class"]),
   ),
   'fragment' => $term["fragment"],

@@ -71,18 +71,25 @@
 
       <?php //print render($page['content']);
         $imageFondo="/sites/default/files/".$node->field_theme_image['und'][0]['filename'];
-         
-       ?>
-
     
-	<div class="theme-selected" style="background:url('<?php echo  $imageFondo; ?>') center bottom no-repeat #99b400">
+		if ($node->field_theme_image['und'][0]['filename']=="workplace_fit_for_all.png"){
+		?>
+				<div class="theme-selected" style="background:url('<?php echo  $imageFondo; ?>') center bottom -5em no-repeat #99b400">
+		<?php
+		}
+		else
+		{?>
+				<div class="theme-selected" style="background:url('<?php echo  $imageFondo; ?>') center bottom no-repeat #99b400">
+		<?php
+		}
+       ?>
 		<div class="backT">
 			<a href="list-themes" class="backThemes"><?php echo t("Back"); ?></a>
 			</div>
 
 		<?php
 			
-			$employer = "employer";
+	  $employer = "employer";
       $pos1 = strpos($base_root,$employer);
 
       $worker = 'worker';
@@ -108,13 +115,13 @@
       }
 			
 			if ($profile==1){
-				$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>Worker</span></div>";
+				$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>".t('Worker')."</span></div>";
 			}else if ($profile==2){
-				$perfil =  "<div class='perfil2T'><span class='fondoperfilE'>Employer</span></div>";
+				$perfil =  "<div class='perfil2T'><span class='fondoperfilE'>".t('Employer')."</span></div>";
 			}else if ($profile==5){
-				$perfil =  "<div class='perfil5T'><span class='fondoperfilH'>HR Manager</span></div>";
+				$perfil =  "<div class='perfil5T'><span class='fondoperfilH'>".t('HR Manager')."</span></div>";
 			}else if ($profile==6){
-				$perfil =  "<div class='perfil6T'><span class='fondoperfilO'>OSH Professional</span></div>";
+				$perfil =  "<div class='perfil6T'><span class='fondoperfilO'>".t('OSH Professional')."</span></div>";
 			}
 
 			print ($perfil);
@@ -123,19 +130,21 @@
     //echo t("Theme");
     echo " <div class='temazocentrado'>".$node->field_order['und'][0]['value']."</div>";
     echo "</div>";
-	
+	//dpm($node);
 	$titulo = $node->title;
 	$titulo = substr ($titulo,3);
-	
+	global $language ;
+	$lang_name = $language->language ;
+		
     echo "<div class='temazocentrado'>".$titulo."</div>"; 
     ?>
 	</div>
 
 	<div class="sections steps">
-		<div class="h2Themes"><?php print $node->body['und'][0]['value']; ?></div>
+		<div class="h2Themes"><?php print $node->body[$lang_name][0]['value']; ?></div>
 		<div class="containerSections">
 			<?php 
-
+		
         $nid="";
         if (arg(0) == 'node' && is_numeric(arg(1)))  {
           $nid = arg(1); 
@@ -143,21 +152,15 @@
         }
 
 				$size=sizeof($page['content']['system_main']['nodes'][$nid]['field_sections']['#items']);
-        //  dpm($page['content']['system_main']);
-    
+				//  dpm($page['content']['system_main']);
+				
 				for($i=0;$i<=$size;$i++){
 					if(isset($page['content']['system_main']['nodes'][$nid]['#node']->field_sections['und'][$i]['node']->title)) {
 
 						$title=$page['content']['system_main']['nodes'][$nid]['#node']->field_sections['und'][$i]['node']->title;
-           
-						//no encuentro la url bonita así que hago una select con la url fea
-						$url=$page['content']['system_main']['nodes'][$nid]['field_sections'][$i]['#href'];
-						$urlFriendly="";
-						$result = db_query("SELECT alias FROM url_alias WHERE source='".$url."'");
-						foreach($result as $item) {
-						   $urlFriendly=$item->alias;
-						}
-
+						$nidpath = $page['content']['system_main']['nodes'][$nid]['field_sections']['#items'][$i]['nid'];
+						$urlFriendly  = drupal_get_path_alias("node/".$nidpath, $lang_name);
+				
 			 			echo "<div class='section'><a href='".$urlFriendly."'>".$title."</a></div>";
 
 			 		}
@@ -165,6 +168,10 @@
 			?>
 		</div>
 		<?php
+		$hrefGoodPrac = drupal_get_path_alias("node/53", $lang_name);
+		$hrefUseful = drupal_get_path_alias("node/69", $lang_name);
+		
+		
 		$claseoculta = "";
 		if($node->field_order['und'][0]['value'] ==1){
 			$claseoculta = "oculto";
@@ -172,11 +179,11 @@
 		?>
 		<h2><?php echo t("Do you want to know more?"); ?></h2>
 		<div class="goodPractices <?php print($claseoculta)?>">
-			<div class="goodP"><a href="good-practices?nid=<?php echo $nid; ?>"><?php echo t("Good practices"); ?></a></div>
+			<div class="goodP"><a href="<?php print($hrefGoodPrac);?>?nid=<?php echo $nid; ?>"><?php echo t("Good practices"); ?></a></div>
 			<div class="keepInMind"><?php echo t("Keep in mind"); ?></div>
 		</div>
 		<div class="usefulLinks">
-			<div class="usefulL"><a href="useful-links"><?php echo t("Useful links"); ?></a></div>
+			<div class="usefulL"><a href="<?php print($hrefUseful);?>"><?php echo t("Useful links"); ?></a></div>
 			<div class="discover"><?php echo t("Discover"); ?></div>
 		</div>
 	</div>
@@ -234,6 +241,16 @@
 
 <script>
 jQuery(document).ready(function() {
+	
+	/*numlexicon = jQuery(".lexicon-termthemes").length;
+    
+	for(i = 0; i < numlexicon; i++) { 
+		jQuery("a.lexicon-termthemes:eq(0)").after(jQuery("a.lexicon-termthemes:eq(0)").text());
+		jQuery("a.lexicon-termthemes:eq(0)").remove();
+	}*/
+
+
+
 	jQuery(".section").each(function() {
 		jQuery(this).css("cursor","pointer");
 		jQuery(this).click(function() {
@@ -258,7 +275,10 @@ jQuery(document).ready(function() {
 	
 	//Migas home
 	jQuery(".migas a:eq(0)").attr("href","/en/select-your-profile");
-		
+	
+	
+
+	
 });
 </script>
 

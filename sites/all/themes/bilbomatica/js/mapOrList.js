@@ -44,6 +44,7 @@ function selection() {
 }
 
 function codeLanguagesList() {
+
 	if(jQuery(window).width()>1006) {
 		jQuery("#listText ul li ul").each(function() {
 			jQuery(this).hide();
@@ -54,15 +55,19 @@ function codeLanguagesList() {
 				jQuery("#listText ul li ul").each(function() {
 					jQuery(this).hide();
 				});
-
+				
 				topParent=jQuery(this).position().top+10;
 				leftParent=jQuery(this).position().left;
+				
+				
+				
 				var width=jQuery(this).width();
 
 				if(jQuery("ul",this).is(':visible')) {
 					jQuery("ul",this).slideUp("fast");
 				} else {
-					jQuery("ul",this).css("left",leftParent+"px").css("top",topParent+"px").css("min-width",width+"px").slideDown("fast");
+					//jQuery("ul",this).css("left",leftParent+"px").css("top",topParent+"px").css("min-width",width+"px").slideDown("fast");
+					jQuery("ul",this).css("left",leftParent+"px").css("top",topParent+"px").slideDown("fast");
 				}
 			});
 		});
@@ -116,11 +121,28 @@ function cargaMapa() {
 		    		jQuery("#containerPopLanguages").remove();
 		    		jQuery("#arrowPop").remove();
 		    	}
-
+				
 		    	var x=e.pageX;
 		    	var y=e.pageY;
 
 				var htmlParent=jQuery("ul."+code).parent().html();
+				
+				if (code=="bg" || code=="at" || code=="hr" ||code=="cy"|| code=="cz"|| 
+				code=="dk"|| code=="ee"|| code=="fr"||code=="de"||code=="gr"|| code=="hu"|| code=="ie"|| code=="it"|| code=="lv"|| code=="lt" || code=="nl"||code=="pl"||code=="pt"||code=="ro"||code=="sk"||code=="si"||code=="es"||code=="se"||code=="gb"||code=="is"||code=="no" ){
+					
+					var htmlParent=jQuery("ul."+code).html();
+					var cachos=htmlParent.split('href="');
+					var trozo=jQuery.trim(cachos[1]);
+					var cachos2=trozo.split('">');
+					var hrefpais=jQuery.trim(cachos2[0]);
+					hrefpais=hrefpais.replace("&amp;","&");
+				    window.location.href = hrefpais;
+						barrablanca = 50000;
+				
+				}
+				
+				
+				
 				var cachos=htmlParent.split("<");
 				var country=jQuery.trim(cachos[0]);
 

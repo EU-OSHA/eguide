@@ -42,8 +42,8 @@ $resultS = db_query($sql);
 	}
 //Get the 
 $nodetheme = node_load($nidTheme);	
-//dpm($nodetheme);
 $backgroundTheme = $nodetheme->field_theme_image['und'][0]['filename'];
+$imgTilte = $nodetheme->field_theme_image['und'][0]['filename'];
 $backgroundTheme = image_style_url('original', $backgroundTheme);
 
 $title=$nodetheme->title;
@@ -91,7 +91,6 @@ $url  = url('node/'.$nidTheme);
     <?php 
     hide($page['header']['block_9']); //oculto el bloque de migas caseras
     print render($page['header']); 
-    //dpm($page['header']);
     ?>
 
   </header>
@@ -116,7 +115,10 @@ $url  = url('node/'.$nidTheme);
 
 
       <?php
-
+		global $language ;
+		global $base_url;
+		$lang_name = $language->language ;
+		
         $siguiente=0;
         $anterior=0;
 
@@ -144,62 +146,61 @@ $url  = url('node/'.$nidTheme);
               for ($a=0;$a<sizeof($arraySteps);$a++) {
                 if($arraySteps[$a]==$nid && isset($arraySteps[$a+1])) {
                   $siguiente=1;
-                  //calculo la URL del siguiente
+                  //Next Url
                   $aa=$arraySteps[$a+1];
-                  $sql="SELECT alias FROM url_alias WHERE source='node/".$aa."'";;
-                  $resultS = db_query($sql);
-                  foreach($resultS as $item) {
-                    $urlSiguiente=$item->alias;
-                   }
+				  $urlSiguiente  = $base_url . '/' . $lang_name . '/' .drupal_get_path_alias("node/".$aa, $lang_name);
                   
                 }
 
                 if($arraySteps[$a]==$nid && isset($arraySteps[$a-1])) {
                   $anterior=1;
+				  //Previous Url
                   $bb=$arraySteps[$a-1];
-                  $sql="SELECT alias FROM url_alias WHERE source='node/".$bb."'";;
-                  $resultA = db_query($sql);
-                  foreach($resultA as $item) {
-                    $urlAnterior=$item->alias;
-                   }
+				  $urlAnterior  = $base_url . '/' . $lang_name . '/' . drupal_get_path_alias("node/".$bb, $lang_name);
+				  
                 }
               }
           }
-
-
-
-        }
-       // dpm($page['content']['system_main']['nodes'][$nid]);
-      ?>
-
-
-
+	}
+    ?>
 <?php
 
-
-//$title = str_replace($title,":","-");
-
+ $themehref = drupal_get_path_alias("node/24", $lang_name);
+ $nodetheme = node_load(24);
+ $titlebread = $nodetheme->title_field[$lang_name][0]['value'];  
+ 
 ?>
 
 <div class="migas">
-  <a href="/">Home</a> / 
-  <a href="/list-themes">Themes</a> / 
+
+  <a href="/<?php print ($lang_name);?>"><?php print t("Home");?></a> / 
+  <a href="/<?php print ($lang_name);?>/<?php print ($themehref); ?>"><?php print($titlebread);?></a> / 
   <a href="<?php echo $url; ?>"><?php echo $title; ?></a> / 
     <a class="active"><?php echo $page['content']['system_main']['nodes'][$nid]['#node']->title; ?></a>
 </div>
+	<?php
+	  
+		if ($imgTilte=="workplace_fit_for_all.png"){
+		?>
+			<div class="theme-selected" style="background:url('<?php echo $backgroundTheme; ?>') center bottom -5em no-repeat #99b400">
+		<?php
+		}
+		else
+		{?>
+			<div class="theme-selected" style="background:url('<?php echo $backgroundTheme; ?>') center bottom no-repeat #99b400">
+		<?php
+		}
+       ?>
+	   
 
-
-<div class="theme-selected" style="background:url('<?php echo $backgroundTheme; ?>') center bottom no-repeat #99b400">
 		<div class="backT">
       <?php
         echo "<a href='".$url."' class='backThemes'>".t("Back")."</a>";
-        
      ?>
-			
 		</div>
-		<?php 
+	<?php 
 		
-		  $employer = "employer";
+	  $employer = "employer";
       $pos1 = strpos($base_root,$employer);
 
       $worker = 'worker';
@@ -223,30 +224,21 @@ $url  = url('node/'.$nidTheme);
       if ($pos4 != false) {
         $profile=6;
       }
-			
-			if ($profile==1){
-				$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>Worker</span></div>";
-			}else if ($profile==2){
-				$perfil =  "<div class='perfil2T'><span class='fondoperfilE'>Employer</span></div>";
-			}else if ($profile==5){
-				$perfil =  "<div class='perfil5T'><span class='fondoperfilH'>HR Manager</span></div>";
-			}else if ($profile==6){
-				$perfil =  "<div class='perfil6T'><span class='fondoperfilO'>OSH Professional</span></div>";
-			}
+		if ($profile==1){
+			$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>".t('Worker')."</span></div>";
+		}else if ($profile==2){
+			$perfil =  "<div class='perfil2T'><span class='fondoperfilE'>".t('Employer')."</span></div>";
+		}else if ($profile==5){
+			$perfil =  "<div class='perfil5T'><span class='fondoperfilH'>".t('HR Manager')."</span></div>";
+		}else if ($profile==6){
+			$perfil =  "<div class='perfil6T'><span class='fondoperfilO'>".t('OSH Professional')."</span></div>";
+		}
 
-			print ($perfil);
-		
-		
-		
+		print ($perfil);
 		
       $nodeTheme = node_load($nidTheme);
 	  $order=$nodeTheme->field_order['und'][0]['value'];
 
-      /*  echo "<div class='temazo'>";
-        echo t("Theme");
-        echo " <span>".$order."</span>";
-        echo "</div>";
-        echo "<h1>".$title."</h1>";*/
 	echo "<div class='temazo'>";
     echo " <div class='temazocentrado'>".$order."</div>";
     echo "</div>";
@@ -255,21 +247,14 @@ $url  = url('node/'.$nidTheme);
 	
     echo "<div class='temazocentrado'>".$titulo."</div>"; 
     ?>
-		
 	</div>
-
-	
-	
-	
-	
 	<div class="sections steps">
-
   <?php 
     if ($anterior==1 || $siguiente==1) {
       echo "<div class='pagSteps'>";
         echo "<div class='medium blue'>";
             if ($anterior==1) {
-              echo "<a href='".$urlAnterior."'><img alt='Previous' src='/sites/all/themes/bilbomatica/img/previousSection.png'> ".t("Previous")."</a> ";
+              echo "<a href='".$urlAnterior."'><img alt='".t("Previous")."' src='/sites/all/themes/bilbomatica/img/previousSection.png'> ".t("Previous")."</a> ";
             }
         echo"&nbsp;</div>";
         echo "<div class='medium green'>&nbsp;";
@@ -281,46 +266,32 @@ $url  = url('node/'.$nidTheme);
     }
 
   ?>
-
 		<h2><?php echo $page['content']['system_main']['nodes'][$nid]['#node']->title; ?></h2>
-
    <?php 
-    //  print render($page['content']); 
-      
-	  
       $pathBASE=str_replace("employer.","",$base_url);
       $pathBASE=str_replace("worker.","",$pathBASE);
       $pathBASE=str_replace("manager.","",$pathBASE);
       $pathBASE=str_replace("professional.","",$pathBASE);
       $pathBASE=str_replace("http://","",$pathBASE);
-     // echo $pathBASE;
-
-      /*if(count($node->field_text_1)>0) {
-        $valorHTML1=$node->field_text_1['und'][0]['value'];
-        $valorHTML1=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$valorHTML1);
-        $valorHTML1=str_replace("eguides-staging.mainstrat.com",$pathBASE,$valorHTML1);
-        $valorHTML1=str_replace("test-eguides.osha.europa.eu",$pathBASE,$valorHTML1);
-        print $valorHTML1;
-      }
-      if(count($node->field_text_2)>0) {
-        $valorHTML2=$node->field_text_2['und'][0]['value'];
-        $valorHTML2=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$valorHTML2);
-        $valorHTML2=str_replace("eguides-staging.mainstrat.com",$pathBASE,$valorHTML2);
-        $valorHTML2=str_replace("test-eguides.osha.europa.eu",$pathBASE,$valorHTML2);
-        print $valorHTML2;
-      }*/
 	 	
 	  if(count($node->field_text_1)>0) {
         $val = $page['content']['system_main']['nodes'][$node->nid]['field_text_1'][0]['#markup'];
+		$val =str_replace("http://eguide.demobilbomatica.com:8887/","/",$val);
 		$val =str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$val);
 		$val =str_replace("eguides-staging.mainstrat.com",$pathBASE,$val);
 		$val =str_replace("test-eguides.osha.europa.eu",$pathBASE,$val);
-		$page['content']['system_main']['nodes'][$node->nid]['field_text_1'][0]['#markup']=$val;
 		
-        //$node->field_text_1['und'][0]['value']=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$node->field_text_1);
-       // $node->field_text_1['und'][0]['value']=str_replace("eguides-staging.mainstrat.com",$pathBASE,$node->field_text_1);
-       // $node->field_text_1['und'][0]['value']=str_replace("test-eguides.osha.europa.eu",$pathBASE,$node->field_text_1);
-        
+		//Replace "/en/good_practices" for language and url of the good parctices page
+		$GPLink = '/' . $lang_name	. '/' . drupal_get_path_alias('node/53') . '?';
+		$val = str_replace("/en/good-practices?",$GPLink,$val);
+		$val = str_replace("/".$lang_name."/good-practices?",$GPLink,$val);
+//Please don't change this lines************************
+		$val = str_replace("(
+
+
+<a","(<a",$val);
+//*******************************************************		
+		$page['content']['system_main']['nodes'][$node->nid]['field_text_1'][0]['#markup']=$val;
       }
 	  
       if(count($node->field_text_2)>0) {
@@ -330,24 +301,14 @@ $url  = url('node/'.$nidTheme);
 		$val2 =str_replace("eguides-staging.mainstrat.com",$pathBASE,$val);
 		$val2 =str_replace("test-eguides.osha.europa.eu",$pathBASE,$val);
 		$page['content']['system_main']['nodes'][$node->nid]['field_text_2'][0]['#markup']=$val;
-			  
-        //$node->field_text_2['und'][0]['value']=str_replace("eguide.demobilbomatica.com:8887",$pathBASE,$node->field_text_2);
-        //$node->field_text_2['und'][0]['value']=str_replace("eguides-staging.mainstrat.com",$pathBASE,$node->field_text_2);
-        //$node->field_text_2['und'][0]['value']=str_replace("test-eguides.osha.europa.eu",$pathBASE,$node->field_text_2);
       }
-	  
 	print render($page['content']);
-	
-   ?>
-  
-
-  <?php 
   
     if ($anterior==1 || $siguiente==1) {
       echo "<div class='pagSteps' style='margin-bottom:1em'>";
         echo "<div class='medium blue'>";
             if ($anterior==1) {
-              echo "<a href='".$urlAnterior."'><img alt='Previous' src='/sites/all/themes/bilbomatica/img/previousSection.png'> ".t("Previous")."</a> ";
+              echo "<a href='".$urlAnterior."'><img alt='".t("Previous")."' src='/sites/all/themes/bilbomatica/img/previousSection.png'> ".t("Previous")."</a> ";
             }
         echo"&nbsp;</div>";
         echo "<div class='medium green'>&nbsp;";
@@ -357,15 +318,11 @@ $url  = url('node/'.$nidTheme);
         echo"</div>";
       echo "</div>";
     }
-
   ?>
-
-
 	</div>
 
       <?php print $feed_icons; ?>
     </div>
-
     <div id="navigation">
 
       <?php if ($main_menu): ?>
@@ -416,13 +373,6 @@ $url  = url('node/'.$nidTheme);
 <script>
 jQuery(document).ready(function() {
   jQuery("ul.menu li:eq(1) a").addClass("is-active-trail").addClass("active");
-  
-  //Migas home
-	jQuery(".migas a:eq(0)").attr("href","/en/select-your-profile");
-	
-  //Migas themes
-	jQuery(".migas a:eq(1)").attr("href","/en/list-themes");
-  //Migas theme	
   var texttheme = jQuery(".migas a:eq(2)").text()	;
   texttheme = texttheme.replace(":"," -");
   jQuery(".migas a:eq(2)").text(texttheme);

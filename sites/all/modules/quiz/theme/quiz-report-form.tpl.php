@@ -33,7 +33,7 @@ foreach ($form as $key => $sub_form):
 	  	<span>
 	      <?php print t('Score')?>
         <?php print drupal_render($sub_form['score'])?>
-        <?php print t('of') .' '. $sub_form['max_score']['#value']?>
+        <?php print t('<span>of</span>') .' '. $sub_form['max_score']['#value']?>
         <?php if ($sub_form['#is_skipped']): ?>
           <br><em><span class="quiz-report-skipped">
           <?php print t('(skipped)') ?>
