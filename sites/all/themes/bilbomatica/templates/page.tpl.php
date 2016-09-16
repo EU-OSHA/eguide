@@ -6,8 +6,17 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
+ //Redirect old version /en/ to new version /UK_en/
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+$url = "http://" . $host . $url;
+$findme   = '/en/';
+$pos = strpos($url, $findme);
 
- 
+if ($pos != false) {
+	$redireccion  = str_replace('/en/','/UK_en/',$url);
+	header('Location:' .$redireccion);
+}
 ?>
 
 <div id="page">

@@ -1,6 +1,18 @@
 <?php
 global $base_root;
 $domain=$base_root;
+
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+$url = "http://" . $host . $url;
+$findme   = '/en/';
+$pos = strpos($url, $findme);
+
+if ($pos != false) {
+	$redireccion  = str_replace('/en/','/UK_en/',$url);
+	header('Location:' .$redireccion);
+}
+
 /**
  * @file
  * Returns the HTML for the basic html structure of a single Drupal page.
