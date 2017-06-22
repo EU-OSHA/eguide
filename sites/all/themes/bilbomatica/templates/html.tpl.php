@@ -4,7 +4,7 @@ $domain=$base_root;
 
 $host= $_SERVER["HTTP_HOST"];
 $url= $_SERVER["REQUEST_URI"];
-$url = "http://" . $host . $url;
+$url = "https://" . $host . $url;
 $findme   = '/en/';
 $pos = strpos($url, $findme);
 
@@ -73,7 +73,7 @@ if ($pos != false) {
       }
     </style>
    </noscript>
-     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>
