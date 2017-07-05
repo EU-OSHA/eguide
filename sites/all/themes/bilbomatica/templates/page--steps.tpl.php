@@ -200,17 +200,19 @@ $url  = url('node/'.$nidTheme);
 		</div>
 	<?php 
 		
-	  $employer = "employer";
-      $pos1 = strpos($base_root,$employer);
+	   $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+     
+     $employer = "employer";
+      $pos1 = strpos($actual_link,$employer);
 
       $worker = 'worker';
-      $pos2 = strpos($base_root,$worker);
+      $pos2 = strpos($actual_link,$worker);
 
       $manager = 'manager';
-      $pos3 = strpos($base_root,$manager);
+      $pos3 = strpos($actual_link,$manager);
 
       $professional = 'professional';
-      $pos4 = strpos($base_root,$professional);
+      $pos4 = strpos($actual_link,$professional);
 
       if ($pos1 != false) {
         $profile=2;
