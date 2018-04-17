@@ -162,40 +162,39 @@ Disallow: /vehicle-safety/?q=user/login/
 Disallow: /vehicle-safety/?q=user/logout/
 
 # CSS, JS, Images
-# Allow: /dangerous-substances/misc/*.css$
-# Allow: /dangerous-substances/misc/*.css?
-# Allow: /dangerous-substances/misc/*.js$
-# Allow: /dangerous-substances/misc/*.js?
-# Allow: /dangerous-substances/misc/*.gif
-# Allow: /dangerous-substances/misc/*.jpg
-# Allow: /dangerous-substances/misc/*.jpeg
-# Allow: /dangerous-substances/misc/*.png
-# Allow: /dangerous-substances/modules/*.css$
-# Allow: /dangerous-substances/modules/*.css?
-# Allow: /dangerous-substances/modules/*.js$
-# Allow: /dangerous-substances/modules/*.js?
-# Allow: /dangerous-substances/modules/*.gif
-# Allow: /dangerous-substances/modules/*.jpg
-# Allow: /dangerous-substances/modules/*.jpeg
-# Allow: /dangerous-substances/modules/*.png
-# Allow: /dangerous-substances/profiles/*.css$
-# Allow: /dangerous-substances/profiles/*.css?
-# Allow: /dangerous-substances/profiles/*.js$
-# Allow: /dangerous-substances/profiles/*.js?
-# Allow: /dangerous-substances/profiles/*.gif
-# Allow: /dangerous-substances/profiles/*.jpg
-# Allow: /dangerous-substances/profiles/*.jpeg
-# Allow: /dangerous-substances/profiles/*.png
-# Allow: /dangerous-substances/themes/*.css$
-# Allow: /dangerous-substances/themes/*.css?
-# Allow: /dangerous-substances/themes/*.js$
-# Allow: /dangerous-substances/themes/*.js?
-# Allow: /dangerous-substances/themes/*.gif
-# Allow: /dangerous-substances/themes/*.jpg
-# Allow: /dangerous-substances/themes/*.jpeg
-# Allow: /dangerous-substances/themes/*.png
+ Allow: /dangerous-substances/misc/*.css$
+ Allow: /dangerous-substances/misc/*.css?
+ Allow: /dangerous-substances/misc/*.js$
+ Allow: /dangerous-substances/misc/*.js?
+ Allow: /dangerous-substances/misc/*.gif
+ Allow: /dangerous-substances/misc/*.jpg
+ Allow: /dangerous-substances/misc/*.jpeg
+ Allow: /dangerous-substances/misc/*.png
+ Allow: /dangerous-substances/modules/*.css$
+ Allow: /dangerous-substances/modules/*.css?
+ Allow: /dangerous-substances/modules/*.js$
+ Allow: /dangerous-substances/modules/*.js?
+ Allow: /dangerous-substances/modules/*.gif
+ Allow: /dangerous-substances/modules/*.jpg
+ Allow: /dangerous-substances/modules/*.jpeg
+ Allow: /dangerous-substances/modules/*.png
+ Allow: /dangerous-substances/profiles/*.css$
+ Allow: /dangerous-substances/profiles/*.css?
+ Allow: /dangerous-substances/profiles/*.js$
+ Allow: /dangerous-substances/profiles/*.js?
+ Allow: /dangerous-substances/profiles/*.gif
+ Allow: /dangerous-substances/profiles/*.jpg
+ Allow: /dangerous-substances/profiles/*.jpeg
+ Allow: /dangerous-substances/profiles/*.png
+ Allow: /dangerous-substances/themes/*.css$
+ Allow: /dangerous-substances/themes/*.css?
+ Allow: /dangerous-substances/themes/*.js$
+ Allow: /dangerous-substances/themes/*.js?
+ Allow: /dangerous-substances/themes/*.gif
+ Allow: /dangerous-substances/themes/*.jpg
+ Allow: /dangerous-substances/themes/*.jpeg
+ Allow: /dangerous-substances/themes/*.png
 # Directories
-Disallow: /dangerous-substances/
 Disallow: /dangerous-substances/includes/
 Disallow: /dangerous-substances/misc/
 Disallow: /dangerous-substances/modules/
