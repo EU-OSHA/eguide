@@ -232,3 +232,75 @@ Disallow: /dangerous-substances/?q=user/password/
 Disallow: /dangerous-substances/?q=user/register/
 Disallow: /dangerous-substances/?q=user/login/
 Disallow: /dangerous-substances/?q=user/logout/
+
+# CSS, JS, Images
+ Allow: /all-ages/misc/*.css$
+ Allow: /all-ages/misc/*.css?
+ Allow: /all-ages/misc/*.js$
+ Allow: /all-ages/misc/*.js?
+ Allow: /all-ages/misc/*.gif
+ Allow: /all-ages/misc/*.jpg
+ Allow: /all-ages/misc/*.jpeg
+ Allow: /all-ages/misc/*.png
+ Allow: /all-ages/modules/*.css$
+ Allow: /all-ages/modules/*.css?
+ Allow: /all-ages/modules/*.js$
+ Allow: /all-ages/modules/*.js?
+ Allow: /all-ages/modules/*.gif
+ Allow: /all-ages/modules/*.jpg
+ Allow: /all-ages/modules/*.jpeg
+ Allow: /all-ages/modules/*.png
+ Allow: /all-ages/profiles/*.css$
+ Allow: /all-ages/profiles/*.css?
+ Allow: /all-ages/profiles/*.js$
+ Allow: /all-ages/profiles/*.js?
+ Allow: /all-ages/profiles/*.gif
+ Allow: /all-ages/profiles/*.jpg
+ Allow: /all-ages/profiles/*.jpeg
+ Allow: /all-ages/profiles/*.png
+ Allow: /all-ages/themes/*.css$
+ Allow: /all-ages/themes/*.css?
+ Allow: /all-ages/themes/*.js$
+ Allow: /all-ages/themes/*.js?
+ Allow: /all-ages/themes/*.gif
+ Allow: /all-ages/themes/*.jpg
+ Allow: /all-ages/themes/*.jpeg
+ Allow: /all-ages/themes/*.png
+# Directories
+Disallow: /all-ages/includes/
+Disallow: /all-ages/misc/
+Disallow: /all-ages/modules/
+Disallow: /all-ages/profiles/
+Disallow: /all-ages/scripts/
+Disallow: /all-ages/themes/
+# Files
+Disallow: /all-ages/CHANGELOG.txt
+Disallow: /all-ages/cron.php
+Disallow: /all-ages/INSTALL.mysql.txt
+Disallow: /all-ages/INSTALL.pgsql.txt
+Disallow: /all-ages/INSTALL.sqlite.txt
+Disallow: /all-ages/install.php
+Disallow: /all-ages/INSTALL.txt
+Disallow: /all-ages/LICENSE.txt
+Disallow: /all-ages/MAINTAINERS.txt
+Disallow: /all-ages/update.php
+Disallow: /all-ages/UPGRADE.txt
+Disallow: /all-ages/xmlrpc.php
+# Paths (clean URLs)
+Disallow: /all-ages/admin/
+Disallow: /all-ages/comment/reply/
+Disallow: /all-ages/filter/tips/
+Disallow: /all-ages/node/add/
+Disallow: /all-ages/user/register/
+Disallow: /all-ages/user/password/
+Disallow: /all-ages/user/login/
+Disallow: /all-ages/user/logout/
+# Paths (no clean URLs)
+Disallow: /all-ages/?q=admin/
+Disallow: /all-ages/?q=comment/reply/
+Disallow: /all-ages/?q=filter/tips/
+Disallow: /all-ages/?q=node/add/
+Disallow: /all-ages/?q=user/password/
+Disallow: /all-ages/?q=user/register/
+Disallow: /all-ages/?q=user/login/
+Disallow: /all-ages/?q=user/logout/
