@@ -89,32 +89,7 @@
 
 		<?php
 
-      $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-	    $employer = "employer";
-      $pos1 = strpos($actual_link,$employer);
-
-      $worker = 'worker';
-      $pos2 = strpos($actual_link,$worker);
-
-      $manager = 'manager';
-      $pos3 = strpos($actual_link,$manager);
-
-      $professional = 'professional';
-      $pos4 = strpos($actual_link,$professional);
-
-      if ($pos1 != false) {
-        $profile=2;
-      } 
-      if ($pos2 != false) {
-        $profile=1;
-      }
-      if ($pos3 != false) {
-        $profile=5;
-      }
-      if ($pos4 != false) {
-        $profile=6;
-      }
+     $profile=$_SESSION['profile'];
 			
 			if ($profile==1){
 				$perfil =  "<div class='perfil1T'><span class='fondoperfilW'>".t('Worker')."</span></div>";
