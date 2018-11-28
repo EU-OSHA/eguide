@@ -1,62 +1,60 @@
 var menuR=0;
 jQuery(document).ready(function() {
 
-if (jQuery(".searchField").length >0){
-	var miga = jQuery("#block-block-9").html();
-	miga = miga.replace("/ search","");
-	jQuery("#block-block-9").html(miga);
-}
-
-if (jQuery(".BarStartTour").length > 0){
-	if(jQuery(window).width()<1007) {
-		jQuery("#containerTools").attr("style","padding-top:1.5em !important");
+	if (jQuery(".searchField").length >0){
+		var miga = jQuery("#block-block-9").html();
+		miga = miga.replace("/ search","");
+		jQuery("#block-block-9").html(miga);
 	}
-}
 
-if (jQuery(".lexicon-links").length >0){
-	
-	glosaryTxt= jQuery(".lexicon-links").html();
-	glosaryTxt = glosaryTxt.replace("a |","|");
-	glosaryTxt = glosaryTxt.replace("| b |","|");
-	glosaryTxt = glosaryTxt.replace("| c |","|");
-	glosaryTxt = glosaryTxt.replace("| d |","|");
-	glosaryTxt = glosaryTxt.replace("| e |","|");
-	glosaryTxt = glosaryTxt.replace("| f |","|");
-	glosaryTxt = glosaryTxt.replace("| g |","|");
-	glosaryTxt = glosaryTxt.replace("| h |","|");
-	glosaryTxt = glosaryTxt.replace("| i |","|");
-	glosaryTxt = glosaryTxt.replace("| j |","|");
-	glosaryTxt = glosaryTxt.replace("| k |","|");
-	glosaryTxt = glosaryTxt.replace("| l |","|");
-	glosaryTxt = glosaryTxt.replace("| m |","|");
-	glosaryTxt = glosaryTxt.replace("| n |","|");
-	glosaryTxt = glosaryTxt.replace("| o |","|");
-	glosaryTxt = glosaryTxt.replace("| p |","|");
-	glosaryTxt = glosaryTxt.replace("| q |","|");
-	glosaryTxt = glosaryTxt.replace("| r |","|");
-	glosaryTxt = glosaryTxt.replace("| s |","|");
-	glosaryTxt = glosaryTxt.replace("| t |","|");
-	glosaryTxt = glosaryTxt.replace("| u |","|");
-	glosaryTxt = glosaryTxt.replace("| v |","|");
-	glosaryTxt = glosaryTxt.replace("| w |","|");
-	glosaryTxt = glosaryTxt.replace("| x |","|");
-	glosaryTxt = glosaryTxt.replace("| y |","|");
-	glosaryTxt = glosaryTxt.replace("| z","|");
-	glosaryTxt = glosaryTxt.replace("| |","|");
-	  
-    //alert(glosaryTxt);
-	jQuery(".lexicon-links").html(glosaryTxt);
-	
-}
+	if (jQuery(".BarStartTour").length > 0){
+		if(jQuery(window).width()<1007) {
+			jQuery("#containerTools").attr("style","padding-top:1.5em !important");
+		}
+	}
+
+	if (jQuery(".lexicon-links").length >0){
+		
+		glosaryTxt= jQuery(".lexicon-links").html();
+		glosaryTxt = glosaryTxt.replace("a |","|");
+		glosaryTxt = glosaryTxt.replace("| b |","|");
+		glosaryTxt = glosaryTxt.replace("| c |","|");
+		glosaryTxt = glosaryTxt.replace("| d |","|");
+		glosaryTxt = glosaryTxt.replace("| e |","|");
+		glosaryTxt = glosaryTxt.replace("| f |","|");
+		glosaryTxt = glosaryTxt.replace("| g |","|");
+		glosaryTxt = glosaryTxt.replace("| h |","|");
+		glosaryTxt = glosaryTxt.replace("| i |","|");
+		glosaryTxt = glosaryTxt.replace("| j |","|");
+		glosaryTxt = glosaryTxt.replace("| k |","|");
+		glosaryTxt = glosaryTxt.replace("| l |","|");
+		glosaryTxt = glosaryTxt.replace("| m |","|");
+		glosaryTxt = glosaryTxt.replace("| n |","|");
+		glosaryTxt = glosaryTxt.replace("| o |","|");
+		glosaryTxt = glosaryTxt.replace("| p |","|");
+		glosaryTxt = glosaryTxt.replace("| q |","|");
+		glosaryTxt = glosaryTxt.replace("| r |","|");
+		glosaryTxt = glosaryTxt.replace("| s |","|");
+		glosaryTxt = glosaryTxt.replace("| t |","|");
+		glosaryTxt = glosaryTxt.replace("| u |","|");
+		glosaryTxt = glosaryTxt.replace("| v |","|");
+		glosaryTxt = glosaryTxt.replace("| w |","|");
+		glosaryTxt = glosaryTxt.replace("| x |","|");
+		glosaryTxt = glosaryTxt.replace("| y |","|");
+		glosaryTxt = glosaryTxt.replace("| z","|");
+		glosaryTxt = glosaryTxt.replace("| |","|");
+		  
+	    //alert(glosaryTxt);
+		jQuery(".lexicon-links").html(glosaryTxt);
+		
+	}
 
 
-//deshabilito el link mnOtherResources
-if(jQuery(window).width()>1006) {
-	jQuery(".mnOtherResources").removeAttr("href");
-	
-}
-
-    //jQuery(".categoriesUsefulLinks a:eq(0)").css("display","hidden");
+	//deshabilito el link mnOtherResources
+	if(jQuery(window).width()>1006) {
+		jQuery(".mnOtherResources").removeAttr("href");
+	}
+  //jQuery(".categoriesUsefulLinks a:eq(0)").css("display","hidden");
 
 	jQuery.getScript(location.protocol + "//" + location.host + '/sites/all/themes/bilbomatica/js/js.cookie.js', function() { 
 		if(Cookies.get('tour')!=undefined && Cookies.get('tour')!="undefined") {
@@ -75,11 +73,10 @@ if(jQuery(window).width()>1006) {
 		} else {
 			Cookies.set('tourVuelta', '0');
 		}
-
-
 		wizard();
 		startTour();
 	});
+
 	icoHome();
 	glossary();
 	glossaryLetters();
@@ -105,7 +102,6 @@ if(jQuery(window).width()>1006) {
 		themesSizes(); //a veces en pantallas ultrapequeñas no sale y así forzamos
 	});
 	
-	
 	jQuery(window).resize(function() {
 		arrowGlossary();
 		sectionsSteps();
@@ -123,14 +119,13 @@ if(jQuery(window).width()>1006) {
 	jQuery(window).load(function() {
 		heightGoodPractices();
 	});
-
 	jQuery(document).ajaxComplete(function() {
 		usefulLinks();
 	});
 });
 
 function icoHome() {
-	
+
 	var htmlHome=jQuery("#block-superfish-1 a.mnHome").text();
 	var domain=jQuery("#domain").text();
 	//alert(htmlHome);
@@ -168,7 +163,7 @@ function linksPreFooter(){
 		var link = jQuery("a",this).attr("href");
 		location.href = link;
 	});
-	
+
 	jQuery(".glossary").click(function(){
 		var link = jQuery("a",this).attr("href");
 		location.href = link;
@@ -269,13 +264,8 @@ function glossary() {
 			jQuery(".popup").each(function() {
 				jQuery(this).draggable().css("cursor","move"); //lo hago dragabble porque si es muy grande no se puede ver el icono de cerrar, así la mueve y puede cerrarla.
 			});
-
-
-
 		});	
-		
 		//jQuery(this).addClass("tooltip"); //descartado por errores cuando las palabras salen en varias líneas
-
 
 	});
 
@@ -290,18 +280,17 @@ function glossary() {
 		*/
 
 
-		//Hago que las pestañas del buscador y a-z filter también sean linkables
-		if(jQuery(".searchGlossary a").length>0) {
-			jQuery(".searchGlossary").click(function() {
-				location.href=jQuery(".searchGlossary a").attr("href");
-			});
-		}
-		if(jQuery(".filterGlossary a").length>0) {
-			jQuery(".filterGlossary").click(function() {
-				location.href=jQuery(".filterGlossary a").attr("href");
-			});
-		}
-
+	//Hago que las pestañas del buscador y a-z filter también sean linkables
+	if(jQuery(".searchGlossary a").length>0) {
+		jQuery(".searchGlossary").click(function() {
+			location.href=jQuery(".searchGlossary a").attr("href");
+		});
+	}
+	if(jQuery(".filterGlossary a").length>0) {
+		jQuery(".filterGlossary").click(function() {
+			location.href=jQuery(".filterGlossary a").attr("href");
+		});
+	}
 }
 
 function removePopUps() {
@@ -312,7 +301,6 @@ function removePopUps() {
 		jQuery(this).remove();
 	});
 }
-
 
 
 function menuloginup(){
@@ -370,7 +358,6 @@ function glossaryClick() {
 	}
 }
 
-
 function glossarySearch() {
 	
 	if(jQuery(".search-api-page-results").length>0) {
@@ -383,9 +370,7 @@ function glossarySearch() {
 			jQuery(this).text(letra);
 		});
 		
-		//letra=jQuery.trim(jQuery(".search-result h3").text()).substr(0,1);
-		
-		
+		//letra=jQuery.trim(jQuery(".search-result h3").text()).substr(0,1);	
 	}
 }
 function sectionsSteps() {
@@ -443,15 +428,14 @@ function usefulLinks() {
 	});
 }
 
-function moreInfo() {
-	
-	
+function moreInfo() {	
 	var body = jQuery("html, body");
 		body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
 	});
 	var alturaCapa=0;
 	if(jQuery("#moreInfoDiv").length>0) {
 		if(jQuery(window).width()>1006) {
+
 			jQuery("#page").after("<div id='shadow'></div>");
 			jQuery("#shadow").css("height",jQuery(window).height());
 			jQuery("#shadow").css("width",jQuery(window).width());
@@ -476,6 +460,7 @@ function moreInfo() {
 	}
 	jQuery(".closeMoreInfo").click(function() {
 		jQuery("#moreInfoDiv").slideUp("fast",function() {
+
 			jQuery("#shadow").remove();
 			jQuery("body").css("overflow","auto").removeAttr("style");
 
@@ -505,7 +490,7 @@ function showSources(texto) {
 	var top=(jQuery(window).height()/2)-(jQuery(".preFooter.did").height()/2)-350;
 	var left=(jQuery("#page").width()/2)-(jQuery(".preFooter.did").width()/2);
 	jQuery(".preFooter.did").css("top",top+"px").css("left",left+"px");
-+
+
 	jQuery(".closeMoreInfo").click(function() {
 		jQuery(".preFooter.did").slideUp("fast",function() {
 			jQuery("#shadow").remove();
@@ -517,7 +502,7 @@ function showSources(texto) {
 }
 
 function viewSources(source) {
-	
+
 	/*if(jQuery(".view-did-you-know").length>0) {
 		var textButton=jQuery(".contentDid strong:eq(0)").text();
 		jQuery(".view-did-you-know .views-row:eq(0)").before("<div class='buttonViewSource'><a href='#' onclick='showSources()' class='viewSource'>"+textButton+"</a></div>");
@@ -526,8 +511,8 @@ function viewSources(source) {
 }
 
 function fontSize() {
-	jQuery(".bigSize a").click(function() {
-	
+
+	jQuery(".bigSize a").click(function() {	
 		jQuery("body").css("font-size","120%");
 		jQuery(".normalSize").removeClass("selected");
 		jQuery(".bigSize").addClass("selected");
@@ -554,11 +539,9 @@ function fontSize() {
 		jQuery("#containerTools .tabs").css("min-width","22em");
 		jQuery("#block-block-4 #profileDiv").css("width","70%");
 	});
-	 
 }
 
 function heightGoodPractices() {
-
 	if(jQuery(".view-good-practices").length>0) {
 		var height=0;
 
@@ -633,7 +616,6 @@ function heightGoodPractices() {
 
 function menuResponsive() {
 	var traduccionMenu=jQuery("#traduccionMenu").val();// metido en el bloque del tamaño de letra y las minipestañas. Es la traducción de la palabra "Menu" en los distintos idiomas
-
 	jQuery(".mainMenu").after("<div id='menuLinkRespon'>"+traduccionMenu+" <img class='open' id='menuIcoMobile' src='/sites/all/themes/bilbomatica/img/menuIcoMobile.png' alt='menu'></div>");
 	activeMenuR();
 }
@@ -752,6 +734,7 @@ function startTour() {
 		/*dependiendo de la página en la que esté el usuario hay que mostrarle una capa distinta. 
 		Esta capa estará contenida en cada página; en la home en el bloque del mapa*/
 		//por el momento muestro la capa oscura
+
 		hacerNoche();
 		
 		//SELECT YOUR PROFILE		
@@ -1127,6 +1110,7 @@ function hacerNoche() {
 	jQuery("#shadow").css("width",jQuery(window).width());
 }
 function hacerDia(cerrar) {
+
 	Cookies.set('tour', '0');
 	Cookies.set('tourVuelta', '0');
 	jQuery("#shadow").fadeOut("fast",function() {
