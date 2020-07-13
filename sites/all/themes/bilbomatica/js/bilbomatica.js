@@ -1378,3 +1378,11 @@ function themesSizes() {
 		});
 	}
 }
+
+jQuery(document).ready(function() {
+    var isshow = localStorage.getItem('isshow');
+    if (isshow == null) {
+        localStorage.setItem('isshow', 1);
+		jQuery( ".messageInfo" ).show();
+    }
+});

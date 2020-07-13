@@ -1569,6 +1569,26 @@ ul.menu ul {
 	margin-bottom:1em;
 	
 }
+
+.messageInfo{
+	border: 1px solid #FFF;
+    display: block;
+    padding: 1em 2em 1em 4em;
+    margin-top: 1em;
+    width: 100%;
+    height: auto;
+    z-index: 9999;
+    border-radius: 0;
+    text-align: left;
+    background: url(../img/info-ico.png) no-repeat 15px 19px #FFF;
+    color: #333;
+    font-size: 0.9em;
+    line-height: 20px;
+    max-width: 66%;
+    margin: 1em auto;
+    display: none;
+}
+
 .moreinfotitle{
 	color: #fff !important;
     float: left;
