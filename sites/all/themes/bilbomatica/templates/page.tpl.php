@@ -60,6 +60,12 @@ if ($pos != false) {
 
   </header>
 
+  <div class="content-message">
+    <div class="messageInfo">
+      <?php echo t("Dear visitor, please note that we are no longer actively maintaining this information, so don't be surprised if you find some broken links or if some of the information is out of date.");?>
+    </div>
+  </div>
+
   <div id="main">
 
     <div id="content" class="column" role="main">

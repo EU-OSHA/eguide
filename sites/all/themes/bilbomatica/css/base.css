@@ -1570,6 +1570,17 @@ ul.menu ul {
 	
 }
 
+.content-message{
+	background: #003386;
+	padding-top: 1em;
+	padding-bottom: 1.5em;
+	display: none;
+}
+
+.content-message.fix-padding{
+	padding-bottom: 0;
+}
+
 .messageInfo{
 	border: 1px solid #FFF;
     display: block;
@@ -1585,8 +1596,7 @@ ul.menu ul {
     font-size: 0.9em;
     line-height: 20px;
     max-width: 66%;
-    margin: 1em auto;
-    display: none;
+    margin: 0 auto;
 }
 
 .moreinfotitle{

@@ -1383,6 +1383,24 @@ jQuery(document).ready(function() {
     var isshow = localStorage.getItem('isshow');
     if (isshow == null) {
         localStorage.setItem('isshow', 1);
-		jQuery( ".messageInfo" ).show();
+		jQuery( ".content-message" ).show();
     }
+
+    //Move the message if the header banner exist
+	if (jQuery("#block-block-1")[0]){
+	     jQuery( ".content-message" ).addClass('fix-padding');
+		 jQuery('.content-message').appendTo('#moreInfo');
+	}
+
+	if (jQuery(".highLight .containerC")[0]){
+		 jQuery( ".content-message" ).addClass('fix-padding');
+		 jQuery('.content-message').appendTo('#moreInfo');
+	}
+
+	if (jQuery(".glossaryB")[0]){
+		 jQuery('.content-message').insertAfter('.migas');
+	}
+	
+   	
+
 });
